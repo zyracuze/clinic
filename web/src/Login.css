@@ -8,19 +8,21 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: whitesmoke;
+  height: 215px;
   padding: 20px;
   color: white;
 }
 
 .view-group{
+  text-align: center;
   padding-left: 40%;
   padding-top: 5px;
 }
 
-.header{
-  padding-left: 35%;
+.view-header{
+  left: 30%;
+  padding-top: 5px;
 }
 
 .App-intro {

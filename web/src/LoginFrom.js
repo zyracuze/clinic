@@ -22,7 +22,7 @@ class LoginFrom extends React.Component {
 
   render() {
     return (
-      <form className="view-group" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <label>
           <h2>เข้าสู่ระบบ</h2><br/>
           User Name:<br/>
