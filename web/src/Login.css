@@ -14,6 +14,15 @@
   color: white;
 }
 
+.view-group{
+  padding-left: 40%;
+  padding-top: 5px;
+}
+
+.header{
+  padding-left: 35%;
+}
+
 .App-intro {
   font-size: large;
 }
