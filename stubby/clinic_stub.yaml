@@ -1,0 +1,6 @@
+- request:
+     method: POST
+     url: /login
+     file: login_request.json
+  response:
+     status: 200
