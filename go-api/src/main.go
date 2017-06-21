@@ -7,6 +7,11 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
+type User struct {
+	Username string `json:"userName"`
+	Password string `json:"password"`
+}
+
 func main() {
 	e := echo.New()
 
@@ -21,8 +26,14 @@ func main() {
 }
 
 func ValidateUserLogin(c echo.Context) error {
-	if c.FormValue("userName") == "phatpan" && c.FormValue("password") == "1234" {
+	user := new(User)
+	err := c.Bind(user)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, nil)
+	}
+	if user.Username == "phatpan" && user.Password == "1234" {
 		return c.String(http.StatusOK, "login success")
 	}
-	return c.String(http.StatusUnauthorized, "not found")
+
+	return c.String(http.StatusUnauthorized, "Not found.")
 }
