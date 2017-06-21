@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import axios from 'axios';
+import { browserHistory } from 'react-router'
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
-
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
+    let userName = this.refs.userName.value;
+    let password = this.refs.password.value;
+    axios.post('http://localhost:8888/login', {
+      userName: userName,
+      password: password
+    })
+    .then(function (response) {
+      const path = '/home'
+      browserHistory.push(path)
+    })
+    .catch(function (error) {
+    });
   }
 
   render() {
@@ -26,18 +32,21 @@ class Login extends React.Component {
           <h2>เข้าสู่ระบบ</h2><br/>
           User Name:<br/>
           <input
-              type="text" name="userName"
-              id="userName" value={this.state.value}
-              onChange={this.handleChange}/><br/><br/>
+              type="text" 
+              ref="userName"/>
+          <br/><br/>
 
-              Password:<br/>
-              <input type="text" name="password" id="password"/><br/>
+          Password:<br/>
+          <input 
+              type="password" 
+              ref="password"/>
+          <br/>
         </label>
-            <br/><br/><Button
+          <br/><br/>
+          <Button
               bsStyle="primary"
               type="submit"
-              className="submit-login"
-              onClick={() => alert()}>Login</Button>
+              className="submit-login">Login</Button>
       </form>
     );
   }
