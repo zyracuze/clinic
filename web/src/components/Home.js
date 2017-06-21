@@ -1,5 +1,5 @@
 import React from 'react'
-import './index.css';
+import '../App.css';
 import {Grid, Row, Col, Thumbnail, Button} from 'react-bootstrap';
 
 export default React.createClass({

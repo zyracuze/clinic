@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import './Login.css';
 import { Button } from 'react-bootstrap';
 
-class LoginFrom extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {value: ''};
@@ -43,4 +42,4 @@ class LoginFrom extends React.Component {
     );
   }
 }
-export default LoginFrom;
+export default Login;
