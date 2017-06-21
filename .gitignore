@@ -2,12 +2,18 @@
 
 # dependencies
 /node_modules
+/web/node_modules
 
 # testing
 /coverage
 
 # production
 /build
+
+#golang
+/go-api/pkg/
+/go-api/src/github.com
+/go-api/src/golang.org
 
 # misc
 .DS_Store

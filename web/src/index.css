@@ -3,3 +3,17 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.code-toggle.open, .highlight {
+    background-color: #fdf6e3;
+}
+
+.btn-warning {
+    height: 100px; width: 200px;
+    margin-bottom: 20px;
+    margin-top:20px;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
