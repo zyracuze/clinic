@@ -3,3 +3,36 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+.code-toggle.open, .highlight {
+    background-color: #fdf6e3;
+}
+
+.thumbnail {
+    display: block;
+    padding: 4px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 1.42857;
+    background-color: #fff;
+    border: 1px solid  #eea236;
+    border-radius: 4px;
+    -webkit-transition: border 0.2s ease-in-out;
+    -o-transition: border 0.2s ease-in-out;
+    transition: border 0.2s ease-in-out;
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    margin-top:20px;
+    height: 90px; width: 90px;
+}
+
+.btn-warning {
+    height: 100px; width: 200px;
+    margin-bottom: 20px;
+    margin-top:20px;
+    padding-top: 20%;
+    padding-bottom: 20%;
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}

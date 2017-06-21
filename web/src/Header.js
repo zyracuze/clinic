@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 
 export default class Header extends Component {
   render() {
+    let style = {'maxWidth':'18%'};
     return(
-        <img src="clinic.jpg" width="350"/>
+        <img style={style} src="clinic.jpg"/>
     )
   }
 }
