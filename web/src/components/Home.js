@@ -1,6 +1,6 @@
 import React from 'react'
 import '../App.css';
-import {Grid, Row, Col, Thumbnail, Button} from 'react-bootstrap';
+import {Grid, Row, Col, Button} from 'react-bootstrap';
 
 export default React.createClass({
   render(){
