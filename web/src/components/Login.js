@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
-import axios from 'axios';
 import { browserHistory } from 'react-router'
+import { validateLogin} from '../apis/ApiLogin'
 import '../App.css'
 
 class Login extends Component {
@@ -14,15 +14,12 @@ class Login extends Component {
     event.preventDefault();
     let userName = this.refs.userName.value;
     let password = this.refs.password.value;
-    axios.post('http://localhost:8888/login', {
+    let dataLogin = {
       userName: userName,
       password: password
-    })
-    .then(function (response) {
-      const path = '/home'
-      browserHistory.push(path)
-    })
-    .catch(function (error) {
+    };
+    validateLogin(dataLogin).then(()=> {
+      this.props.history.push("/home");
     });
   }
 
