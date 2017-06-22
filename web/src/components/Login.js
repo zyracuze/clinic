@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
-import { browserHistory } from 'react-router'
-import { validateLogin} from '../apis/ApiLogin'
-import '../App.css'
+import { validateLogin} from '../apis/ApiLogin';
+import '../App.css';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {msg: ""};
   }
 
   handleSubmit(event) {
@@ -20,10 +20,13 @@ class Login extends Component {
     };
     validateLogin(dataLogin).then(()=> {
       this.props.history.push("/home");
+    },()=>{
+      this.setState({msg: "One or both Username or Password are invalid."});
     });
   }
 
   render() {
+    const message = this.state.msg;
     return (
         <form onSubmit={this.handleSubmit} className="form-signin">
           <label>
@@ -43,6 +46,7 @@ class Login extends Component {
                 placeholder="***********"
                 ref="password"/>
             <br/>
+           <span className="msg-error"> {message}</span>
           </label>
             <br/><br/>
             <Button
