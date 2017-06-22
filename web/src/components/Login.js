@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { browserHistory } from 'react-router'
 
-class Login extends React.Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
