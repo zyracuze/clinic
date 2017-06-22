@@ -1,3 +1,7 @@
+body {
+	background: #eee !important;	
+}
+
 .App {
   text-align: center;
 }
@@ -8,7 +12,6 @@
 }
 
 .App-header {
-  background-color: whitesmoke;
   height: 150px;
   padding: 10px;
   color: white;
@@ -38,6 +41,25 @@
     color: #fff;
     background-color: #f0ad4e;
     border-color: #eea236;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+}
+
+.form-control-signin {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+
+.form-signin-heading{
+  margin-bottom: 30px;
 }
 
 @keyframes App-logo-spin {
