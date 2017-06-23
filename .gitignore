@@ -13,7 +13,7 @@
 /go-api/pkg/
 /go-api/src/github.com
 /go-api/src/golang.org
-
+/go-api/src/gopkg.in
 # misc
 .DS_Store
 .env.local
