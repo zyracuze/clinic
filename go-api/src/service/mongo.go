@@ -46,3 +46,10 @@ func (conn *Connection) Update(collection string, query interface{}, data interf
 	err := c.Update(query, data)
 	return err
 }
+
+func (conn *Connection) CountCollection(collection string) (int, error) {
+	session := conn.MogoSession.Clone()
+	defer session.Clone()
+	c := session.DB(conn.DatabaseName).C(collection)
+	return c.Count()
+}
