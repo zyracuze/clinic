@@ -53,3 +53,10 @@ func (conn *Connection) CountCollection(collection string) (int, error) {
 	c := session.DB(conn.DatabaseName).C(collection)
 	return c.Count()
 }
+
+func (conn *Connection) Find(collection string, query interface{}, data interface{}) error {
+	session := conn.MogoSession.Clone()
+	defer session.Clone()
+	c := session.DB(conn.DatabaseName).C(collection)
+	return c.Find(query).All(data)
+}
