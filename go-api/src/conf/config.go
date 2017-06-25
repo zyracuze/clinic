@@ -14,7 +14,7 @@ func (v *viperConfigReader) GetString(key string) string {
 
 func init() {
 	v := viper.New()
-	v.SetConfigName("clinicConfig")
+	v.SetConfigName("clinic_config")
 	v.AddConfigPath("conf")
 
 	err := v.ReadInConfig()
