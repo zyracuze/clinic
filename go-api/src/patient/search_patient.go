@@ -11,18 +11,18 @@ import (
 func SearchPatient(c echo.Context) error {
 	patient := new(Patient)
 	if err := c.Bind(patient); err != nil {
-		return c.JSON(http.StatusBadRequest, nil)
+		return c.NoContent(http.StatusBadRequest)
 	}
 
-	result, err := patient.find()
+	result, err := patient.Find()
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, nil)
+		return c.NoContent(http.StatusConflict)
 	}
 
 	return c.JSON(http.StatusOK, result)
 }
 
-func (p *Patient) find() (*[]Patient, error) {
+func (p *Patient) Find() (*[]Patient, error) {
 	db, err := database.Connect()
 	if err != nil {
 		return nil, err
