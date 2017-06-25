@@ -18,21 +18,15 @@ func ValidateUserLogin(c echo.Context) error {
 	err := c.Bind(user)
 
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, nil)
+		return c.JSON(http.StatusBadRequest, "Username or password incorrect")
 	}
 
-	result := &User{}
-	result, err = getDataLogin(result.Username)
+	result, err := getDataLogin(user.Username)
 	if err != nil {
-		return c.JSON(http.StatusOK, "Username and Password are not found.")
+		return echo.ErrUnauthorized
 	}
 
-	if user.Username == result.Username && user.Password == result.Password {
-		display := "login success" + result.Username
-		return c.JSON(http.StatusOK, display)
-	}
-
-	return c.JSON(http.StatusUnauthorized, "Username and Password are not found.")
+	return c.JSON(http.StatusOK, result)
 }
 
 func getDataLogin(username string) (*User, error) {
