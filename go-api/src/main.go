@@ -1,6 +1,7 @@
 package main
 
 import (
+	fee "./fee"
 	login "./login"
 	patient "./patient"
 	"github.com/labstack/echo"
@@ -20,5 +21,6 @@ func main() {
 	e.POST("/patient/create", patient.CreatePatient)
 	e.PUT("/patient/update/:id", patient.UpdatePatient)
 	e.POST("/patient/search", patient.SearchPatient)
+	e.POST("/fee/create", fee.CreateFee)
 	e.Logger.Fatal(e.Start(":8888"))
 }
