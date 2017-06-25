@@ -13,10 +13,11 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"},
-		AllowMethods: []string{echo.POST},
+		AllowMethods: []string{echo.POST, echo.PUT},
 	}))
 
 	e.POST("/login", login.ValidateUserLogin)
 	e.POST("/patient/create", patient.CreatePatient)
+	e.PUT("/patient/update/:id", patient.UpdatePatient)
 	e.Logger.Fatal(e.Start(":8888"))
 }
