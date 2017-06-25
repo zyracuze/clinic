@@ -29,6 +29,8 @@ type Patient struct {
 	CongenitalDisease string        `json:"congenitalDisease"`
 	BeAllergic        string        `json:"beAllergic"`
 	EmergencyContact  Emergency     `json:"emergencyContact"`
+	CreateDateTime    string        `json:"createDateTime"`
+	UpdateDateTime    string        `json:"updateDatetime"`
 }
 
 type Emergency struct {
@@ -45,6 +47,7 @@ func CreatePatient(c echo.Context) error {
 	}
 
 	patient.IdPatient = generateIdPatient()
+	patient.CreateDateTime = time.Now().Local()
 	err = patient.insertPatient()
 	if err != nil {
 		return c.NoContent(http.StatusConflict)

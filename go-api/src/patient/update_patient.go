@@ -3,6 +3,8 @@ package patient
 import (
 	"net/http"
 
+	"time"
+
 	database "../service"
 	"github.com/labstack/echo"
 	"gopkg.in/mgo.v2/bson"
@@ -15,7 +17,7 @@ func UpdatePatient(c echo.Context) error {
 	if err := c.Bind(patient); err != nil {
 		return c.NoContent(http.StatusBadRequest)
 	}
-
+	patient.UpdateDateTime = time.Now()
 	err := patient.updatePatient(patient)
 	if err != nil {
 		return c.NoContent(http.StatusConflict)
