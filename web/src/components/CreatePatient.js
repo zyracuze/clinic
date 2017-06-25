@@ -1,22 +1,35 @@
 import React, { Component } from 'react';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
 import '../App.css';
 
 class CreatePatient extends Component {
   constructor() {
     super();
+    this.state = {
+      startDate: moment()
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(date) {
+    this.setState({
+      startDate: date
+    });
+    console.log(this.state)
   }
 
   handleSubmit(event) {
     event.preventDefault();
-
     let requestObj = {
-      idPatient: "",
       fullname: this.refs.fullname.value,
       lastname: this.refs.fullname.value,
       nickname: this.refs.nickname.value,
       gender: this.refs.gender.value,
-      birthday: this.refs.birthday.value,
+      birthday: this.state.startDate.format('DD/MM/YYYY'),
       idCard: this.refs.idCard.value,
       career: this.refs.career.value,
       tel: this.refs.tel.value,
@@ -59,7 +72,15 @@ class CreatePatient extends Component {
         <div className="form-group">
           <label className="col-sm-3 control-label">วันเกิด</label>
           <div className="col-sm-2">
-            <input type="text" placeholder="วันเกิด" ref="birthday" id="birthday" className="form-control" />
+            <DatePicker
+              id="birthday"
+              selected={this.state.startDate}
+              onChange={this.handleChange}
+              showMonthDropdown
+              showYearDropdown
+              dateFormat="DD/MM/YYYY"
+              dropdownMode="select" 
+              className="form-control"/>
           </div>
         </div>
         <div className="form-group">
@@ -99,11 +120,10 @@ class CreatePatient extends Component {
               <input type="radio" id="medicalCertificate" ref="requiredDocument" value="MedicalCertificate" name="requiredDocument" />ใบรับรองแพทย์
             </label>
             <label className="radio-inline">
-              <input type="radio" id="socialSecurity" ref="requiredDocument" value="SocialSecurity"name="requiredDocument" />ประกันสังคม
+              <input type="radio" id="socialSecurity" ref="requiredDocument" value="SocialSecurity" name="requiredDocument" />ประกันสังคม
             </label>
           </div>
         </div>
-
         <div className="form-group">
           <label className="col-sm-3 control-label">โรคประจำตัว</label>
           <div className="col-sm-7">
