@@ -5,23 +5,25 @@ import (
 
 	database "../service"
 	"github.com/labstack/echo"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type Patient struct {
-	FirstName         string    `json:"firstname"`
-	Lastname          string    `json:"lastname"`
-	Nickname          string    `json:"nickname"`
-	Gender            string    `json:"gender"`
-	Birthday          string    `json:"birthday"`
-	IdCard            string    `json:"idCard"`
-	Career            string    `json:"career"`
-	Tel               string    `json:"tel"`
-	WorkAddress       string    `json:"workAddress"`
-	HomeAddress       string    `json:"homeAddress"`
-	RequiredDocument  string    `json:"requiredDocument"`
-	CongenitalDisease string    `json:"congenitalDisease"`
-	BeAllergic        string    `json:"beAllergic"`
-	EmergencyContact  Emergency `json:"emergencyContact"`
+	Id                bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
+	FirstName         string        `json:"firstname"`
+	Lastname          string        `json:"lastname"`
+	Nickname          string        `json:"nickname"`
+	Gender            string        `json:"gender"`
+	Birthday          string        `json:"birthday"`
+	IdCard            string        `json:"idCard"`
+	Career            string        `json:"career"`
+	Tel               string        `json:"tel"`
+	WorkAddress       string        `json:"workAddress"`
+	HomeAddress       string        `json:"homeAddress"`
+	RequiredDocument  string        `json:"requiredDocument"`
+	CongenitalDisease string        `json:"congenitalDisease"`
+	BeAllergic        string        `json:"beAllergic"`
+	EmergencyContact  Emergency     `json:"emergencyContact"`
 }
 
 type Emergency struct {
@@ -31,19 +33,18 @@ type Emergency struct {
 }
 
 func CreatePatient(c echo.Context) error {
-	p := new(Patient)
-
-	err := c.Bind(p)
+	patient := new(Patient)
+	err := c.Bind(patient)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, nil)
+		return c.NoContent(http.StatusBadRequest)
 	}
 
-	err = p.insertPatient()
+	err = patient.insertPatient()
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, nil)
+		return c.NoContent(http.StatusConflict)
 	}
 
-	return c.JSON(http.StatusCreated, "Create patient success.")
+	return c.NoContent(http.StatusCreated)
 }
 
 func (p *Patient) insertPatient() error {
