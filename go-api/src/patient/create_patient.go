@@ -1,0 +1,5 @@
+package patient
+
+func CreatePatient() {
+
+}
