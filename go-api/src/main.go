@@ -19,5 +19,6 @@ func main() {
 	e.POST("/login", login.ValidateUserLogin)
 	e.POST("/patient/create", patient.CreatePatient)
 	e.PUT("/patient/update/:id", patient.UpdatePatient)
+	e.POST("/patient/search", patient.SearchPatient)
 	e.Logger.Fatal(e.Start(":8888"))
 }
