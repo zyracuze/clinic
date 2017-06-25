@@ -71,3 +71,16 @@ body {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.clearline{
+  border-top: 1px solid #e5e5e5;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.txtheader{
+  text-align: center !important; 
+  margin-bottom: 1% !important;
+}
