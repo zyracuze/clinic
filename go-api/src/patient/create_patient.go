@@ -29,8 +29,8 @@ type Patient struct {
 	CongenitalDisease string        `json:"congenitalDisease"`
 	BeAllergic        string        `json:"beAllergic"`
 	EmergencyContact  Emergency     `json:"emergencyContact"`
-	CreateDateTime    string        `json:"createDateTime"`
-	UpdateDateTime    string        `json:"updateDatetime"`
+	CreateDateTime    time.Time     `json:"createDateTime"`
+	UpdateDateTime    time.Time     `json:"updateDatetime"`
 }
 
 type Emergency struct {
