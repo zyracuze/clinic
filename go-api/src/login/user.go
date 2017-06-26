@@ -3,8 +3,9 @@ package login
 import (
 	"net/http"
 
-	database "../service"
 	"github.com/labstack/echo"
+	"gopkg.in/mgo.v2/bson"
+	database "service"
 )
 
 func CreateUser(c echo.Context) error {
