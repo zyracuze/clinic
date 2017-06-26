@@ -16,7 +16,7 @@ export default React.createClass({
                 <Button href="#/createPatient" bsStyle="warning">เพิ่มข้อมูลผู้ป่วย</Button>
               </Col>
               <Col xs={3} md={2}>
-                <Button href="#/" bsStyle="warning">พิมพ์ใบรับรองแพทย์</Button>
+                <Button href="#/generateMedicalCertificate" bsStyle="warning">พิมพ์ใบรับรองแพทย์</Button>
               </Col>
               <Col xs={3} md={3}/>
           </Row>
@@ -25,13 +25,13 @@ export default React.createClass({
           <Row>
               <Col xs={2} md={3}/>
               <Col xs={3} md={2}>
-                <Button href="#/" bsStyle="warning">ดูรายงานค่ารักษา</Button>
+                <Button href="#/medicalExpenseReport" bsStyle="warning">ดูรายงานค่ารักษา</Button>
               </Col>
               <Col xs={3} md={2}>
-                <Button href="#/" bsStyle="warning">บันทึกค่ารักษาพยาบาล</Button>
+                <Button href="#/saveFee" bsStyle="warning">บันทึกค่ารักษาพยาบาล</Button>
               </Col>
               <Col xs={3} md={2}>
-                <Button href="#/" bsStyle="warning">แก้ไขข้อมูลผู้ป่วย</Button>
+                <Button href="#/editPatient" bsStyle="warning">แก้ไขข้อมูลผู้ป่วย</Button>
               </Col>
               <Col xs={3} md={3}/>
           </Row>
@@ -40,10 +40,10 @@ export default React.createClass({
           <Row>
               <Col xs={2} md={3}/>
               <Col xs={3} md={2}>
-                <Button href="#/" bsStyle="warning">ตารางนัด</Button>
+                <Button href="#/schedule" bsStyle="warning">ตารางนัด</Button>
               </Col>
               <Col xs={3} md={2}>
-                <Button href="#/" bsStyle="warning">ออกจากระบบ</Button>
+                <Button href="#/logout" bsStyle="warning">ออกจากระบบ</Button>
               </Col>
               <Col xs={2} md={3}/>
           </Row>
