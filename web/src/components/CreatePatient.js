@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 
+import { hashHistory } from 'react-router';
+import { apiCreatePatient } from '../apis/ApiPatient'
+
+import Dialog from 'react-bootstrap-dialog'
+
 import 'react-datepicker/dist/react-datepicker.css';
 import '../App.css';
 
@@ -9,24 +14,25 @@ class CreatePatient extends Component {
   constructor() {
     super();
     this.state = {
-      startDate: moment()
+      startDate: moment(),
+      showModal: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.onClickOkCancel = this.onClickOkCancel.bind(this)
   }
 
   handleChange(date) {
     this.setState({
       startDate: date
     });
-    console.log(this.state)
   }
 
   handleSubmit(event) {
     event.preventDefault();
     let requestObj = {
-      fullname: this.refs.fullname.value,
-      lastname: this.refs.fullname.value,
+      firstname: this.refs.firstname.value,
+      lastname: this.refs.lastname.value,
       nickname: this.refs.nickname.value,
       gender: this.refs.gender.value,
       birthday: this.state.startDate.format('DD/MM/YYYY'),
@@ -44,16 +50,52 @@ class CreatePatient extends Component {
         tel: this.refs.emergencyContactTel.value
       }
     };
-    console.log(requestObj);
+
+    apiCreatePatient(requestObj).then(() => {
+      this.onClickOkCancel();
+    }, () => {
+      this.apiCreatePatientFail();
+    });
+  }
+
+  apiCreatePatientFail(){
+    this.refs.dialog.show({
+        body: 'ไม่สามารถเพิ่มผู้ป่วยได้',
+        actions: [
+          Dialog.OKAction(() => {
+            this.refs.dialog.hide();
+          })
+        ]
+      });
+  }
+
+  onClickOkCancel() {
+    this.refs.dialog.show({
+      body: 'เพิ่มผู้ป่วยเรียบร้อย.',
+      actions: [
+        Dialog.OKAction(() => {
+          hashHistory.push('/home');
+        })
+      ],
+      onHide: (dialog) => {
+        console.log("The dialog was closed by clicking background.")
+      }
+    })
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="form-horizontal">
         <div className="form-group">
-          <label className="col-sm-3 control-label">ชื่อ - นามสกุล</label>
+          <label className="col-sm-3 control-label">ชื่อ</label>
           <div className="col-sm-7">
-            <input type="text" placeholder="ชื่อ - นามสกุล" ref="fullname" id="fullname" className="form-control" />
+            <input type="text" placeholder="ชื่อ" ref="firstname" id="firstname" className="form-control" />
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="col-sm-3 control-label">นามสกุล</label>
+          <div className="col-sm-7">
+            <input type="text" placeholder="นามสกุล" ref="lastname" id="lastname" className="form-control" />
           </div>
         </div>
         <div className="form-group">
@@ -79,8 +121,8 @@ class CreatePatient extends Component {
               showMonthDropdown
               showYearDropdown
               dateFormat="DD/MM/YYYY"
-              dropdownMode="select" 
-              className="form-control"/>
+              dropdownMode="select"
+              className="form-control" />
           </div>
         </div>
         <div className="form-group">
@@ -159,6 +201,9 @@ class CreatePatient extends Component {
           </div>
         </div>
         <button type="submit" className="btn btn-success">เพิ่ม</button>
+        <div>
+          <Dialog ref='dialog' />
+        </div>
       </form>
     )
   }
