@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginFrom from './components/Login'
 import Home from './components/Home'
+import Search from './components/Search'
 import Header from './components/Header'
 import './App.css'
 
@@ -17,6 +18,7 @@ class App extends Component {
         <Router history={hashHistory}>
           <Route path='/' component={LoginFrom} />
           <Route path='/home' component={Home} />
+          <Route path='/search' component={Search} />
         </Router>
         </div>
       </div>
