@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-export default class EditPatient extends Component {
+export default class Header extends Component {
   render() {
     let style = {'maxWidth':'18%'};
     return(
