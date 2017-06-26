@@ -18,6 +18,7 @@ func main() {
 	}))
 
 	e.POST("/login", login.ValidateUserLogin)
+	e.POST("/user/create", login.CreateUser)
 	e.POST("/patient/create", patient.CreatePatient)
 	e.PUT("/patient/update/:id", patient.UpdatePatient)
 	e.POST("/patient/search", patient.SearchPatient)
