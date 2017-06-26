@@ -13,7 +13,7 @@ export default React.createClass({
                 <Button href="#/search" className="btn-warning">ค้นหาข้อมูลผู้ป่วย</Button>
               </Col>
               <Col xs={3} md={2}>
-                <Button href="#/" bsStyle="warning">เพิ่มข้อมูลผู้ป่วย</Button>
+                <Button href="#/createPatient" bsStyle="warning">เพิ่มข้อมูลผู้ป่วย</Button>
               </Col>
               <Col xs={3} md={2}>
                 <Button href="#/" bsStyle="warning">พิมพ์ใบรับรองแพทย์</Button>
