@@ -1,6 +1,9 @@
 
 ## NPM Dependencies
-"react-bootstrap-dialog": "^0.9.1" (https://github.com/akiroom/react-bootstrap-dialog)
+"react-bootstrap-dialog": "^0.9.1" --> https://github.com/akiroom/react-bootstrap-dialog
+"react-datepicker": "^0.48.0" --> https://github.com/Hacker0x01/react-datepicker
+"@storybook/react": "^3.1.6",https://github.com/storybooks/storybook
+"@storybook/addon-actions": "^3.1.6" --> https://github.com/storybooks/storybook/tree/master/addons/actions
 
 ##
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
