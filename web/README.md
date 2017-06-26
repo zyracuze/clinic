@@ -2,7 +2,7 @@
 ## Dependencies
 "react-bootstrap-dialog": "^0.9.1" --> https://github.com/akiroom/react-bootstrap-dialog <br>
 "react-datepicker": "^0.48.0" --> https://github.com/Hacker0x01/react-datepicker <br>
-"@storybook/react": "^3.1.6",https://github.com/storybooks/storybook <br>
+"@storybook/react": "^3.1.6" --> https://github.com/storybooks/storybook <br>
 "@storybook/addon-actions": "^3.1.6" --> https://github.com/storybooks/storybook/tree/master/addons/actions <br>
 
 ##
