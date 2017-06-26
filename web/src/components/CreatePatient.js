@@ -66,7 +66,7 @@ class CreatePatient extends Component {
             this.refs.dialog.hide();
           })
         ]
-      })
+      });
   }
 
   onClickOkCancel() {
