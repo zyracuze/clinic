@@ -1,7 +1,7 @@
 package service
 
 import (
-	config "../conf"
+	config "conf"
 	mgo "gopkg.in/mgo.v2"
 )
 
@@ -37,4 +37,26 @@ func (conn *Connection) Insert(collection string, data interface{}) error {
 	defer session.Clone()
 	c := session.DB(conn.DatabaseName).C(collection)
 	return c.Insert(&data)
+}
+
+func (conn *Connection) Update(collection string, query interface{}, data interface{}) error {
+	session := conn.MogoSession.Clone()
+	defer session.Clone()
+	c := session.DB(conn.DatabaseName).C(collection)
+	err := c.Update(query, data)
+	return err
+}
+
+func (conn *Connection) CountCollection(collection string) (int, error) {
+	session := conn.MogoSession.Clone()
+	defer session.Clone()
+	c := session.DB(conn.DatabaseName).C(collection)
+	return c.Count()
+}
+
+func (conn *Connection) Find(collection string, query interface{}, data interface{}) error {
+	session := conn.MogoSession.Clone()
+	defer session.Clone()
+	c := session.DB(conn.DatabaseName).C(collection)
+	return c.Find(query).All(data)
 }
