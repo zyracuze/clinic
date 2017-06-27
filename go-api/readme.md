@@ -1,6 +1,5 @@
 <!-- start api -->
-/go-api แล้วสั่ง run
-sh build.sh
+# วิธีการ run GO API
 
 <!-- step mongo and first use api-->
 ## 1. run golang
