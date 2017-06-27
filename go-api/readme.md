@@ -7,6 +7,13 @@
 $cd go-api
 $sh build.sh
 ```
+ถ้าต้องการ download dependencies ต่าง ๆ ใหม่ ให้ทำการ run
+
+```
+$cd go-api
+$sh build.sh refresh
+```
+
 ## 2. start mongodb
 ```
 $mongod --dbpath <path of data>
