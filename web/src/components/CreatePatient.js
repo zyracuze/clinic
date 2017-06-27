@@ -7,6 +7,8 @@ import { apiCreatePatient } from '../apis/ApiPatient'
 
 import Dialog from 'react-bootstrap-dialog'
 
+import { Form, FormGroup, FormControl, ControlLabel, Row, Col, Radio, Button, DropdownButton, MenuItem, Modal, Alert } from 'react-bootstrap';
+
 import 'react-datepicker/dist/react-datepicker.css';
 import '../App.css';
 
@@ -15,11 +17,70 @@ class CreatePatient extends Component {
     super();
     this.state = {
       startDate: moment(),
-      showModal: false
+      modal: {
+        active: false,
+        body: ''
+      },
+      modalAlert: {
+        active: false,
+        body: ''
+      },
+      firstname: '',
+      lastname: '',
+      nickname: '',
+      gender: '',
+      birthday: '',
+      idCard: '',
+      career: '',
+      tel: '',
+      workAddress: '',
+      homeAddress: '',
+      requiredDocument: '',
+      congenitalDisease: '',
+      beAllergic: '',
+      emergencyContact: {
+        name: '',
+        relationship: '',
+        tel: ''
+      }
+
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.onClickOkCancel = this.onClickOkCancel.bind(this)
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.closeModalAlert = this.closeModalAlert.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let requestObj = {
+      firstname: e.target.firstname.value,
+      lastname: e.target.lastname.value,
+      nickname: e.target.nickname.value,
+      gender: e.target.gender.value,
+      birthday: this.state.startDate.format('DD/MM/YYYY'),
+      idCard: e.target.idCard.value,
+      career: e.target.career.value,
+      tel: e.target.tel.value,
+      workAddress: e.target.workAddress.value,
+      homeAddress: e.target.homeAddress.value,
+      requiredDocument: e.target.requiredDocument.value,
+      congenitalDisease: e.target.congenitalDisease.value,
+      beAllergic: e.target.beAllergic.value,
+      emergencyContact: {
+        name: e.target.emergencyContactName.value,
+        relationship: e.target.emergencyContactRelationship.value,
+        tel: e.target.emergencyContactTel.value
+      }
+    };
+
+    console.log(requestObj)
+    apiCreatePatient(requestObj).then(() => {
+      this.openModal();
+    }, () => {
+      this.openModalAlert();
+    });
   }
 
   handleChange(date) {
@@ -28,92 +89,62 @@ class CreatePatient extends Component {
     });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    let requestObj = {
-      firstname: this.refs.firstname.value,
-      lastname: this.refs.lastname.value,
-      nickname: this.refs.nickname.value,
-      gender: this.refs.gender.value,
-      birthday: this.state.startDate.format('DD/MM/YYYY'),
-      idCard: this.refs.idCard.value,
-      career: this.refs.career.value,
-      tel: this.refs.tel.value,
-      workAddress: this.refs.workAddress.value,
-      homeAddress: this.refs.homeAddress.value,
-      requiredDocument: this.refs.requiredDocument.value,
-      congenitalDisease: this.refs.congenitalDisease.value,
-      beAllergic: this.refs.beAllergic.value,
-      emergencyContact: {
-        name: this.refs.emergencyContactName.value,
-        relationship: this.refs.emergencyContactRelationship.value,
-        tel: this.refs.emergencyContactTel.value
-      }
-    };
-
-    apiCreatePatient(requestObj).then(() => {
-      this.onClickOkCancel();
-    }, () => {
-      this.apiCreatePatientFail();
-    });
+  openModal() {
+    this.setState({ modal: { active: true } });
   }
 
-  apiCreatePatientFail(){
-    this.refs.dialog.show({
-        body: 'ไม่สามารถเพิ่มผู้ป่วยได้',
-        actions: [
-          Dialog.OKAction(() => {
-            this.refs.dialog.hide();
-          })
-        ]
-      });
+  closeModal() {
+    this.setState({ modal: { active: false } });
+    hashHistory.push('/home');
   }
 
-  onClickOkCancel() {
-    this.refs.dialog.show({
-      body: 'เพิ่มผู้ป่วยเรียบร้อย.',
-      actions: [
-        Dialog.OKAction(() => {
-          hashHistory.push('/home');
-        })
-      ],
-      onHide: (dialog) => {
-        console.log("The dialog was closed by clicking background.")
-      }
-    })
+  openModalAlert() {
+    this.setState({ modalAlert: { active: true } });
+  }
+
+  closeModalAlert() {
+    this.setState({ modalAlert: { active: false } });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="form-horizontal">
-        <div className="form-group">
-          <label className="col-sm-3 control-label">ชื่อ</label>
-          <div className="col-sm-7">
-            <input type="text" placeholder="ชื่อ" ref="firstname" id="firstname" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">นามสกุล</label>
-          <div className="col-sm-7">
-            <input type="text" placeholder="นามสกุล" ref="lastname" id="lastname" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">ชื่อเล่น</label>
-          <div className="col-sm-2">
-            <input type="text" placeholder="ชื่อเล่น" ref="nickname" id="nickname" className="form-control" />
-          </div>
-          <label className="col-sm-1 control-label">เพศ</label>
-          <div className="col-sm-2">
-            <select ref="gender" id="gender" className="form-control">
+      <Form horizontal onSubmit={this.handleSubmit}>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            ชื่อ
+             </Col>
+          <Col sm={3}>
+            <FormControl id="firstname" type="text" placeholder="ชื่อ" />
+          </Col>
+          <Col componentClass={ControlLabel} sm={1}>
+            นามสกุล
+             </Col>
+          <Col sm={3}>
+            <FormControl id="lastname" type="text" placeholder="นามสกุล" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            ชื่อเล่น
+             </Col>
+          <Col sm={3}>
+            <FormControl id="nickname" type="text" placeholder="ชื่อเล่น" />
+          </Col>
+          <Col componentClass={ControlLabel} sm={1}>
+            เพศ
+             </Col>
+          <Col sm={3}>
+            <FormControl componentClass="select" id="gender">
               <option value="male">ชาย</option>
               <option value="female">หญิง</option>
-            </select>
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">วันเกิด</label>
-          <div className="col-sm-2">
+            </FormControl>
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            วันเกิด
+             </Col>
+          <Col sm={3}>
             <DatePicker
               id="birthday"
               selected={this.state.startDate}
@@ -123,88 +154,116 @@ class CreatePatient extends Component {
               dateFormat="DD/MM/YYYY"
               dropdownMode="select"
               className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">บัตรประชาชน</label>
-          <div className="col-sm-2">
-            <input type="text" placeholder="บัตรประชาชน" ref="idCard" id="idCard" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">อาชีพ</label>
-          <div className="col-sm-2">
-            <input type="text" placeholder="อาชีพ" ref="career" id="career" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">โทร</label>
-          <div className="col-sm-2">
-            <input type="text" placeholder="โทร" ref="tel" id="tel" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">ที่อยู่ปัจจุบัน</label>
-          <div className="col-sm-7">
-            <input type="text" placeholder="ที่อยู่ปัจจุบัน" ref="homeAddress" id="homeAddress" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">ที่อยู่ที่ทำงาน</label>
-          <div className="col-sm-7">
-            <input type="text" placeholder="ที่อยู่ที่ทำงาน" ref="workAddress" id="workAddress" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">เอกสารที่ต้องการ</label>
-          <div className="col-sm-3">
-            <label className="radio-inline">
-              <input type="radio" id="medicalCertificate" ref="requiredDocument" value="MedicalCertificate" name="requiredDocument" />ใบรับรองแพทย์
-            </label>
-            <label className="radio-inline">
-              <input type="radio" id="socialSecurity" ref="requiredDocument" value="SocialSecurity" name="requiredDocument" />ประกันสังคม
-            </label>
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">โรคประจำตัว</label>
-          <div className="col-sm-7">
-            <input type="text" placeholder="โรคประจำตัว" ref="congenitalDisease" id="congenitalDisease" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">แพ้ยา</label>
-          <div className="col-sm-7">
-            <input type="text" placeholder="แพ้ยา" ref="beAllergic" id="beAllergic" className="form-control" />
-          </div>
-        </div>
-
-        <div className="clearline"></div>
-
-        <label className="txtheader col-sm-12 control-label">ติดต่อฉุกเฉิน</label>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">ผู้ติดต่อฉุกเฉิน</label>
-          <div className="col-sm-7">
-            <input type="text" placeholder="ผู้ติดต่อฉุกเฉิน" ref="emergencyContactName" id="emergencyContactName" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">ความสัมพันธ์</label>
-          <div className="col-sm-3">
-            <input type="text" placeholder="ความสัมพันธ์" ref="emergencyContactRelationship" id="emergencyContactRelationship" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">โทร</label>
-          <div className="col-sm-3">
-            <input type="text" placeholder="โทร" ref="emergencyContactTel" id="emergencyContactTel" className="form-control" />
-          </div>
-        </div>
-        <button type="submit" className="btn btn-success">เพิ่ม</button>
-        <div>
-          <Dialog ref='dialog' />
-        </div>
-      </form>
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            บัตรประชาชน
+             </Col>
+          <Col sm={2}>
+            <FormControl id="idCard" type="text" placeholder="บัตรประชาชน" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            อาชีพ
+             </Col>
+          <Col sm={2}>
+            <FormControl id="career" type="text" placeholder="อาชีพ" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            โทร
+             </Col>
+          <Col sm={2}>
+            <FormControl id="tel" type="text" placeholder="โทร" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            ที่อยู่ปัจจุบัน
+             </Col>
+          <Col sm={7}>
+            <FormControl id="homeAddress" type="text" placeholder="ที่อยู่ปัจจุบัน" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            ที่อยู่ที่ทำงาน
+             </Col>
+          <Col sm={7}>
+            <FormControl id="workAddress" type="text" placeholder="ที่อยู่ที่ทำงาน" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            เอกสารที่ต้องการ
+              </Col>
+          <Col sm={3}>
+            <Radio id="doc0" name="requiredDocument" inline>ใบรับรองแพทย์</Radio>{' '}
+            <Radio id="doc1" name="requiredDocument" inline>ประกันสังคม</Radio>
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            โรคประจำตัว
+              </Col>
+          <Col sm={7}>
+            <FormControl id="congenitalDisease" type="text" placeholder="โรคประจำตัว" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            แพ้ยา
+              </Col>
+          <Col sm={7}>
+            <FormControl id="beAllergic" type="text" placeholder="แพ้ยา" />
+          </Col>
+        </FormGroup>
+        <Col className="clearline" />
+        <Col className="txtheader" componentClass={ControlLabel} sm={12}>
+          ติดต่อฉุกเฉิน
+            </Col>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            ผู้ติดต่อฉุกเฉิน
+              </Col>
+          <Col sm={7}>
+            <FormControl id="emergencyContactName" type="text" placeholder="ผู้ติดต่อฉุกเฉิน" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            ความสัมพันธ์
+              </Col>
+          <Col sm={3}>
+            <FormControl id="emergencyContactRelationship" type="text" placeholder="ความสัมพันธ์" />
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            โทร
+              </Col>
+          <Col sm={3}>
+            <FormControl id="emergencyContactTel" type="text" placeholder="โทร" />
+          </Col>
+        </FormGroup>
+        <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
+        <Modal show={this.state.modal.active} onHide={this.closeModal} backdrop="static" keyboard="false">
+          <Modal.Body>
+            เพิ่มผู้ป่วยสำเร็จ
+            <div>
+              <Button bsStyle="default" type="button" onClick={this.closeModal} id="okBtn">ตกลง</Button>
+            </div>
+          </Modal.Body>
+        </Modal>
+        <Modal show={this.state.modalAlert.active} onHide={this.closeModalAlert}>
+          <Alert bsStyle="danger">
+            <strong>ขออภัย</strong>ไม่สามารถเพิ่มผู้ป่วยได้
+          </Alert>
+        </Modal>
+      </Form >
     )
   }
 
