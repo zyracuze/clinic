@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo"
-	"gopkg.in/mgo.v2/bson"
 	database "service"
 )
 
