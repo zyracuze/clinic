@@ -84,6 +84,11 @@ body {
   text-align: center !important; 
   margin-bottom: 1% !important;
 }
+
+.width45{
+  width: 45%
+}
+
 .react-datepicker__input-container {
   display: inline !important;
 }
