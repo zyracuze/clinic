@@ -29,4 +29,6 @@ echo "Building ...."
 go install main
 
 echo "Finished"
+export mongodb_host=localhost:27017
+export mongodb_dbname=clinic
 ./bin/main

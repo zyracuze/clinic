@@ -11,12 +11,12 @@ type Connection struct {
 }
 
 func Connect() (*Connection, error) {
-	session, err := mgo.Dial(os.Getenv("mongodb.host"))
+	session, err := mgo.Dial(os.Getenv("mongodb_host"))
 	if err != nil {
 		return nil, err
 	}
 	session.SetMode(mgo.Monotonic, true)
-	db := os.Getenv("mongodb.dbname")
+	db := os.Getenv("mongodb_dbname")
 	return &Connection{
 		MogoSession:  session,
 		DatabaseName: db,
