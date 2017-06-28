@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Col, Button, ControlLabel } from 'react-bootstrap';
 import '../App.css';
+import ApiSearch from '../apis/ApiSearch'
 
 class Search extends Component {
   constructor(props) {
@@ -11,17 +12,32 @@ class Search extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let name = this.refs.name.value;
+
+    let firstname = this.refs.firstname.value;
+    let lastname = this.refs.lastname.value;
     let identifySearch = this.refs.identifySearch.value;
-
-    this.setState({
-      identify: "",
-      address: "",
-      gender: "",
-      birthDate: "",
-      phoneNumber: ""});
+    let data = {
+      "idpatient": identifySearch,
+      "firstname": firstname,
+      "lastame": lastname
+    }
+    ApiSearch.validateSearch(data).then(
+      (responseSuccess) => {
+        this.setPatient(responseSuccess[0])},
+      (responseFail) => {}
+      );
   }
+  
 
+ setPatient(patient) {
+      this.setState({
+      identify: patient.idPatient,
+      name:patient.firstname + " " + patient.lastname,
+      address: patient.address,
+      gender: patient.gender,
+      birthDate: patient.birthday,
+      phoneNumber: patient.tel});
+  }
   render() {
 
     return (
@@ -35,8 +51,14 @@ class Search extends Component {
             <input
                 type="text"
                 className="form-control-signin"
-                placeholder="ชื่อ - นามสกุลผู้ป่วย"
-                ref="name"/>
+                placeholder="ชื่อ"
+                ref="firstname"/>
+
+                <input
+                type="text"
+                className="form-control-signin"
+                placeholder="นามสกุล"
+                ref="lastname"/>
 
             <label>รหัสผู้ป่วย :</label>
             <input
@@ -53,9 +75,7 @@ class Search extends Component {
                 className="btn btn-lg btn-primary">SEARCH</Button>
         </div>
       </form>
-
-
-
+      
       <Form horizontal>
         <FormGroup>
           <Col componentClass={ControlLabel} sm={3}>
@@ -70,7 +90,7 @@ class Search extends Component {
             <label>ชื่อ - นามสกุล : </label>
           </Col>
           <Col componentClass={ControlLabel} sm={6}>
-            <label> {this.state.name} </label>
+            <label> {this.state.name} </label> 
           </Col>
         </FormGroup>
         <FormGroup>
