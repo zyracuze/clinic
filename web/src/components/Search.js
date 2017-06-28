@@ -38,20 +38,20 @@ class Search extends Component {
       birthDate: patient.birthday,
       phoneNumber: patient.tel});
   }
-  render() {
+  render(
+    
+  ) {
+
+
 
     return (
+      
+
       <div>
+         <form onSubmit={this.handleSubmit}>
         <div>
           <label>
             <h2 className="form-signin-heading">ค้นหาผู้ป่วย</h2>
-            <label>ชื่อ - นามสกุล : </label>
-            <input
-                type="text"
-                className="form-control-signin"
-                placeholder="ชื่อ"
-                ref="firstname"/>
-
                 <input
                 type="text"
                 className="form-control-signin"
@@ -72,7 +72,7 @@ class Search extends Component {
                 type="submit"
                 className="btn btn-lg btn-primary">SEARCH</Button>
         </div>
-      </form>
+        </form>
       
       <Form horizontal>
         <FormGroup>
