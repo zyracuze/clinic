@@ -23,10 +23,10 @@ then
 fi
 
 echo "Testing ...."
-go test patient/...
+go test -v patient/...
 
 echo "Building ...."
 go install main
 
 echo "Finished"
-# ./bin/main
+./bin/main
