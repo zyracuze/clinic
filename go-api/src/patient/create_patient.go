@@ -3,9 +3,9 @@ package patient
 import (
 	"math/rand"
 	"net/http"
-	"strconv"
 
 	"time"
+	"fmt"
 
 	"github.com/labstack/echo"
 	"gopkg.in/mgo.v2/bson"
@@ -39,35 +39,13 @@ type Emergency struct {
 	Tel          string `json:"tel"`
 }
 
-func CreatePatient(c echo.Context) error {
-	patient := new(Patient)
-	err := c.Bind(patient)
-	if err != nil {
-		return c.NoContent(http.StatusBadRequest)
-	}
-
-	patient.IdPatient = generateIdPatient()
-	patient.CreateDateTime = time.Now().Local()
-	err = patient.insertPatient()
-	if err != nil {
-		return c.NoContent(http.StatusConflict)
-	}
-
-	return c.NoContent(http.StatusCreated)
+type Counter interface {
+	count() (int, error)
 }
 
-func generateIdPatient() string {
-	t := time.Now().Local()
-	dateTime := t.Format("20060102150405")
-	count, err := count()
-	if err != nil {
-		count = rand.Intn(10)
-	}
-	result := "P" + dateTime + strconv.Itoa(count+1)
-	return result
-}
+type MongoCounter struct {}
 
-func count() (int, error) {
+func (m MongoCounter) count() (int, error) {
 	db, err := database.Connect()
 	if err != nil {
 		return 0, err
@@ -78,6 +56,32 @@ func count() (int, error) {
 		return 0, err
 	}
 	return result, nil
+}
+
+func CreatePatient(c echo.Context) error {
+	patient := new(Patient)
+	err := c.Bind(patient)
+	if err != nil {
+		return c.NoContent(http.StatusBadRequest)
+	}
+
+	patient.IdPatient = generateIdPatient(MongoCounter{})
+	patient.CreateDateTime = time.Now().Local()
+	err = patient.insertPatient()
+	if err != nil {
+		return c.NoContent(http.StatusConflict)
+	}
+
+	return c.NoContent(http.StatusCreated)
+}
+
+func generateIdPatient(c Counter) string {
+	count, err := c.count()
+	if err != nil {
+		count = rand.Intn(10)
+	}
+	result := fmt.Sprintf("P%06d", count+1)
+	return result
 }
 
 func (p *Patient) insertPatient() error {

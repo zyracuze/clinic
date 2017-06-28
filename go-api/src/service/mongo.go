@@ -1,7 +1,7 @@
 package service
 
 import (
-	config "conf"
+	"os"
 	mgo "gopkg.in/mgo.v2"
 )
 
@@ -11,14 +11,12 @@ type Connection struct {
 }
 
 func Connect() (*Connection, error) {
-	conf := config.ConfReader
-
-	session, err := mgo.Dial(conf.GetString("mongodb.host"))
+	session, err := mgo.Dial(os.Getenv("mongodb.host"))
 	if err != nil {
 		return nil, err
 	}
 	session.SetMode(mgo.Monotonic, true)
-	db := conf.GetString("mongodb.dbname")
+	db := os.Getenv("mongodb.dbname")
 	return &Connection{
 		MogoSession:  session,
 		DatabaseName: db,
