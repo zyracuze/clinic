@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, Button, ControlLabel } from 'react-bootstrap';
+import { Form, FormGroup, Col, Button, ControlLabel, HelpBlock } from 'react-bootstrap';
 import '../App.css';
 import ApiSearch from '../apis/ApiSearch'
 
@@ -42,8 +42,6 @@ class Search extends Component {
 
     return (
       <div>
-
-        <form onSubmit={this.handleSubmit}>
         <div>
           <label>
             <h2 className="form-signin-heading">ค้นหาผู้ป่วย</h2>
@@ -78,52 +76,12 @@ class Search extends Component {
       
       <Form horizontal>
         <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            <label>รหัสผู้ป่วย : </label>
-          </Col>
-          <Col componentClass={ControlLabel} sm={6}>
-              <label> {this.state.identify} </label>
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            <label>ชื่อ - นามสกุล : </label>
-          </Col>
-          <Col componentClass={ControlLabel} sm={6}>
-            <label> {this.state.name} </label> 
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            <label>เบอร์ติดต่อ : </label>
-          </Col>
-          <Col componentClass={ControlLabel} sm={6}>
-            <label> {this.state.phoneNumber} </label>
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            <label>วันเกิด : </label>
-          </Col>
-          <Col componentClass={ControlLabel} sm={6}>
-            <label> {this.state.birthDate} </label>
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            <label>เพศ : </label>
-          </Col>
-          <Col componentClass={ControlLabel} sm={6}>
-            <label> {this.state.gender} </label>
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            <label>ที่อยู่ : </label>
-          </Col>
-          <Col componentClass={ControlLabel} sm={6}>
-            <label> {this.state.address} </label>
-          </Col>
+          <ControlLabel>รหัสผู้ป่วย :  {this.state.identify}</ControlLabel>
+          <ControlLabel> ชื่อ - นามสกุล :  {this.state.name}</ControlLabel>
+          <ControlLabel>เบอร์ติดต่อ : {this.state.phoneNumber}</ControlLabel>
+          <ControlLabel>วันเกิด : {this.state.birthDate}</ControlLabel>
+          <ControlLabel>เพศ : {this.state.gender}</ControlLabel>
+          <ControlLabel>ที่อยู่ : {this.state.address}</ControlLabel>
         </FormGroup>
         </Form>
     </div>
