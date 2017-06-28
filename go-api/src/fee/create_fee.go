@@ -11,12 +11,16 @@ import (
 	database "service"
 )
 
+type FeeItem struct {
+	ExpenseItem string  `json:"expenseItem"`
+	Amount      float64 `json:"amount"`
+}
+
 type Fee struct {
 	Id             bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
 	IdFee          string        `json:"idFee"`
 	IdPatient      string        `json:"idPatient"`
-	ExpenseItem    string        `json:"expenseItem"`
-	Amount         float64       `json:"amount"`
+	FeeItem        []FeeItem     `json:"items"`
 	CreateDateTime time.Time     `json:"createDateTime"`
 }
 
