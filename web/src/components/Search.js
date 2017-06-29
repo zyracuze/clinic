@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, Button, ControlLabel, HelpBlock } from 'react-bootstrap';
+import { Form, Row, FormGroup, Col, Button, ControlLabel, FormControl } from 'react-bootstrap';
 import '../App.css';
 import ApiSearch from '../apis/ApiSearch'
 
 class Search extends Component {
+  
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {msg: ""};
+    
   }
 
   handleSubmit(event) {
     event.preventDefault();
-
+    
+    // let identifySearch = findDOMNode(this.refs.identifySearch).value;
+    let identifySearch = this.refs.identifySearch.value;
     let firstname = this.refs.firstname.value;
     let lastname = this.refs.lastname.value;
-    let identifySearch = this.refs.identifySearch.value;
+    
     let data = {
       "idpatient": identifySearch,
       "firstname": firstname,
@@ -42,23 +46,38 @@ class Search extends Component {
     
   ) {
 
+    function FieldGroup({ id, labelPlace, labelValue, ...props }) {
+      return (
+        <FormGroup controlId={id}>
+          <ControlLabel>{labelPlace} {labelValue}</ControlLabel>
+        </FormGroup>
+      );
+    }
 
+    function FieldSearchGroup({ id1, ref, ...props }) {
+      return (
+        <FormGroup controlId={id1}>
+          <FormControl ref={ref}  {...props}/>
+        </FormGroup>
+      );
+    }
 
     return (
-      
-
       <div>
          <form onSubmit={this.handleSubmit}>
         <div>
           <label>
             <h2 className="form-signin-heading">ค้นหาผู้ป่วย</h2>
-                <input
+              <input
+                type="text"
+                className="form-control-signin"
+                placeholder="ชื่อ"
+                ref="firstname"/>
+              <input
                 type="text"
                 className="form-control-signin"
                 placeholder="นามสกุล"
                 ref="lastname"/>
-
-            <label>รหัสผู้ป่วย :</label>
             <input
                 type="text"
                 className="form-control-signin"
@@ -73,16 +92,42 @@ class Search extends Component {
                 className="btn btn-lg btn-primary">SEARCH</Button>
         </div>
         </form>
-      
-      <Form horizontal>
-        <FormGroup>
-          <ControlLabel>รหัสผู้ป่วย :  {this.state.identify}</ControlLabel>
-          <ControlLabel> ชื่อ - นามสกุล :  {this.state.name}</ControlLabel>
-          <ControlLabel>เบอร์ติดต่อ : {this.state.phoneNumber}</ControlLabel>
-          <ControlLabel>วันเกิด : {this.state.birthDate}</ControlLabel>
-          <ControlLabel>เพศ : {this.state.gender}</ControlLabel>
-          <ControlLabel>ที่อยู่ : {this.state.address}</ControlLabel>
-        </FormGroup>
+      <Form>
+        <FieldGroup
+          id="formControlsIdentify"
+          labelPlace="รหัสผู้ป่วย : "
+          labelValue={this.state.identify}
+        />
+
+        <FieldGroup
+          id="formControlsName"
+          labelPlace="ชื่อ - นามสกุล : "
+          labelValue={this.state.name}
+        />
+
+        <FieldGroup
+          id="formControlsName"
+          labelPlace="เบอร์ติดต่อ : "
+          labelValue={this.state.phoneNumber}
+        />
+
+        <FieldGroup
+          id="formControlsName"
+          labelPlace="วันเกิด : "
+          labelValue={this.state.birthDate}
+        />
+
+        <FieldGroup
+          id="formControlsName"
+          labelPlace="เพศ : "
+          labelValue={this.state.gender}
+        />
+
+        <FieldGroup
+          id="formControlsName"
+          labelPlace="ที่อยู่ : "
+          labelValue={this.state.address}
+        />
         </Form>
     </div>
     );
