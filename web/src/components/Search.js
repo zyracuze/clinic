@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Row, FormGroup, Col, Button, ControlLabel, FormControl } from 'react-bootstrap';
 import '../App.css';
-import ApiSearch from '../apis/ApiSearch'
+import { apiValidateSearch } from '../apis/ApiPatient';
 
 class Search extends Component {
   
@@ -25,15 +25,15 @@ class Search extends Component {
       "firstname": firstname,
       "lastame": lastname
     }
-    ApiSearch.validateSearch(data).then(
-      (responseSuccess) => {
-        this.setPatient(responseSuccess[0])},
+    apiValidateSearch(data).then(
+      this.setPatient,
       (responseFail) => {}
-      );
+    );
   }
   
 
- setPatient(patient) {
+ setPatient(responseSuccess) {
+      let patient = responseSuccess[0];
       this.setState({
       identify: patient.idPatient,
       name:patient.firstname + " " + patient.lastname,

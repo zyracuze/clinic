@@ -74,7 +74,6 @@ class CreatePatient extends Component {
         tel: e.target.emergencyContactTel.value
       }
     };
-
     console.log(requestObj)
     apiCreatePatient(requestObj).then(() => {
       this.openModal();

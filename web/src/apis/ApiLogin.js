@@ -1,10 +1,9 @@
 
 import axios from 'axios';
-
-const URL = "http://localhost:8888/login";
+import config from './config';
 
 function validateLogin(data) {
-  return axios.post(URL,data).then( response => response.data );
+  return axios.post(config.LOGIN_URL,data).then( response => response.data );
 }
 
 export { validateLogin }

@@ -1,10 +1,12 @@
 
 import axios from 'axios';
+import config from './config';
 
-const URL = "http://localhost:8888/patient";
-
-function apiCreatePatient(data) {
-  return axios.post(URL+'/create', data).then(response => response.data);
+export const apiCreatePatient=(data)=>{
+  return axios.post(config.CREATE_PATIENT_URL, data).then(response => response.data);
 }
 
-export { apiCreatePatient }
+export const apiValidateSearch=(data)=>{
+  return axios.post(config.SEARCH_PATIENT_URL,data).then(responseFromSearch => responseFromSearch.data);
+}
+
