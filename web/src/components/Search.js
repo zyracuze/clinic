@@ -26,14 +26,15 @@ class Search extends Component {
       "lastame": lastname
     }
     apiValidateSearch(data).then(
-      this.setPatient,
-      (responseFail) => {}
+      (responseSuccess)=>{
+        this.setPatient(responseSuccess[0])
+      },(responseFail) => {
+
+      }
     );
   }
   
-
- setPatient(responseSuccess) {
-      let patient = responseSuccess[0];
+ setPatient(patient) {
       this.setState({
       identify: patient.idPatient,
       name:patient.firstname + " " + patient.lastname,
