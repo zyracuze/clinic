@@ -8,14 +8,17 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.editPatienSubmit = this.editPatienSubmit.bind(this);
     this.state = {msg: ""};
-    
+  }
+
+  editPatienSubmit(event) {
+      event.preventDefault();
+      this.props.history.push("/createPatient?id="+this.setState.identify);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    
-    // let identifySearch = findDOMNode(this.refs.identifySearch).value;
     let identifySearch = this.refs.identifySearch.value;
     let firstname = this.refs.firstname.value;
     let lastname = this.refs.lastname.value;
@@ -93,7 +96,7 @@ class Search extends Component {
                 className="btn btn-lg btn-primary">SEARCH</Button>
         </div>
         </form>
-      <Form>
+
         <FieldGroup
           id="formControlsIdentify"
           labelPlace="รหัสผู้ป่วย : "
@@ -129,7 +132,13 @@ class Search extends Component {
           labelPlace="ที่อยู่ : "
           labelValue={this.state.address}
         />
-        </Form>
+
+        <Button
+           onClick={this.editPatienSubmit}
+           bsStyle="primary"
+           type="submit"
+           className="btn btn-lg btn-primary">แก้ไขข้อมูลผู้ป่วย</Button>
+        
     </div>
     );
   }
