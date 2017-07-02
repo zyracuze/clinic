@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Row, FormGroup, Col, Button, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, Button, ControlLabel } from 'react-bootstrap';
 import '../App.css';
 import { apiValidateSearch } from '../apis/ApiPatient';
 
@@ -54,14 +54,6 @@ class Search extends Component {
       return (
         <FormGroup controlId={id}>
           <ControlLabel>{labelPlace} {labelValue}</ControlLabel>
-        </FormGroup>
-      );
-    }
-
-    function FieldSearchGroup({ id1, ref, ...props }) {
-      return (
-        <FormGroup controlId={id1}>
-          <FormControl ref={ref}  {...props}/>
         </FormGroup>
       );
     }
