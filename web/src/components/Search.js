@@ -12,9 +12,8 @@ class Search extends Component {
     this.state = {msg: ""};
   }
 
-  editPatienSubmit(event) {
-      event.preventDefault();
-      this.props.history.push("/createPatient?id="+this.setState.identify);
+  editPatienSubmit(id) {
+      this.props.history.push("/createPatient?id="+ id);
   }
 
   handleSubmit(event) {
@@ -126,7 +125,7 @@ class Search extends Component {
         />
 
         <Button
-           onClick={this.editPatienSubmit}
+           onClick={()=> this.editPatienSubmit(this.state.identify)}
            bsStyle="primary"
            type="submit"
            className="btn btn-lg btn-primary">แก้ไขข้อมูลผู้ป่วย</Button>
