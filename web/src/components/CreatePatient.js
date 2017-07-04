@@ -7,7 +7,7 @@ import { apiCreatePatient } from '../apis/ApiPatient'
 
 import Dialog from 'react-bootstrap-dialog'
 
-import { Form, FormGroup, FormControl, ControlLabel, Row, Col, Radio, Button, DropdownButton, MenuItem, Modal, Alert } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button, Modal, Alert } from 'react-bootstrap';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import '../App.css';
@@ -16,94 +16,208 @@ class CreatePatient extends Component {
   constructor() {
     super();
     this.state = {
-      startDate: moment(),
-      modal: {
-        active: false,
-        body: ''
-      },
-      modalAlert: {
-        active: false,
-        body: ''
-      },
+      modal: false,
+      modalAlert: false,
+      formValid: true,
       firstname: '',
+      firstnameClassName: '',
       lastname: '',
+      lastnameClassName: '',
       nickname: '',
+      nicknameClassName: '',
       gender: '',
-      birthday: '',
+      birthday: moment(),
+      birthdayClassName: '',
       idCard: '',
+      idCardClassName: '',
       career: '',
+      careerClassName: '',
       tel: '',
+      telClassName: '',
       workAddress: '',
+      workAddressClassName: '',
       homeAddress: '',
+      homeAddressClassName: '',
       requiredDocument: '',
       congenitalDisease: '',
+      congenitalDiseaseClassName: '',
       beAllergic: '',
-      emergencyContact: {
-        name: '',
-        relationship: '',
-        tel: ''
-      }
-
+      beAllergicClassName: '',
+      emergencyContactName: '',
+      emergencyContactNameClassName: '',
+      emergencyContactRelationship: '',
+      emergencyContactRelationshipClassName: '',
+      emergencyContactTel: '',
+      emergencyContactTelClassName: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleInput = this.handleInput.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.closeModalAlert = this.closeModalAlert.bind(this);
   }
 
   handleSubmit(e) {
-    e.preventDefault();
-    let requestObj = {
-      firstname: e.target.firstname.value,
-      lastname: e.target.lastname.value,
-      nickname: e.target.nickname.value,
-      gender: e.target.gender.value,
-      birthday: this.state.startDate.format('DD/MM/YYYY'),
-      idCard: e.target.idCard.value,
-      career: e.target.career.value,
-      tel: e.target.tel.value,
-      workAddress: e.target.workAddress.value,
-      homeAddress: e.target.homeAddress.value,
-      requiredDocument: e.target.requiredDocument.value,
-      congenitalDisease: e.target.congenitalDisease.value,
-      beAllergic: e.target.beAllergic.value,
-      emergencyContact: {
-        name: e.target.emergencyContactName.value,
-        relationship: e.target.emergencyContactRelationship.value,
-        tel: e.target.emergencyContactTel.value
-      }
-    };
 
-    console.log(requestObj)
-    apiCreatePatient(requestObj).then(() => {
-      this.openModal();
-    }, () => {
-      this.openModalAlert();
+    e.preventDefault();
+
+    let inputError = 'input-error';
+
+    let firstnameClassName = '';
+    let lastnameClassName = '';
+    let nicknameClassName = '';
+    let idCardClassName = '';
+    let careerClassName = '';
+    let telClassName = '';
+    let workAddressClassName = '';
+    let homeAddressClassName = '';
+    let congenitalDiseaseClassName = '';
+    let beAllergicClassName = '';
+    let emergencyContactNameClassName = '';
+    let emergencyContactRelationshipClassName = '';
+    let emergencyContactTelClassName = '';
+    let formValid = true;
+
+    if (0 >= this.state.firstname.length) {
+      firstnameClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.lastname.length) {
+      lastnameClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.nickname.length) {
+      nicknameClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.idCard.length) {
+      idCardClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.career.length) {
+      careerClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.tel.length) {
+      telClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.workAddress.length) {
+      workAddressClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.homeAddress.length) {
+      homeAddressClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.congenitalDisease.length) {
+      congenitalDiseaseClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.beAllergic.length) {
+      beAllergicClassName = inputError;
+      formValid = false;
+    }
+    if (0 >= this.state.emergencyContactName.length) {
+      emergencyContactNameClassName = inputError;
+      formValid = false;
+    }
+    if (0 >= this.state.emergencyContactRelationship.length) {
+      emergencyContactRelationshipClassName = inputError;
+      formValid = false;
+    }
+    if (0 >= this.state.emergencyContactTel.length) {
+      emergencyContactTelClassName = inputError;
+      formValid = false;
+    }
+
+    this.setState({
+      formValid: formValid,
+      firstnameClassName: firstnameClassName,
+      lastnameClassName: lastnameClassName,
+      nicknameClassName: nicknameClassName,
+      idCardClassName: idCardClassName,
+      careerClassName: careerClassName,
+      telClassName: telClassName,
+      workAddressClassName: workAddressClassName,
+      homeAddressClassName: homeAddressClassName,
+      congenitalDiseaseClassName: congenitalDiseaseClassName,
+      beAllergicClassName: beAllergicClassName,
+      emergencyContactNameClassName: emergencyContactNameClassName,
+      emergencyContactRelationshipClassName: emergencyContactRelationshipClassName,
+      emergencyContactTelClassName: emergencyContactTelClassName
     });
+
+    if (formValid) {
+      let requestObj = {
+        firstname: this.state.firstname,
+        lastname: this.state.lastname,
+        nickname: this.state.nickname,
+        gender: this.state.gender,
+        birthday: this.state.birthday.format('DD/MM/YYYY'),
+        idCard: this.state.idCard,
+        career: this.state.career,
+        tel: this.state.tel,
+        workAddress: this.state.workAddress,
+        homeAddress: this.state.homeAddress,
+        requiredDocument: this.state.requiredDocument,
+        congenitalDisease: this.state.congenitalDisease,
+        beAllergic: this.state.beAllergic,
+        emergencyContact: {
+          name: this.state.emergencyContactName,
+          relationship: this.state.emergencyContactRelationship,
+          tel: this.state.emergencyContactTel
+        }
+      };
+
+      apiCreatePatient(requestObj).then(() => {
+        this.openModal();
+      }, () => {
+        this.openModalAlert();
+      });
+
+    }
+
+    this.openModalAlert();
   }
 
   handleChange(date) {
     this.setState({
-      startDate: date
+      birthday: date
     });
   }
 
+  handleInput(e) {
+    const key = e.target.id;
+    const value = e.target.value;
+    this.setState({ [key]: value });
+  };
+
   openModal() {
-    this.setState({ modal: { active: true } });
+    this.setState({ modal: true });
   }
 
   closeModal() {
-    this.setState({ modal: { active: false } });
+    this.setState({ modal: false });
     hashHistory.push('/home');
   }
 
   openModalAlert() {
-    this.setState({ modalAlert: { active: true } });
+    this.setState({ modalAlert: true });
   }
 
   closeModalAlert() {
-    this.setState({ modalAlert: { active: false } });
+    this.setState({ modalAlert: false });
   }
 
   render() {
@@ -114,13 +228,13 @@ class CreatePatient extends Component {
             ชื่อ
              </Col>
           <Col sm={3}>
-            <FormControl id="firstname" type="text" placeholder="ชื่อ" />
+            <FormControl id="firstname" type="text" placeholder="ชื่อ" className={this.state.firstnameClassName} value={this.state.firstname} onChange={this.handleInput} />
           </Col>
           <Col componentClass={ControlLabel} sm={1}>
             นามสกุล
              </Col>
           <Col sm={3}>
-            <FormControl id="lastname" type="text" placeholder="นามสกุล" />
+            <FormControl id="lastname" type="text" placeholder="นามสกุล" className={this.state.lastnameClassName} value={this.state.lastname} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -128,7 +242,7 @@ class CreatePatient extends Component {
             ชื่อเล่น
              </Col>
           <Col sm={3}>
-            <FormControl id="nickname" type="text" placeholder="ชื่อเล่น" />
+            <FormControl id="nickname" type="text" placeholder="ชื่อเล่น" className={this.state.nicknameClassName} value={this.state.nickname} onChange={this.handleInput} />
           </Col>
           <Col componentClass={ControlLabel} sm={1}>
             เพศ
@@ -147,13 +261,14 @@ class CreatePatient extends Component {
           <Col sm={3}>
             <DatePicker
               id="birthday"
-              selected={this.state.startDate}
+              selected={this.state.birthday}
               onChange={this.handleChange}
               showMonthDropdown
               showYearDropdown
               dateFormat="DD/MM/YYYY"
               dropdownMode="select"
-              className="form-control" />
+              className="form-control"
+            />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -161,7 +276,7 @@ class CreatePatient extends Component {
             บัตรประชาชน
              </Col>
           <Col sm={2}>
-            <FormControl id="idCard" type="text" placeholder="บัตรประชาชน" />
+            <FormControl id="idCard" type="text" placeholder="บัตรประชาชน" className={this.state.idCardClassName} value={this.state.idCard} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -169,7 +284,7 @@ class CreatePatient extends Component {
             อาชีพ
              </Col>
           <Col sm={2}>
-            <FormControl id="career" type="text" placeholder="อาชีพ" />
+            <FormControl id="career" type="text" placeholder="อาชีพ" className={this.state.careerClassName} value={this.state.career} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -177,7 +292,7 @@ class CreatePatient extends Component {
             โทร
              </Col>
           <Col sm={2}>
-            <FormControl id="tel" type="text" placeholder="โทร" />
+            <FormControl id="tel" type="text" placeholder="โทร" className={this.state.telClassName} value={this.state.tel} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -185,7 +300,7 @@ class CreatePatient extends Component {
             ที่อยู่ปัจจุบัน
              </Col>
           <Col sm={7}>
-            <FormControl id="homeAddress" type="text" placeholder="ที่อยู่ปัจจุบัน" />
+            <FormControl id="homeAddress" type="text" placeholder="ที่อยู่ปัจจุบัน" className={this.state.homeAddressClassName} value={this.state.homeAddress} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -193,7 +308,7 @@ class CreatePatient extends Component {
             ที่อยู่ที่ทำงาน
              </Col>
           <Col sm={7}>
-            <FormControl id="workAddress" type="text" placeholder="ที่อยู่ที่ทำงาน" />
+            <FormControl id="workAddress" type="text" placeholder="ที่อยู่ที่ทำงาน" className={this.state.workAddressClassName} value={this.state.workAddress} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -210,7 +325,7 @@ class CreatePatient extends Component {
             โรคประจำตัว
               </Col>
           <Col sm={7}>
-            <FormControl id="congenitalDisease" type="text" placeholder="โรคประจำตัว" />
+            <FormControl id="congenitalDisease" type="text" placeholder="โรคประจำตัว" className={this.state.congenitalDiseaseClassName} value={this.state.congenitalDisease} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -218,7 +333,7 @@ class CreatePatient extends Component {
             แพ้ยา
               </Col>
           <Col sm={7}>
-            <FormControl id="beAllergic" type="text" placeholder="แพ้ยา" />
+            <FormControl id="beAllergic" type="text" placeholder="แพ้ยา" className={this.state.beAllergicClassName} value={this.state.beAllergic} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <Col className="clearline" />
@@ -230,7 +345,7 @@ class CreatePatient extends Component {
             ผู้ติดต่อฉุกเฉิน
               </Col>
           <Col sm={7}>
-            <FormControl id="emergencyContactName" type="text" placeholder="ผู้ติดต่อฉุกเฉิน" />
+            <FormControl id="emergencyContactName" type="text" placeholder="ผู้ติดต่อฉุกเฉิน" className={this.state.emergencyContactNameClassName} value={this.state.emergencyContactName} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -238,7 +353,7 @@ class CreatePatient extends Component {
             ความสัมพันธ์
               </Col>
           <Col sm={3}>
-            <FormControl id="emergencyContactRelationship" type="text" placeholder="ความสัมพันธ์" />
+            <FormControl id="emergencyContactRelationship" type="text" placeholder="ความสัมพันธ์" className={this.state.emergencyContactRelationshipClassName} value={this.state.emergencyContactRelationship} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -246,11 +361,11 @@ class CreatePatient extends Component {
             โทร
               </Col>
           <Col sm={3}>
-            <FormControl id="emergencyContactTel" type="text" placeholder="โทร" />
+            <FormControl id="emergencyContactTel" type="text" placeholder="โทร" className={this.state.emergencyContactTelClassName} value={this.state.emergencyContactTel} onChange={this.handleInput} />
           </Col>
         </FormGroup>
         <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
-        <Modal show={this.state.modal.active} onHide={this.closeModal} backdrop="static" keyboard="false">
+        <Modal show={this.state.modal} onHide={this.closeModal} backdrop="static" keyboard={false}>
           <Modal.Body>
             เพิ่มผู้ป่วยสำเร็จ
             <div>
@@ -258,10 +373,10 @@ class CreatePatient extends Component {
             </div>
           </Modal.Body>
         </Modal>
-        <Modal show={this.state.modalAlert.active} onHide={this.closeModalAlert}>
-          <Alert bsStyle="danger">
+        <Modal show={this.state.modalAlert} onHide={this.closeModalAlert}>
+          <div className={"modal-alert-danger"}>
             <strong>ขออภัย</strong>ไม่สามารถเพิ่มผู้ป่วยได้
-          </Alert>
+          </div>
         </Modal>
       </Form >
     )
