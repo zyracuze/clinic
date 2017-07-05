@@ -1,8 +1,7 @@
-import React from 'react'
+import React,{ Component } from 'react'
 import '../App.css';
 import {Grid, Row, Col, Button} from 'react-bootstrap';
-
-export default React.createClass({
+export default class Home extends Component{
   render(){
     return (
       <div>
@@ -51,4 +50,4 @@ export default React.createClass({
       </div>
     )
   }
-})
+}

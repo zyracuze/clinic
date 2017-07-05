@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
-import { Form, Row, FormGroup, Col, Button, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, Button, ControlLabel } from 'react-bootstrap';
 import '../App.css';
-import ApiSearch from '../apis/ApiSearch'
+import { apiValidateSearch } from '../apis/ApiPatient';
 
 class Search extends Component {
   
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.editPatienSubmit = this.editPatienSubmit.bind(this);
     this.state = {msg: ""};
-    
+  }
+
+  editPatienSubmit(id) {
+      this.props.history.push("/createPatient?id="+ id);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    
-    // let identifySearch = findDOMNode(this.refs.identifySearch).value;
     let identifySearch = this.refs.identifySearch.value;
     let firstname = this.refs.firstname.value;
     let lastname = this.refs.lastname.value;
@@ -25,14 +27,15 @@ class Search extends Component {
       "firstname": firstname,
       "lastame": lastname
     }
-    ApiSearch.validateSearch(data).then(
-      (responseSuccess) => {
-        this.setPatient(responseSuccess[0])},
-      (responseFail) => {}
-      );
+    apiValidateSearch(data).then(
+      (responseSuccess)=>{
+        this.setPatient(responseSuccess[0])
+      },(responseFail) => {
+
+      }
+    );
   }
   
-
  setPatient(patient) {
       this.setState({
       identify: patient.idPatient,
@@ -50,14 +53,6 @@ class Search extends Component {
       return (
         <FormGroup controlId={id}>
           <ControlLabel>{labelPlace} {labelValue}</ControlLabel>
-        </FormGroup>
-      );
-    }
-
-    function FieldSearchGroup({ id1, ref, ...props }) {
-      return (
-        <FormGroup controlId={id1}>
-          <FormControl ref={ref}  {...props}/>
         </FormGroup>
       );
     }
@@ -92,7 +87,7 @@ class Search extends Component {
                 className="btn btn-lg btn-primary">SEARCH</Button>
         </div>
         </form>
-      <Form>
+
         <FieldGroup
           id="formControlsIdentify"
           labelPlace="รหัสผู้ป่วย : "
@@ -128,7 +123,13 @@ class Search extends Component {
           labelPlace="ที่อยู่ : "
           labelValue={this.state.address}
         />
-        </Form>
+
+        <Button
+           onClick={()=> this.editPatienSubmit(this.state.identify)}
+           bsStyle="primary"
+           type="submit"
+           className="btn btn-lg btn-primary">แก้ไขข้อมูลผู้ป่วย</Button>
+        
     </div>
     );
   }

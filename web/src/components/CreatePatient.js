@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
-
 import { hashHistory } from 'react-router';
 import { apiCreatePatient } from '../apis/ApiPatient'
-
-import Dialog from 'react-bootstrap-dialog'
 
 import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button, Modal, Alert } from 'react-bootstrap';
 
@@ -156,6 +153,7 @@ class CreatePatient extends Component {
       emergencyContactNameClassName: emergencyContactNameClassName,
       emergencyContactRelationshipClassName: emergencyContactRelationshipClassName,
       emergencyContactTelClassName: emergencyContactTelClassName
+
     });
 
     if (formValid) {
