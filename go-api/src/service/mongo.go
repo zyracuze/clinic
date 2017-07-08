@@ -2,6 +2,7 @@ package service
 
 import (
 	"os"
+
 	mgo "gopkg.in/mgo.v2"
 )
 
@@ -23,38 +24,29 @@ func Connect() (*Connection, error) {
 	}, nil
 }
 
-func (conn *Connection) FindOne(collection string, query interface{}, data interface{}) error {
+func createCollection(conn *Connection, collection string) *mgo.Collection {
 	session := conn.MogoSession.Clone()
 	defer session.Clone()
-	c := session.DB(conn.DatabaseName).C(collection)
-	return c.Find(query).One(data)
+	return session.DB(conn.DatabaseName).C(collection)
+}
+
+func (conn *Connection) FindOne(collection string, query interface{}, data interface{}) error {
+	return createCollection(conn, collection).Find(query).One(data)
 }
 
 func (conn *Connection) Insert(collection string, data interface{}) error {
-	session := conn.MogoSession.Clone()
-	defer session.Clone()
-	c := session.DB(conn.DatabaseName).C(collection)
-	return c.Insert(&data)
+	return createCollection(conn, collection).Insert(&data)
 }
 
 func (conn *Connection) Update(collection string, query interface{}, data interface{}) error {
-	session := conn.MogoSession.Clone()
-	defer session.Clone()
-	c := session.DB(conn.DatabaseName).C(collection)
-	err := c.Update(query, data)
+	err := createCollection(conn, collection).Update(query, data)
 	return err
 }
 
 func (conn *Connection) CountCollection(collection string) (int, error) {
-	session := conn.MogoSession.Clone()
-	defer session.Clone()
-	c := session.DB(conn.DatabaseName).C(collection)
-	return c.Count()
+	return createCollection(conn, collection).Count()
 }
 
 func (conn *Connection) Find(collection string, query interface{}, data interface{}) error {
-	session := conn.MogoSession.Clone()
-	defer session.Clone()
-	c := session.DB(conn.DatabaseName).C(collection)
-	return c.Find(query).All(data)
+	return createCollection(conn, collection).Find(query).All(data)
 }
