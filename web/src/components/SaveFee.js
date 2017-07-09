@@ -1,50 +1,64 @@
 import React, { Component } from 'react'
 
+import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Modal, Alert, Glyphicon, InputGroup } from 'react-bootstrap';
+
 class SaveFee extends Component {
 
   constructor() {
     super();
     this.state = {
       feeblock: [(
-        <div key="0" className="form-group">
-          <label className="col-sm-3 control-label">รายการค่าใช้จ่าย</label>
-          <div className="col-sm-2">
-            <input type="text" placeholder="รายการค่าใช้จ่าย" ref="expenseItem" id="expenseItem0" className="form-control" />
-          </div>
-          <label className="col-sm-1 control-label">จำนวนเงิน</label>
-          <div className="col-sm-2">
-            <input type="text" placeholder="จำนวนเงิน" ref="amount" id="amount0" className="form-control" />
-          </div>
-        </div>
-      )]
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            รายการค่าใช้จ่าย
+             </Col>
+          <Col sm={3}>
+            <FormControl id="expenseItem0" type="text" placeholder="รายการค่าใช้จ่าย" />
+          </Col>
+          <Col componentClass={ControlLabel} sm={1}>
+            จำนวนเงิน
+             </Col>
+          <Col sm={3}>
+            <FormControl id="amount0" type="text" placeholder="จำนวนเงิน" />
+          </Col>
+        </FormGroup>
+      )],
+      firstname: 'Star',
+      lastname: 'bug'
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onAddBtnClick = this.onAddBtnClick.bind(this);
+    this.handleSearchPatient = this.handleSearchPatient.bind(this);
 
+  }
+
+  handleSearchPatient() {
+    console.log("GGWP");
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.refs.idPatient.value)
-    console.log(this.refs.fullname.value)
-    console.log(this.refs.expenseItem.value)
   }
 
   onAddBtnClick(event) {
     const feeblock = this.state.feeblock;
     this.setState({
       feeblock: feeblock.concat((
-        <div key={feeblock.length} className="form-group">
-          <label className="col-sm-3 control-label">รายการค่าใช้จ่าย</label>
-          <div className="col-sm-2">
-            <input type="text" placeholder="รายการค่าใช้จ่าย" id={"expenseItem" + feeblock.length} className="form-control" />
-          </div>
-          <label className="col-sm-1 control-label">จำนวนเงิน</label>
-          <div className="col-sm-2">
-            <input type="text" placeholder="จำนวนเงิน" id={"amount" + feeblock.length} className="form-control" />
-          </div>
-        </div>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            รายการค่าใช้จ่าย
+             </Col>
+          <Col sm={3}>
+            <FormControl id={"expenseItem" + feeblock.length} type="text" placeholder="รายการค่าใช้จ่าย" />
+          </Col>
+          <Col componentClass={ControlLabel} sm={1}>
+            จำนวนเงิน
+             </Col>
+          <Col sm={3}>
+            <FormControl id={"amount" + feeblock.length} type="text" placeholder="จำนวนเงิน" />
+          </Col>
+        </FormGroup>
       ))
     });
   }
@@ -52,25 +66,35 @@ class SaveFee extends Component {
   render() {
 
     return (
-      <form onSubmit={this.handleSubmit} className="form-horizontal">
-        <div className="form-group">
-          <label className="col-sm-3 control-label">รหัสผู้ป่วย</label>
-          <div className="col-sm-2">
-            <input type="text" placeholder="รหัสผู้ป่วย" ref="idPatient" id="idPatient" className="form-control" />
-          </div>
-        </div>
-        <div className="form-group">
-          <label className="col-sm-3 control-label">ชื่อผู้ป่วย</label>
-          <div className="col-sm-2">
-            <input type="text" placeholder="ชื่อผู้ป่วย" ref="fullname" id="fullname" className="form-control" />
-          </div>
-        </div>
+
+      <Form horizontal onSubmit={this.handleSubmit}>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            รหัสผู้ป่วย
+          </Col>
+          <Col sm={3}>
+            <InputGroup>
+              <FormControl id="idPatient" type="text" placeholder="รหัสผู้ป่วย" />
+              <InputGroup.Addon>
+                <Glyphicon glyph="search" onClick={this.handleSearchPatient} />
+              </InputGroup.Addon>
+            </InputGroup>
+          </Col>
+        </FormGroup>
+        <FormGroup>
+          <Col componentClass={ControlLabel} sm={3}>
+            ชื่อผู้ป่วย
+          </Col>
+          <Col componentClass={ControlLabel} sm={3}>
+            {this.state.firstname + ' : ' + this.state.lastname}
+          </Col>
+        </FormGroup>
         {this.state.feeblock}
         <div>
-          <button onClick={this.onAddBtnClick} type="button" className="btn btn-primary width45">+</button>
+          <Button onClick={this.onAddBtnClick} bsStyle="btn btn-primary width45" type="submit" id="saveBtn" >+</Button>
         </div>
-        <button type="submit" className="btn btn-success">เพิ่ม</button>
-      </form>
+        <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
+      </Form>
     )
   }
 }

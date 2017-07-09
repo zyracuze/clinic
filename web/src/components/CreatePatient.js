@@ -314,7 +314,7 @@ class CreatePatient extends Component {
             เอกสารที่ต้องการ
               </Col>
           <Col sm={3}>
-            <Radio id="doc0" name="requiredDocument" inline>ใบรับรองแพทย์</Radio>{' '}
+            <Radio id="doc0" name="requiredDocument" defaultChecked={true} inline>ใบรับรองแพทย์</Radio>{' '}
             <Radio id="doc1" name="requiredDocument" inline>ประกันสังคม</Radio>
           </Col>
         </FormGroup>

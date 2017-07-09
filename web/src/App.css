@@ -86,7 +86,8 @@ body {
 }
 
 .width45{
-  width: 45%
+  margin-bottom: 15px;
+  width: 45%;
 }
 
 .react-datepicker__input-container {
