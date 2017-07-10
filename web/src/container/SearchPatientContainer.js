@@ -134,4 +134,4 @@ class SearchPatientContainer extends Component {
     );
   }
 }
-export default SearchPatientContainerclear;
+export default SearchPatientContainer;
