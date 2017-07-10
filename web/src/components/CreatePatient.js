@@ -4,7 +4,7 @@ import moment from 'moment';
 import { hashHistory } from 'react-router';
 import { apiCreatePatient } from '../apis/ApiPatient'
 
-import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button, Modal, Alert } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button, Modal } from 'react-bootstrap';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import '../App.css';

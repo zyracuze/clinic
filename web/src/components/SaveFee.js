@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Modal, Alert, Glyphicon, InputGroup } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Glyphicon, InputGroup } from 'react-bootstrap';
 
 class SaveFee extends Component {
 

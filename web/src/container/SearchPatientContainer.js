@@ -1,34 +1,28 @@
 import React, { Component } from 'react';
-import { FormGroup, Button, ControlLabel } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import '../App.css';
 import { apiValidateSearch } from '../apis/ApiPatient';
+import SearchPatientComponent from '../components/SearchPatientComponent';
+import SearchPatientResultComponent from '../components/SearchPatientResultComponent';
 
 class SearchPatientContainer extends Component {
   
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onSearch = this.onSearch.bind(this);
     this.editPatienSubmit = this.editPatienSubmit.bind(this);
-    this.state = {msg: ""};
+    this.state = {patients: {}};
   }
 
   editPatienSubmit(id) {
       this.props.history.push("/createPatient?id="+ id);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    let identifySearch = this.refs.identifySearch.value;
-    let firstname = this.refs.firstname.value;
-    let lastname = this.refs.lastname.value;
-    
-    let data = {
-      "idpatient": identifySearch,
-      "firstname": firstname,
-      "lastame": lastname
-    }
+  onSearch(data) {
+    console.log("Data : " + JSON.stringify(data))
     apiValidateSearch(data).then(
       (responseSuccess)=>{
+        console.log("API : " + JSON.stringify(responseSuccess[0]));
         this.setPatient(responseSuccess[0])
       },(responseFail) => {
 
@@ -36,100 +30,22 @@ class SearchPatientContainer extends Component {
     );
   }
   
- setPatient(patient) {
+ setPatient(patients) {
       this.setState({
-      identify: patient.idPatient,
-      name:patient.firstname + " " + patient.lastname,
-      address: patient.address,
-      gender: patient.gender,
-      birthDate: patient.birthday,
-      phoneNumber: patient.tel});
+        "patients": patients
+      });
   }
-  render(
-    
-  ) {
-
-    function FieldGroup({ id, labelPlace, labelValue, ...props }) {
-      return (
-        <FormGroup controlId={id}>
-          <ControlLabel>{labelPlace} {labelValue}</ControlLabel>
-        </FormGroup>
-      );
-    }
-
+  
+  render() {
     return (
       <div>
-         <form onSubmit={this.handleSubmit}>
-        <div>
-          <label>
-            <h2 className="form-signin-heading">ค้นหาผู้ป่วย</h2>
-              <input
-                type="text"
-                className="form-control-signin"
-                placeholder="ชื่อ"
-                ref="firstname"/>
-              <input
-                type="text"
-                className="form-control-signin"
-                placeholder="นามสกุล"
-                ref="lastname"/>
-            <input
-                type="text"
-                className="form-control-signin"
-                placeholder="รหัสผู้ป่วย"
-                ref="identifySearch"/>
-
-           <span className="msg-error"> {this.state.msg}</span>
-          </label>
-            <Button
-                bsStyle="primary"
-                type="submit"
-                className="btn btn-lg btn-primary">SEARCH</Button>
-        </div>
-        </form>
-
-        <FieldGroup
-          id="formControlsIdentify"
-          labelPlace="รหัสผู้ป่วย : "
-          labelValue={this.state.identify}
-        />
-
-        <FieldGroup
-          id="formControlsName"
-          labelPlace="ชื่อ - นามสกุล : "
-          labelValue={this.state.name}
-        />
-
-        <FieldGroup
-          id="formControlsName"
-          labelPlace="เบอร์ติดต่อ : "
-          labelValue={this.state.phoneNumber}
-        />
-
-        <FieldGroup
-          id="formControlsName"
-          labelPlace="วันเกิด : "
-          labelValue={this.state.birthDate}
-        />
-
-        <FieldGroup
-          id="formControlsName"
-          labelPlace="เพศ : "
-          labelValue={this.state.gender}
-        />
-
-        <FieldGroup
-          id="formControlsName"
-          labelPlace="ที่อยู่ : "
-          labelValue={this.state.address}
-        />
-
+        <SearchPatientComponent onSearch={this.onSearch.bind(this)}/>
+        <SearchPatientResultComponent patients={this.state.patients}/>
         <Button
            onClick={()=> this.editPatienSubmit(this.state.identify)}
            bsStyle="primary"
            type="submit"
-           className="btn btn-lg btn-primary">แก้ไขข้อมูลผู้ป่วย</Button>
-        
+           className="btn btn-lg btn-primary">แก้ไขข้อมูลผู้ป่วย</Button>      
     </div>
     );
   }
