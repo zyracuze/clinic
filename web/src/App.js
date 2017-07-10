@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Login from './components/Login'
 import Home from './components/Home'
-import Search from './components/Search'
+import SearchPatientContainer from './container/SearchPatientContainer'
 import Header from './components/Header'
 import CreatePatient from './components/CreatePatient'
 import GenerateMedicalCertificate from './components/GenerateMedicalCertificate'
@@ -26,7 +26,7 @@ class App extends Component {
         <Router history={hashHistory}>
           <Route path='/' component={Login} />
           <Route path='/home' component={Home} />
-          <Route path='/search' component={Search} />
+          <Route path='/search' component={SearchPatientContainer} />
           <Route path='/createPatient' component={CreatePatient}/>
           <Route path='/generateMedicalCertificate' component={GenerateMedicalCertificate}/>
           <Route path='/medicalExpenseReport' component={MedicalExpenseReport}/>
