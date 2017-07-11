@@ -4,6 +4,7 @@ import Home from './components/Home'
 import SearchPatientContainer from './container/SearchPatientContainer'
 import Header from './components/Header'
 import CreatePatient from './components/CreatePatient'
+import EditPatientContainer from './container/EditPatientContainer'
 import GenerateMedicalCertificate from './components/GenerateMedicalCertificate'
 import MedicalExpenseReport from './components/MedicalExpenseReport'
 import SaveFee from './components/SaveFee'
@@ -28,6 +29,7 @@ class App extends Component {
           <Route path='/home' component={Home} />
           <Route path='/search' component={SearchPatientContainer} />
           <Route path='/createPatient' component={CreatePatient}/>
+          <Route path='/editPatient' component={EditPatientContainer}/>
           <Route path='/generateMedicalCertificate' component={GenerateMedicalCertificate}/>
           <Route path='/medicalExpenseReport' component={MedicalExpenseReport}/>
           <Route path='/saveFee' component={SaveFee}/>

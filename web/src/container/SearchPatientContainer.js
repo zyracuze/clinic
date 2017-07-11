@@ -14,8 +14,8 @@ class SearchPatientContainer extends Component {
     this.state = {patients: {}};
   }
 
-  editPatienSubmit(id) {
-      this.props.history.push("/createPatient?id="+ id);
+  editPatienSubmit(patients) {
+      this.props.history.push("/editPatient?id="+ patients.idPatient);
   }
 
   onSearch(data) {
@@ -35,14 +35,14 @@ class SearchPatientContainer extends Component {
         "patients": patients
       });
   }
-  
+
   render() {
     return (
       <div>
         <SearchPatientComponent onSearch={this.onSearch.bind(this)}/>
         <SearchPatientResultComponent patients={this.state.patients}/>
         <Button
-           onClick={()=> this.editPatienSubmit(this.state.identify)}
+           onClick={()=> this.editPatienSubmit(this.state.patients)}
            bsStyle="primary"
            type="submit"
            className="btn btn-lg btn-primary">แก้ไขข้อมูลผู้ป่วย</Button>      
