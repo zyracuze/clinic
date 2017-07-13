@@ -30,17 +30,19 @@ class SaveFee extends Component {
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
     this.onAddBtnClick = this.onAddBtnClick.bind(this);
     this.handleSearchPatient = this.handleSearchPatient.bind(this);
 
   }
 
-  handleCloseModal(){
-
+  handleCloseModal() {
+    this.setState({
+      isShowingModal: false
+    })
   }
 
   handleSearchPatient() {
-    console.log("dd");
     this.setState({
       isShowingModal: true
     })
@@ -103,8 +105,8 @@ class SaveFee extends Component {
           <Button onClick={this.onAddBtnClick} bsStyle="btn btn-primary width45" type="submit" id="saveBtn" >+</Button>
         </div>
         <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
-        
-        <ModalSearch handleCloseModal={this.state.handleCloseModal} 
+
+        <ModalSearch handleCloseModal={this.handleCloseModal} 
                      isShowingModal={this.state.isShowingModal}/>
       </Form>
       
