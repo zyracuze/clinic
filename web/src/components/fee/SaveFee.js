@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ModalSearch from './ModalSearch'
 
 import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Glyphicon, InputGroup } from 'react-bootstrap';
 
@@ -7,6 +8,7 @@ class SaveFee extends Component {
   constructor() {
     super();
     this.state = {
+      isShowingModal: false,
       feeblock: [(
         <FormGroup>
           <Col componentClass={ControlLabel} sm={3}>
@@ -33,8 +35,15 @@ class SaveFee extends Component {
 
   }
 
+  handleCloseModal(){
+
+  }
+
   handleSearchPatient() {
-    console.log("GGWP");
+    console.log("dd");
+    this.setState({
+      isShowingModal: true
+    })
   }
 
   handleSubmit(event) {
@@ -94,7 +103,11 @@ class SaveFee extends Component {
           <Button onClick={this.onAddBtnClick} bsStyle="btn btn-primary width45" type="submit" id="saveBtn" >+</Button>
         </div>
         <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
+        
+        <ModalSearch handleCloseModal={this.state.handleCloseModal} 
+                     isShowingModal={this.state.isShowingModal}/>
       </Form>
+      
     )
   }
 }
