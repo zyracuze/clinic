@@ -1,6 +1,11 @@
 import React,{Component} from 'react'
+import PropTypes from 'prop-types';
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 export default class ModalSearch extends Component{
+    static propTypes = {
+        isShowingModal: PropTypes.bool.isRequired,
+        handleCloseModal: PropTypes.func.isRequired
+    }
     render(){
         return (
         <div>
