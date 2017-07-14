@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { hashHistory } from 'react-router';
-import { apiCreatePatient } from '../apis/ApiPatient'
+import { apiUpdatePatient } from '../apis/ApiPatient'
 import { apiValidateSearch } from '../apis/ApiPatient';
 
-import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button, Modal } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button, Modal, Checkbox } from 'react-bootstrap';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import '../App.css';
@@ -14,13 +14,10 @@ class EditPatientContainer extends Component {
   constructor(props) {
     super(props);
     console.log("Edit : "+ JSON.stringify(props)); 
-
     this.state = {patients: {}};
-
     let data = {
       "idpatient": this.props.location.query.id
     }
-
     apiValidateSearch(data).then(
       (responseSuccess)=>{
         console.log("API : " + JSON.stringify(responseSuccess[0]));
@@ -30,8 +27,6 @@ class EditPatientContainer extends Component {
       }
     );
 
-
-    
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -52,7 +47,7 @@ class EditPatientContainer extends Component {
       nickname: patients.nickname,
       nicknameClassName: '',
       gender: patients.gender,
-      birthday: moment(),
+      birthday: moment(patients.birthday, "MM-DD-YYYY"),
       birthdayClassName: '',
       idCard: patients.idCard,
       idCardClassName: '',
@@ -79,7 +74,6 @@ class EditPatientContainer extends Component {
   }
 
   handleSubmit(e) {
-
     e.preventDefault();
     let inputError = 'input-error';
     let firstnameClassName = '';
@@ -96,68 +90,6 @@ class EditPatientContainer extends Component {
     let emergencyContactRelationshipClassName = '';
     let emergencyContactTelClassName = '';
     let formValid = true;
-
-    if (0 >= this.state.firstname.length) {
-      firstnameClassName = inputError;
-      formValid = false;
-    }
-
-    if (0 >= this.state.lastname.length) {
-      lastnameClassName = inputError;
-      formValid = false;
-    }
-
-    if (0 >= this.state.nickname.length) {
-      nicknameClassName = inputError;
-      formValid = false;
-    }
-
-    if (0 >= this.state.idCard.length) {
-      idCardClassName = inputError;
-      formValid = false;
-    }
-
-    if (0 >= this.state.career.length) {
-      careerClassName = inputError;
-      formValid = false;
-    }
-
-    if (0 >= this.state.tel.length) {
-      telClassName = inputError;
-      formValid = false;
-    }
-
-    if (0 >= this.state.workAddress.length) {
-      workAddressClassName = inputError;
-      formValid = false;
-    }
-
-    if (0 >= this.state.homeAddress.length) {
-      homeAddressClassName = inputError;
-      formValid = false;
-    }
-
-    if (0 >= this.state.congenitalDisease.length) {
-      congenitalDiseaseClassName = inputError;
-      formValid = false;
-    }
-
-    if (0 >= this.state.beAllergic.length) {
-      beAllergicClassName = inputError;
-      formValid = false;
-    }
-    if (0 >= this.state.emergencyContactName.length) {
-      emergencyContactNameClassName = inputError;
-      formValid = false;
-    }
-    if (0 >= this.state.emergencyContactRelationship.length) {
-      emergencyContactRelationshipClassName = inputError;
-      formValid = false;
-    }
-    if (0 >= this.state.emergencyContactTel.length) {
-      emergencyContactTelClassName = inputError;
-      formValid = false;
-    }
 
     this.setState({
       formValid: formValid,
@@ -176,8 +108,6 @@ class EditPatientContainer extends Component {
       emergencyContactTelClassName: emergencyContactTelClassName
 
     });
-
-    if (formValid) {
       let requestObj = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
@@ -199,20 +129,24 @@ class EditPatientContainer extends Component {
         }
       };
 
-      apiCreatePatient(requestObj).then(() => {
+      apiUpdatePatient(requestObj).then(() => {
         this.openModal();
       }, () => {
         this.openModalAlert();
       });
-
-    }
-
-    this.openModalAlert();
   }
+
+
 
   handleChange(date) {
     this.setState({
       birthday: date
+    });
+  }
+
+  handleChangeGender(event){
+    this.setState({
+      gender: event.target.value
     });
   }
 
@@ -267,7 +201,7 @@ class EditPatientContainer extends Component {
             เพศ
              </Col>
           <Col sm={3}>
-            <FormControl componentClass="select" id="gender">
+            <FormControl componentClass="select" id="gender" value={this.state.gender} onChange={this.handleChangeGender.bind(this)}>
               <option value="male">ชาย</option>
               <option value="female">หญิง</option>
             </FormControl>
@@ -335,8 +269,8 @@ class EditPatientContainer extends Component {
             เอกสารที่ต้องการ
               </Col>
           <Col sm={3}>
-            <Radio id="doc0" name="requiredDocument" defaultChecked={true} inline>ใบรับรองแพทย์</Radio>{' '}
-            <Radio id="doc1" name="requiredDocument" inline>ประกันสังคม</Radio>
+            <Checkbox id="requiredDocument" name="certMedicine" value={this.state.requiredDocument} inline>ใบรับรองแพทย์</Checkbox>{' '}
+            <Checkbox id="requiredDocument" name="requiredDocument" value={this.state.requiredDocument} inline>ใบประกันสังคม</Checkbox>
           </Col>
         </FormGroup>
         <FormGroup>

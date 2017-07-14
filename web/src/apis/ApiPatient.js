@@ -10,3 +10,7 @@ export const apiValidateSearch=(data)=>{
   return axios.post(config.SEARCH_PATIENT_URL,data).then(responseFromSearch => responseFromSearch.data);
 }
 
+export const apiUpdatePatient=(data)=>{
+  return axios.post(config.UPDATE_PATIENT_URL + "?id=" + data.idPatient , data).then(response => response.data);
+}
+
