@@ -270,7 +270,7 @@ class EditPatientContainer extends Component {
               </Col>
           <Col sm={3}>
             <Checkbox id="requiredDocument" name="certMedicine" value={this.state.requiredDocument} inline>ใบรับรองแพทย์</Checkbox>{' '}
-            <Checkbox id="requiredDocument" name="requiredDocument" value={this.state.requiredDocument} inline>ใบประกันสังคม</Checkbox>
+            <Checkbox id="requiredDocument" name="socialCert" value={this.state.requiredDocument} inline>ใบประกันสังคม</Checkbox>
           </Col>
         </FormGroup>
         <FormGroup>

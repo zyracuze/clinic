@@ -9,6 +9,7 @@
     "react-bootstrap-dialog": "^0.9.1",
     "react-datepicker": "^0.48.0",
     "react-dom": "^15.6.1",
+    "react-modal-dialog": "^0.1.4",
     "react-router": "^2.0.1"
   },
   "devDependencies": {
