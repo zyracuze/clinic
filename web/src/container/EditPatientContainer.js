@@ -324,7 +324,7 @@ class EditPatientContainer extends Component {
 
         <Modal show={this.state.modal} onHide={this.closeModal} backdrop="static" keyboard={false}>
           <Modal.Body>
-            เพิ่มผู้ป่วยสำเร็จ
+            แก้ไขข้อมูลผู้ป่วยสำเร็จแล้ว
             <div>
               <Button bsStyle="default" type="button" onClick={this.closeModal} id="okBtn">ตกลง</Button>
             </div>
@@ -334,7 +334,7 @@ class EditPatientContainer extends Component {
 
         <Modal show={this.state.modalAlert} onHide={this.closeModalAlert}>
           <div className={"modal-alert-danger"}>
-            <strong>ขออภัย</strong>ไม่สามารถเพิ่มผู้ป่วยได้
+            <strong>ขออภัย</strong>ไม่สามารถแก้ไขผู้ป่วยได้
           </div>
         </Modal>
 
