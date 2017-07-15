@@ -28,7 +28,7 @@ class SearchPatientContainer extends Component {
     }
   }
 
-  onAdvanceSearchPatient(event){
+  onAdvanceSearchPatient=(event)=>{
     let patient = event.target
     let data = {
       "idPatient": patient.idPatient.value,
