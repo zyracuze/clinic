@@ -10,9 +10,7 @@ class SearchPatientResultComponent extends Component {
   }
 
   render() {
-
     const {patients} = this.props;
-
     function FieldGroup({ id, labelPlace, labelValue, ...props }) {
       return (
         <FormGroup controlId={id}>
@@ -20,7 +18,7 @@ class SearchPatientResultComponent extends Component {
         </FormGroup>
       );
     }
-
+    
     return (
       <div>
         <FieldGroup
