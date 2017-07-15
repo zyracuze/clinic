@@ -1,39 +1,24 @@
 import React, { Component } from 'react'
 import ModalSearch from './ModalSearch'
+import { Form, Button} from 'react-bootstrap';
+import ListFee from './ListFee'
+import DisplayPatientName from '../elements/DisplayPatientName'
+import SearchForm from '../elements/SearchForm'
 
-import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Glyphicon, InputGroup } from 'react-bootstrap';
-
-class SaveFee extends Component {
-
+export default class SaveFee extends Component {
   constructor() {
     super();
     this.state = {
       isShowingModal: false,
-      feeblock: [(
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            รายการค่าใช้จ่าย
-             </Col>
-          <Col sm={3}>
-            <FormControl id="expenseItem0" type="text" placeholder="รายการค่าใช้จ่าย" />
-          </Col>
-          <Col componentClass={ControlLabel} sm={1}>
-            จำนวนเงิน
-             </Col>
-          <Col sm={3}>
-            <FormControl id="amount0" type="text" placeholder="จำนวนเงิน" />
-          </Col>
-        </FormGroup>
-      )],
+      dataObjTable: [],
+      titleSearch: "",
       firstname: 'Star',
-      lastname: 'bug'
+      lastname: 'bug',
+      lastnamePatient: "",
+      firstnamePatient: "",
     }
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.onAddBtnClick = this.onAddBtnClick.bind(this);
-    this.handleSearchPatient = this.handleSearchPatient.bind(this);
-
   }
 
   handleCloseModal() {
@@ -42,7 +27,24 @@ class SaveFee extends Component {
     })
   }
 
-  handleSearchPatient() {
+  onSubmitSearchButton(){
+    this.setState({
+      dataObjTable: [{
+        id:"1",
+        name:"kae",
+        lastname:"lastname kae"
+      }]
+    })
+  }
+
+  onChooseDataTable(data){
+    console.log("onChooseDataTable" + data)
+  }
+  onAdvanceSearchPatient(){
+    console.log("onAdvanceSearchPatient 11")
+  }
+
+  onSearchPatient=()=> {
     this.setState({
       isShowingModal: true
     })
@@ -52,65 +54,20 @@ class SaveFee extends Component {
     event.preventDefault();
   }
 
-  onAddBtnClick(event) {
-    const feeblock = this.state.feeblock;
-    this.setState({
-      feeblock: feeblock.concat((
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            รายการค่าใช้จ่าย
-             </Col>
-          <Col sm={3}>
-            <FormControl id={"expenseItem" + feeblock.length} type="text" placeholder="รายการค่าใช้จ่าย" />
-          </Col>
-          <Col componentClass={ControlLabel} sm={1}>
-            จำนวนเงิน
-             </Col>
-          <Col sm={3}>
-            <FormControl id={"amount" + feeblock.length} type="text" placeholder="จำนวนเงิน" />
-          </Col>
-        </FormGroup>
-      ))
-    });
-  }
-
   render() {
-
     return (
-
       <Form horizontal onSubmit={this.handleSubmit}>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            รหัสผู้ป่วย
-          </Col>
-          <Col sm={3}>
-            <InputGroup>
-              <FormControl id="idPatient" type="text" placeholder="รหัสผู้ป่วย" />
-              <InputGroup.Addon>
-                <Glyphicon glyph="search" onClick={this.handleSearchPatient} />
-              </InputGroup.Addon>
-            </InputGroup>
-          </Col>
-        </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            ชื่อผู้ป่วย
-          </Col>
-          <Col componentClass={ControlLabel} sm={3}>
-            {this.state.firstname + ' : ' + this.state.lastname}
-          </Col>
-        </FormGroup>
-        {this.state.feeblock}
-        <div>
-          <Button onClick={this.onAddBtnClick} bsStyle="btn btn-primary width45" type="submit" id="saveBtn" >+</Button>
-        </div>
+        <SearchForm onSearchPatient={this.onSearchPatient}/>
+        <DisplayPatientName firstnamePatient={this.state.firstnamePatient}
+                            lastnamePatient={this.state.lastnamePatient}/>
+        <ListFee/>
         <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
-
-        <ModalSearch handleCloseModal={this.handleCloseModal} 
-                     isShowingModal={this.state.isShowingModal}/>
+        <ModalSearch onCloseModal={this.onCloseModal} 
+                     isShowingModal={this.state.isShowingModal}
+                     dataObjTable={this.state.dataObjTable}
+                     onChooseDataTable={this.onChooseDataTable}
+                     onAdvanceSearchPatient={this.onAdvanceSearchPatient}/>
       </Form>
-      
     )
   }
 }
-export default SaveFee;
