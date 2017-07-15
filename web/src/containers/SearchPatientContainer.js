@@ -4,42 +4,52 @@ import '../App.css';
 import { apiValidateSearch } from '../apis/ApiPatient';
 import SearchPatientComponent from '../components/SearchPatientComponent';
 import SearchPatientResultComponent from '../components/SearchPatientResultComponent';
+import AdvanceSearchForm from '../components/elements/AdvanceSearchForm';
 
 class SearchPatientContainer extends Component {
-  
   constructor(props) {
     super(props);
-    this.onSearch = this.onSearch.bind(this);
     this.editPatienSubmit = this.editPatienSubmit.bind(this);
-    this.state = {patients: {}};
+    this.state = {
+      patients: {},
+      titleSearch: "ค้นหาผู้ป่วย"
+    };
   }
 
   editPatienSubmit(patients) {
       this.props.history.push("/editPatient?id="+ patients.idPatient);
   }
 
-  onSearch(data) {
-    console.log("Data : " + JSON.stringify(data))
+ setPatient(patients) {
+    if(patients){
+      this.setState({
+        "patients": patients
+      });
+    }
+  }
+
+  onAdvanceSearchPatient(event){
+    let patient = event.target
+    let data = {
+      "idPatient": patient.idPatient.value,
+      "firstname": patient.namePatient.value,
+      "lastname": patient.lastnamePatient.value
+    }
     apiValidateSearch(data).then(
       (responseSuccess)=>{
-        console.log("API : " + JSON.stringify(responseSuccess[0]));
+        console.log("API : " + responseSuccess);
         this.setPatient(responseSuccess[0])
       },(responseFail) => {
 
       }
     );
   }
-  
- setPatient(patients) {
-      this.setState({
-        "patients": patients
-      });
-  }
 
   render() {
     return (
       <div>
-        <SearchPatientComponent onSearch={this.onSearch.bind(this)}/>
+        <AdvanceSearchForm onAdvanceSearchPatient={this.onAdvanceSearchPatient}
+                           titleSearch={this.state.titleSearch}/>
         <SearchPatientResultComponent patients={this.state.patients}/>
         <Button
            onClick={()=> this.editPatienSubmit(this.state.patients)}
