@@ -2,65 +2,41 @@ import React, { Component } from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { hashHistory } from 'react-router';
-import { apiUpdatePatient } from '../apis/ApiPatient'
-import { apiValidateSearch } from '../apis/ApiPatient';
+import { apiCreatePatient } from '../apis/ApiPatient'
 
-import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button, Modal, Checkbox } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button, Modal } from 'react-bootstrap';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import '../App.css';
 
-class EditPatientContainer extends Component {
-  constructor(props) {
-    super(props);
-    console.log("Edit : "+ JSON.stringify(props)); 
-    this.state = {patients: {}};
-    let data = {
-      "idpatient": this.props.location.query.id
-    }
-    apiValidateSearch(data).then(
-      (responseSuccess)=>{
-        console.log("API : " + JSON.stringify(responseSuccess[0]));
-        this.setPatient(responseSuccess[0])
-      },(responseFail) => {
-
-      }
-    );
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.closeModalAlert = this.closeModalAlert.bind(this);
-  }
-
-  setPatient(patients) {
-      this.setState({
+class CreatePatient extends Component {
+  constructor() {
+    super();
+    this.state = {
       modal: false,
       modalAlert: false,
       formValid: true,
-      firstname: patients.firstname,
-      firstnameClassName:'',
-      lastname: patients.lastname,
+      firstname: '',
+      firstnameClassName: '',
+      lastname: '',
       lastnameClassName: '',
-      nickname: patients.nickname,
+      nickname: '',
       nicknameClassName: '',
-      gender: patients.gender,
-      birthday: moment(patients.birthday, "MM-DD-YYYY"),
+      gender: '',
+      birthday: moment(),
       birthdayClassName: '',
-      idCard: patients.idCard,
+      idCard: '',
       idCardClassName: '',
-      career: patients.career,
+      career: '',
       careerClassName: '',
-      tel: patients.tel,
+      tel: '',
       telClassName: '',
-      workAddress: patients.workAddress,
+      workAddress: '',
       workAddressClassName: '',
-      homeAddress: patients.homeAddress,
+      homeAddress: '',
       homeAddressClassName: '',
-      requiredDocument: patients.requiredDocument,
-      congenitalDisease: patients.con,
+      requiredDocument: '',
+      congenitalDisease: '',
       congenitalDiseaseClassName: '',
       beAllergic: '',
       beAllergicClassName: '',
@@ -70,12 +46,21 @@ class EditPatientContainer extends Component {
       emergencyContactRelationshipClassName: '',
       emergencyContactTel: '',
       emergencyContactTelClassName: ''
-    });
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.closeModalAlert = this.closeModalAlert.bind(this);
   }
 
   handleSubmit(e) {
+
     e.preventDefault();
+
     let inputError = 'input-error';
+
     let firstnameClassName = '';
     let lastnameClassName = '';
     let nicknameClassName = '';
@@ -90,6 +75,68 @@ class EditPatientContainer extends Component {
     let emergencyContactRelationshipClassName = '';
     let emergencyContactTelClassName = '';
     let formValid = true;
+
+    if (0 >= this.state.firstname.length) {
+      firstnameClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.lastname.length) {
+      lastnameClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.nickname.length) {
+      nicknameClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.idCard.length) {
+      idCardClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.career.length) {
+      careerClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.tel.length) {
+      telClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.workAddress.length) {
+      workAddressClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.homeAddress.length) {
+      homeAddressClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.congenitalDisease.length) {
+      congenitalDiseaseClassName = inputError;
+      formValid = false;
+    }
+
+    if (0 >= this.state.beAllergic.length) {
+      beAllergicClassName = inputError;
+      formValid = false;
+    }
+    if (0 >= this.state.emergencyContactName.length) {
+      emergencyContactNameClassName = inputError;
+      formValid = false;
+    }
+    if (0 >= this.state.emergencyContactRelationship.length) {
+      emergencyContactRelationshipClassName = inputError;
+      formValid = false;
+    }
+    if (0 >= this.state.emergencyContactTel.length) {
+      emergencyContactTelClassName = inputError;
+      formValid = false;
+    }
 
     this.setState({
       formValid: formValid,
@@ -108,6 +155,8 @@ class EditPatientContainer extends Component {
       emergencyContactTelClassName: emergencyContactTelClassName
 
     });
+
+    if (formValid) {
       let requestObj = {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
@@ -129,24 +178,20 @@ class EditPatientContainer extends Component {
         }
       };
 
-      apiUpdatePatient(requestObj).then(() => {
+      apiCreatePatient(requestObj).then(() => {
         this.openModal();
       }, () => {
         this.openModalAlert();
       });
+
+    }
+
+    this.openModalAlert();
   }
-
-
 
   handleChange(date) {
     this.setState({
       birthday: date
-    });
-  }
-
-  handleChangeGender(event){
-    this.setState({
-      gender: event.target.value
     });
   }
 
@@ -201,7 +246,7 @@ class EditPatientContainer extends Component {
             เพศ
              </Col>
           <Col sm={3}>
-            <FormControl componentClass="select" id="gender" value={this.state.gender} onChange={this.handleChangeGender.bind(this)}>
+            <FormControl componentClass="select" id="gender">
               <option value="male">ชาย</option>
               <option value="female">หญิง</option>
             </FormControl>
@@ -269,8 +314,8 @@ class EditPatientContainer extends Component {
             เอกสารที่ต้องการ
               </Col>
           <Col sm={3}>
-            <Checkbox id="requiredDocument" name="certMedicine" value={this.state.requiredDocument} inline>ใบรับรองแพทย์</Checkbox>{' '}
-            <Checkbox id="requiredDocument" name="socialCert" value={this.state.requiredDocument} inline>ใบประกันสังคม</Checkbox>
+            <Radio id="doc0" name="requiredDocument" defaultChecked={true} inline>ใบรับรองแพทย์</Radio>{' '}
+            <Radio id="doc1" name="requiredDocument" inline>ใบประกันสังคม</Radio>
           </Col>
         </FormGroup>
         <FormGroup>
@@ -317,30 +362,23 @@ class EditPatientContainer extends Component {
             <FormControl id="emergencyContactTel" type="text" placeholder="โทร" className={this.state.emergencyContactTelClassName} value={this.state.emergencyContactTel} onChange={this.handleInput} />
           </Col>
         </FormGroup>
-
-
-        <Button bsStyle="success" type="submit" id="saveBtn" >แก้ไข</Button>
-
-
+        <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
         <Modal show={this.state.modal} onHide={this.closeModal} backdrop="static" keyboard={false}>
           <Modal.Body>
-            แก้ไขข้อมูลผู้ป่วยสำเร็จแล้ว
+            เพิ่มผู้ป่วยสำเร็จ
             <div>
               <Button bsStyle="default" type="button" onClick={this.closeModal} id="okBtn">ตกลง</Button>
             </div>
           </Modal.Body>
         </Modal>
-
-
         <Modal show={this.state.modalAlert} onHide={this.closeModalAlert}>
           <div className={"modal-alert-danger"}>
-            <strong>ขออภัย</strong>ไม่สามารถแก้ไขผู้ป่วยได้
+            <strong>ขออภัย</strong>ไม่สามารถเพิ่มผู้ป่วยได้
           </div>
         </Modal>
-
       </Form >
     )
   }
 
 }
-export default EditPatientContainer;
+export default CreatePatient;
