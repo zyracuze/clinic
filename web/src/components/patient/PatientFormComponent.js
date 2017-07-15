@@ -12,7 +12,6 @@ class PatientFormComponent extends Component {
     super(props);
     console.log("Result PatientFormComponent : "+ JSON.stringify(props));
 
-    this.setPatient(this.props);
     this.setPatient = this.setPatient.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -20,6 +19,8 @@ class PatientFormComponent extends Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.closeModalAlert = this.closeModalAlert.bind(this);
+    this.state = {patients: {}};
+     this.setPatient(this.props);
   }
 
   setPatient(patients) {
