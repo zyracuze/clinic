@@ -9,6 +9,8 @@ class SaveFee extends Component {
     super();
     this.state = {
       isShowingModal: false,
+      dataObj: [],
+      titleSearch: "",
       feeblock: [(
         <FormGroup>
           <Col componentClass={ControlLabel} sm={3}>
@@ -40,6 +42,20 @@ class SaveFee extends Component {
     this.setState({
       isShowingModal: false
     })
+  }
+
+  onSubmitSearchButton(){
+    this.setState({
+      dataObj: [{
+        id:"1",
+        name:"kae",
+        lastname:"lastname kae"
+      }]
+    })
+  }
+
+  onChooseData(){
+
   }
 
   handleSearchPatient() {
@@ -107,7 +123,10 @@ class SaveFee extends Component {
         <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
 
         <ModalSearch handleCloseModal={this.handleCloseModal} 
-                     isShowingModal={this.state.isShowingModal}/>
+                     isShowingModal={this.state.isShowingModal}
+                     dataObj={this.state.dataObj}
+                     onChooseData={this.onChooseData}
+                     onSubmitSearchButton={this.onSubmitSearchButton}/>
       </Form>
       
     )
