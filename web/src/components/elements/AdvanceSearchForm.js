@@ -4,7 +4,7 @@ import '../../App.css';
 export default class AdvanceSearchFormElement extends Component{
     render(){
         return (
-        <form onSubmit = { this.props.onSubmitSearchButton }>
+        <form onSubmit = { this.props.onAdvanceSearchPatient }>
         <label>
           <h2 className="form-signin-heading">{this.props.titleSearch}</h2>
             <input

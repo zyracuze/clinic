@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ModalSearch from './ModalSearch'
-import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Glyphicon, InputGroup } from 'react-bootstrap';
+import { Form, Button} from 'react-bootstrap';
 import ListFee from './ListFee'
 import DisplayPatientName from '../elements/DisplayPatientName'
 import SearchForm from '../elements/SearchForm'
@@ -10,7 +10,7 @@ export default class SaveFee extends Component {
     super();
     this.state = {
       isShowingModal: false,
-      dataObj: [],
+      dataObjTable: [],
       titleSearch: "",
       firstname: 'Star',
       lastname: 'bug',
@@ -29,7 +29,7 @@ export default class SaveFee extends Component {
 
   onSubmitSearchButton(){
     this.setState({
-      dataObj: [{
+      dataObjTable: [{
         id:"1",
         name:"kae",
         lastname:"lastname kae"
@@ -37,8 +37,11 @@ export default class SaveFee extends Component {
     })
   }
 
-  onChooseData(){
-
+  onChooseDataTable(data){
+    console.log("onChooseDataTable" + data)
+  }
+  onAdvanceSearchPatient(){
+    console.log("onAdvanceSearchPatient 11")
   }
 
   onSearchPatient=()=> {
@@ -59,11 +62,11 @@ export default class SaveFee extends Component {
                             lastnamePatient={this.state.lastnamePatient}/>
         <ListFee/>
         <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
-        <ModalSearch handleCloseModal={this.handleCloseModal} 
+        <ModalSearch onCloseModal={this.onCloseModal} 
                      isShowingModal={this.state.isShowingModal}
-                     dataObj={this.state.dataObj}
-                     onChooseData={this.onChooseData}
-                     onSubmitSearchButton={this.onSubmitSearchButton}/>
+                     dataObjTable={this.state.dataObjTable}
+                     onChooseDataTable={this.onChooseDataTable}
+                     onAdvanceSearchPatient={this.onAdvanceSearchPatient}/>
       </Form>
     )
   }

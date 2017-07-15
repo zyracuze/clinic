@@ -7,23 +7,24 @@ import Table from '../elements/SharedTable'
 export default class ModalSearch extends Component{
     static propTypes = {
         isShowingModal: PropTypes.bool.isRequired,
-        handleCloseModal: PropTypes.func.isRequired,
-        dataObj:  PropTypes.array.isRequired,
-        onChooseData: PropTypes.func.isRequired,
+        onCloseModal: PropTypes.func.isRequired,
+        dataObjTable:  PropTypes.array.isRequired,
+        onChooseDataTable: PropTypes.func.isRequired,
         titleSearch: PropTypes.string.isRequired,
-        onSubmitSearchButton : PropTypes.func.isRequired
+        onAdvanceSearchPatient : PropTypes.func.isRequired
     }
     render(){
         return (
         <div>
             {
                 this.props.isShowingModal &&
-                <ModalContainer onClose={this.props.handleCloseModal}>
-                <ModalDialog onClose={this.props.handleCloseModal}>
+                <ModalContainer onClose={this.props.onCloseModal}>
+                <ModalDialog onClose={this.props.onCloseModal}>
                     <h1>Search Patient</h1>
-                    <AdvanceSearchForm titleSearch={this.props.titleSearch} 
-                                onSubmitSearchButton={this.props.onSubmitSearchButton}/>
-                    <Table dataObj={this.props.dataObj} onChooseData={this.props.onChooseData}/>
+                    <AdvanceSearchForm  titleSearch={this.props.titleSearch} 
+                                        onAdvanceSearchPatient={this.props.onAdvanceSearchPatient}/>
+                    <Table dataObjTable={this.props.dataObjTable} 
+                           onChooseDataTable={this.props.onChooseDataTable}/>
                 </ModalDialog>
                 </ModalContainer>
             }

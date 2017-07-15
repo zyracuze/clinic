@@ -2,11 +2,11 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 export default class SharedTableElement extends Component{
     static propTypes = {
-        dataObj: PropTypes.array.isRequired,
-        onSearchButton: PropTypes.func.isRequired
+        dataObjTable: PropTypes.array.isRequired,
+        onChooseDataTable: PropTypes.func.isRequired
     }
     render(){
-        const {dataObj, onChooseData} = this.props
+        const {dataObjTable, onChooseDataTable} = this.props
         return(
             <table>
                 <thead>
@@ -18,9 +18,9 @@ export default class SharedTableElement extends Component{
                 </thead>
                 <tbody>
                     {
-                        dataObj.length > 0 &&
-                        dataObj.map((data)=>(
-                            <tr onClick={()=> onChooseData(data)}>
+                        dataObjTable.length > 0 &&
+                        dataObjTable.map((data)=>(
+                            <tr onClick={()=> onChooseDataTable(data)}>
                                 <td>{data.id}</td>
                                 <td>{data.name}</td>
                                 <td>{data.lastname}</td>
@@ -28,7 +28,7 @@ export default class SharedTableElement extends Component{
                         ))
                     }
                     {
-                        dataObj.length === 0 && 
+                        dataObjTable.length === 0 && 
                         <tr><td colSpan="3">No data</td></tr>
                     }
                 </tbody>
