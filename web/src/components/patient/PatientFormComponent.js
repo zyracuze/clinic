@@ -10,8 +10,6 @@ import '../../App.css';
 class PatientFormComponent extends Component {
   constructor(props) {
     super(props);
-    console.log("Result PatientFormComponent : "+ JSON.stringify(props));
-
     this.setPatient = this.setPatient.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -168,7 +166,7 @@ class PatientFormComponent extends Component {
              ชื่อ
               </Col>
            <Col sm={3}>
-             <FormControl id="firstname" type="text" placeholder="ชื่อ" className={this.state.firstnameClassName} value={this.state.firstname} onChange={this.handleInput} />
+             <FormControl id="firstname" type="text" placeholder="ชื่อ" className={this.state.firstnameClassName} value={patients.firstname} onChange={this.handleInput} />
            </Col>
            <Col componentClass={ControlLabel} sm={1}>
              นามสกุล
