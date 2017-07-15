@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ModalSearch from './ModalSearch'
-
 import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Glyphicon, InputGroup } from 'react-bootstrap';
+import ListFee from './ListFee'
 
 class SaveFee extends Component {
 
@@ -11,24 +11,11 @@ class SaveFee extends Component {
       isShowingModal: false,
       dataObj: [],
       titleSearch: "",
-      feeblock: [(
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            รายการค่าใช้จ่าย
-             </Col>
-          <Col sm={3}>
-            <FormControl id="expenseItem0" type="text" placeholder="รายการค่าใช้จ่าย" />
-          </Col>
-          <Col componentClass={ControlLabel} sm={1}>
-            จำนวนเงิน
-             </Col>
-          <Col sm={3}>
-            <FormControl id="amount0" type="text" placeholder="จำนวนเงิน" />
-          </Col>
-        </FormGroup>
-      )],
       firstname: 'Star',
-      lastname: 'bug'
+      lastname: 'bug',
+      feeblock: [(
+        <ListFee />
+      )]
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -72,20 +59,7 @@ class SaveFee extends Component {
     const feeblock = this.state.feeblock;
     this.setState({
       feeblock: feeblock.concat((
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            รายการค่าใช้จ่าย
-             </Col>
-          <Col sm={3}>
-            <FormControl id={"expenseItem" + feeblock.length} type="text" placeholder="รายการค่าใช้จ่าย" />
-          </Col>
-          <Col componentClass={ControlLabel} sm={1}>
-            จำนวนเงิน
-             </Col>
-          <Col sm={3}>
-            <FormControl id={"amount" + feeblock.length} type="text" placeholder="จำนวนเงิน" />
-          </Col>
-        </FormGroup>
+        <ListFee />
       ))
     });
   }
