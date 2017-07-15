@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {FormGroup, FormControl, ControlLabel, Col } from 'react-bootstrap';
-import PropTypes from 'prop-types'
 export default class FormGroupTwoBlock extends Component {
     render() {
         return (

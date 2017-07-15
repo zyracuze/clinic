@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ModalSearch from './ModalSearch'
 import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Glyphicon, InputGroup } from 'react-bootstrap';
 import ListFee from './ListFee'
+import DisplayPatientName from '../elements/DisplayPatientName'
 
 class SaveFee extends Component {
 
@@ -13,6 +14,8 @@ class SaveFee extends Component {
       titleSearch: "",
       firstname: 'Star',
       lastname: 'bug',
+      lastnamePatient: "",
+      firstnamePatient: "",
       feeblock: [(
         <ListFee />
       )]
@@ -82,14 +85,8 @@ class SaveFee extends Component {
             </InputGroup>
           </Col>
         </FormGroup>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            ชื่อผู้ป่วย
-          </Col>
-          <Col componentClass={ControlLabel} sm={3}>
-            {this.state.firstname + ' : ' + this.state.lastname}
-          </Col>
-        </FormGroup>
+        <DisplayPatientName firstnamePatient={this.state.firstnamePatient}
+                            lastnamePatient={this.state.lastnamePatient}/>
         {this.state.feeblock}
         <div>
           <Button onClick={this.onAddBtnClick} bsStyle="btn btn-primary width45" type="submit" id="saveBtn" >+</Button>
