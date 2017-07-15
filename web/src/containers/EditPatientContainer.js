@@ -16,6 +16,7 @@ class EditPatientContainer extends Component {
       let data = {
           "idpatient": localtion.query.id
         }
+        
         apiValidateSearch(data).then(
           (responseSuccess)=>{
             console.log("API EditPatientContainer validate : " + JSON.stringify(responseSuccess[0]));
