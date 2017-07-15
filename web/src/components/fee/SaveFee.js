@@ -3,6 +3,7 @@ import ModalSearch from './ModalSearch'
 import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Glyphicon, InputGroup } from 'react-bootstrap';
 import ListFee from './ListFee'
 import DisplayPatientName from '../elements/DisplayPatientName'
+import SearchForm from '../elements/SearchForm'
 
 export default class SaveFee extends Component {
   constructor() {
@@ -18,7 +19,6 @@ export default class SaveFee extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.handleSearchPatient = this.handleSearchPatient.bind(this);
   }
 
   handleCloseModal() {
@@ -41,7 +41,7 @@ export default class SaveFee extends Component {
 
   }
 
-  handleSearchPatient() {
+  onSearchPatient=()=> {
     this.setState({
       isShowingModal: true
     })
@@ -54,19 +54,7 @@ export default class SaveFee extends Component {
   render() {
     return (
       <Form horizontal onSubmit={this.handleSubmit}>
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            รหัสผู้ป่วย
-          </Col>
-          <Col sm={3}>
-            <InputGroup>
-              <FormControl id="idPatient" type="text" placeholder="รหัสผู้ป่วย" />
-              <InputGroup.Addon>
-                <Glyphicon glyph="search" onClick={this.handleSearchPatient} />
-              </InputGroup.Addon>
-            </InputGroup>
-          </Col>
-        </FormGroup>
+        <SearchForm onSearchPatient={this.onSearchPatient}/>
         <DisplayPatientName firstnamePatient={this.state.firstnamePatient}
                             lastnamePatient={this.state.lastnamePatient}/>
         <ListFee/>
