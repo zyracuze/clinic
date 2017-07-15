@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Button } from 'react-bootstrap';
 import '../../App.css';
-export default class SearchFormElement extends Component{
+export default class AdvanceSearchFormElement extends Component{
     render(){
         return (
         <form onSubmit = { this.props.onSubmitSearchButton }>
