@@ -7,10 +7,11 @@ import SearchForm from '../../components/elements/SearchForm'
 import { apiValidateSearch } from '../../apis/ApiPatient';
 export default class SaveFeeContainer extends Component{
     state = {
-        namePatient: ""
+        namePatient: "",
+        disabledListFee: true
     }
     onChangeIdPatient=(event)=>{
-        this.setStatePatient("")
+        this.setStatePatient("", true)
         if(event.target.value !== ''){
             apiValidateSearch(this.setDataPatientSearch(event)).then(this.searchPatientSuccess)
         }
@@ -21,18 +22,16 @@ export default class SaveFeeContainer extends Component{
         }
     }
     searchPatientSuccess=(response)=>{
-        this.setStatePatient("Data not found.")
+        this.setStatePatient("Data not found.", true)
         if(response){
-            this.setStatePatient(response[0].firstname + " " + response[0].lastname)
+            this.setStatePatient(response[0].firstname + " " + response[0].lastname, false)
         }
     }
-    setStatePatient(data){
+    setStatePatient(data, isDisabled){
         this.setState({
-            namePatient: data
+            namePatient: data,
+            disabledListFee: isDisabled
         })
-    }
-    searchPatientFail=()=>{
-
     }
     render(){
         return(
@@ -40,8 +39,7 @@ export default class SaveFeeContainer extends Component{
             <SearchForm onAdvanceSearchPatient={this.onAdvanceSearchPatient}
                         onChangeIdPatient={this.onChangeIdPatient}/>
             <DisplayPatientName namePatient={this.state.namePatient}/>
-            <ListFee/>
-            <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
+            <ListFee disabledListFee={this.state.disabledListFee}/>
             <ModalSearch onCloseModal={this.onCloseModal} 
                         isShowingModal={this.state.isShowingModal}
                         dataObjTable={this.state.dataObjTable}
