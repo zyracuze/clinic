@@ -8,7 +8,8 @@ export default class SharedTableElement extends Component{
     render(){
         const {dataObjTable} = this.props
         return(
-            <table className="table table-bordered">
+            <div className="container">
+            <table className="table table-hover">
                 <thead>
                     <tr>
                         <th>รหัสผู้ป่วย</th>
@@ -35,6 +36,7 @@ export default class SharedTableElement extends Component{
                     }
                 </tbody>
             </table>
+            </div>
         )
     }
 }
