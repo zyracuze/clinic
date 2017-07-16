@@ -11,7 +11,7 @@ export default class SaveFeeContainer extends Component{
     }
     onChangeIdPatient=(event)=>{
         this.setStatePatient("")
-        if(event.target.value != ''){
+        if(event.target.value !== ''){
             apiValidateSearch(this.setDataPatientSearch(event)).then(this.searchPatientSuccess)
         }
     }
