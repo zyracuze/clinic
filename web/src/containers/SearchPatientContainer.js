@@ -34,7 +34,7 @@ class SearchPatientContainer extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="form-search-container">
         <AdvanceSearchForm onAdvanceSearchPatient={this.onAdvanceSearchPatient}
                            titleSearch={this.state.titleSearch}/>
         <SharedTable dataObjTable={this.state.dataObjTable} />     
