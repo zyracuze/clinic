@@ -4,15 +4,31 @@ import ModalSearch from '../../components/fee/ModalSearch'
 import ListFee from '../../components/fee/ListFee'
 import DisplayPatientName from '../../components/elements/DisplayPatientName'
 import SearchForm from '../../components/elements/SearchForm'
+import { apiValidateSearch } from '../../apis/ApiPatient';
 export default class SaveFeeContainer extends Component{
     state = {
         firstnamePatient: "",
         lastnamePatient: ""
     }
+    onChangeIdPatient=(event)=>{
+        apiValidateSearch(this.setDataPatientSearch(event)).then(this.searchPatientSuccess)
+    }
+    setDataPatientSearch(event){
+        return {
+        "idPatient": event.target.value
+        }
+    }
+    searchPatientSuccess=(response)=>{
+        this.setState({
+            firstnamePatient: response[0].firstname,
+            lastnamePatient: response[0].lastname
+        })
+    }
     render(){
         return(
         <Form horizontal onSubmit={this.onSubmitSaveFee}>
-            <SearchForm onSearchPatient={this.onSearchPatient}/>
+            <SearchForm onAdvanceSearchPatient={this.onAdvanceSearchPatient}
+                        onChangeIdPatient={this.onChangeIdPatient}/>
             <DisplayPatientName firstnamePatient={this.state.firstnamePatient}
                                 lastnamePatient={this.state.lastnamePatient}/>
             <ListFee/>
