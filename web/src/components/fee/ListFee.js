@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-import {FormGroup, FormControl, ControlLabel, Col, Button } from 'react-bootstrap';
+import {Form, FormGroup, FormControl, ControlLabel, Col, Button } from 'react-bootstrap';
 export default class FormGroupTwoBlock extends Component {
     static propTypes = {
-       disabledListFee: PropTypes.bool.isRequired
+       disabledListFee: PropTypes.bool.isRequired,
+       onSubmitSaveFee: PropTypes.func.isRequired
     }
     state = {
         feeblock:[]
@@ -33,7 +34,7 @@ export default class FormGroupTwoBlock extends Component {
             })
         }
         return (
-          <div>
+          <Form horizontal onSubmit={this.props.onSubmitSaveFee}>
             <FormGroup>
               <Col componentClass={ControlLabel} sm={3}>รายการค่าใช้จ่าย</Col>
               <Col sm={3}>
@@ -46,6 +47,10 @@ export default class FormGroupTwoBlock extends Component {
                   <FormControl id="amount0" disabled={this.props.disabledListFee} 
                                type="text" placeholder="จำนวนเงิน"
                                name="amount0" />
+                  <FormControl id="num" 
+                               type="hidden" 
+                               value={this.state.feeblock.length}
+                               name="num" />
               </Col>
             </FormGroup>
             {this.state.feeblock}
@@ -54,7 +59,7 @@ export default class FormGroupTwoBlock extends Component {
                     type="button" id="saveBtn" >+</Button><br/>
             <Button bsStyle="success" type="submit" id="saveBtn" 
                     disabled={this.props.disabledListFee}>เพิ่ม</Button>
-          </div>
+          </Form>
         );
     }
 }
