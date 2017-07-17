@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import '../App.css';
 import { apiValidateSearch } from '../apis/ApiPatient';
-import SearchPatientComponent from '../components/SearchPatientComponent';
 import SearchPatientResultComponent from '../components/SearchPatientResultComponent';
 import AdvanceSearchForm from '../components/elements/AdvanceSearchForm';
 
