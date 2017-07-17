@@ -5,6 +5,7 @@ import ListFee from '../../components/fee/ListFee'
 import DisplayPatientName from '../../components/elements/DisplayPatientName'
 import SearchForm from '../../components/elements/SearchForm'
 import { apiValidateSearch } from '../../apis/ApiPatient';
+import { apiCreateFee } from '../../apis/ApiFee';
 export default class SaveFeeContainer extends Component{
     state = {
         namePatient: "",
@@ -49,6 +50,13 @@ export default class SaveFeeContainer extends Component{
                 amount: data.elements["amount"+i].value
             })
         }
+        apiCreateFee(this.setDataForSaveFee(fees)).then(this.createFeeSuccess,this.createFeeFail)
+    }
+    createFeeSuccess=(response)=>{
+        console.log("success" + response)
+    }
+    createFeeFail=(response)=>{
+        console.log("fail" + response)
     }
     setDataForSaveFee=(data)=>{
         return{
