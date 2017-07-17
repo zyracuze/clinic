@@ -8,7 +8,7 @@ import AdvanceSearchForm from '../components/elements/AdvanceSearchForm';
 
 class SearchPatientContainer extends Component {
   state = {
-    dataObjTable: {},
+    dataObjTable: [],
     titleSearch: "ค้นหาผู้ป่วย"
   }
   setPatient(patients) {
@@ -20,8 +20,8 @@ class SearchPatientContainer extends Component {
   }
   onAdvanceSearchPatient=(event)=>{
     event.preventDefault()
-    let patient = event.target
-    let data = {
+    var patient = event.target
+    var data = {
       "idPatient": patient.idPatient.value,
       "firstname": patient.namePatient.value,
       "lastname": patient.lastnamePatient.value

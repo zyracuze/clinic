@@ -32,7 +32,10 @@ export default class SharedTableElement extends Component{
                     }
                     {
                         dataObjTable.length === 0 && 
-                        <tr><td colSpan="3">No data</td></tr>
+                        <tr><td>
+                            No data
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
