@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import { hashHistory } from 'react-router'
-import { apiValidateSearch, apiUpdatePatient } from '../../apis/ApiPatient'
-import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button, Modal, Checkbox } from 'react-bootstrap';
+import { apiUpdatePatient } from '../../apis/ApiPatient'
+import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Modal, Checkbox } from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../App.css';
 
@@ -13,15 +13,13 @@ class PatientFormComponent extends Component {
     console.log("Result PatientFormComponent : "+ JSON.stringify(props));
 
     this.setPatient = this.setPatient.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.closeModalAlert = this.closeModalAlert.bind(this);
     this.setPatient = this.setPatient.bind(this);
     this.state = {patients: props};
-    this.setPatient(props);
+   
 
     console.log("Result PatientFormComponent this.state.modal : " + JSON.stringify(this.state.modal));
   }
@@ -55,77 +53,81 @@ class PatientFormComponent extends Component {
       congenitalDiseaseClassName: '',
       beAllergic: '',
       beAllergicClassName: '',
-      emergencyContactName: '',
+      emergencyContactName: patients.emergencyContact.name,
       emergencyContactNameClassName: '',
-      emergencyContactRelationship: '',
+      emergencyContactRelationship: patients.emergencyContact.relationship,
       emergencyContactRelationshipClassName: '',
-      emergencyContactTel: '',
-      emergencyContactTelClassName: ''
-    });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    let inputError = 'input-error';
-    let firstnameClassName = '';
-    let lastnameClassName = '';
-    let nicknameClassName = '';
-    let idCardClassName = '';
-    let careerClassName = '';
-    let telClassName = '';
-    let workAddressClassName = '';
-    let homeAddressClassName = '';
-    let congenitalDiseaseClassName = '';
-    let beAllergicClassName = '';
-    let emergencyContactNameClassName = '';
-    let emergencyContactRelationshipClassName = '';
-    let emergencyContactTelClassName = '';
-    let formValid = true;
-
-    this.setState({
-      formValid: formValid,
-      firstnameClassName: firstnameClassName,
-      lastnameClassName: lastnameClassName,
-      nicknameClassName: nicknameClassName,
-      idCardClassName: idCardClassName,
-      careerClassName: careerClassName,
-      telClassName: telClassName,
-      workAddressClassName: workAddressClassName,
-      homeAddressClassName: homeAddressClassName,
-      congenitalDiseaseClassName: congenitalDiseaseClassName,
-      beAllergicClassName: beAllergicClassName,
-      emergencyContactNameClassName: emergencyContactNameClassName,
-      emergencyContactRelationshipClassName: emergencyContactRelationshipClassName,
-      emergencyContactTelClassName: emergencyContactTelClassName
-
-    });
-      let requestObj = {
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        nickname: this.state.nickname,
-        gender: this.state.gender,
-        birthday: this.state.birthday.format('DD/MM/YYYY'),
-        idCard: this.state.idCard,
-        career: this.state.career,
-        tel: this.state.tel,
-        workAddress: this.state.workAddress,
-        homeAddress: this.state.homeAddress,
-        requiredDocument: this.state.requiredDocument,
-        congenitalDisease: this.state.congenitalDisease,
-        beAllergic: this.state.beAllergic,
-        emergencyContact: {
-          name: this.state.emergencyContactName,
-          relationship: this.state.emergencyContactRelationship,
-          tel: this.state.emergencyContactTel
+      emergencyContactTel: patients.emergencyContact.tel,
+      emergencyContactTelClassName: '',
+      emergencyContact: {
+          name: '',
+          relationship: '',
+          tel: ''
         }
-      };
-
-      apiUpdatePatient(requestObj).then(() => {
-        this.openModal();
-      }, () => {
-        this.openModalAlert();
-      });
+    });
   }
+
+//   handleSubmit(e) {
+//     e.preventDefault();
+//     let firstnameClassName = '';
+//     let lastnameClassName = '';
+//     let nicknameClassName = '';
+//     let idCardClassName = '';
+//     let careerClassName = '';
+//     let telClassName = '';
+//     let workAddressClassName = '';
+//     let homeAddressClassName = '';
+//     let congenitalDiseaseClassName = '';
+//     let beAllergicClassName = '';
+//     let emergencyContactNameClassName = '';
+//     let emergencyContactRelationshipClassName = '';
+//     let emergencyContactTelClassName = '';
+//     let formValid = true;
+
+//     this.setState({
+//       formValid: formValid,
+//       firstnameClassName: firstnameClassName,
+//       lastnameClassName: lastnameClassName,
+//       nicknameClassName: nicknameClassName,
+//       idCardClassName: idCardClassName,
+//       careerClassName: careerClassName,
+//       telClassName: telClassName,
+//       workAddressClassName: workAddressClassName,
+//       homeAddressClassName: homeAddressClassName,
+//       congenitalDiseaseClassName: congenitalDiseaseClassName,
+//       beAllergicClassName: beAllergicClassName,
+//       emergencyContactNameClassName: emergencyContactNameClassName,
+//       emergencyContactRelationshipClassName: emergencyContactRelationshipClassName,
+//       emergencyContactTelClassName: emergencyContactTelClassName
+
+//     });
+//       let requestObj = {
+//         firstname: this.state.firstname,
+//         lastname: this.state.lastname,
+//         nickname: this.state.nickname,
+//         gender: this.state.gender,
+//         birthday: this.state.birthday.format('DD/MM/YYYY'),
+//         idCard: this.state.idCard,
+//         career: this.state.career,
+//         tel: this.state.tel,
+//         workAddress: this.state.workAddress,
+//         homeAddress: this.state.homeAddress,
+//         requiredDocument: this.state.requiredDocument,
+//         congenitalDisease: this.state.congenitalDisease,
+//         beAllergic: this.state.beAllergic,
+//         emergencyContact: {
+//           name: this.state.emergencyContactName,
+//           relationship: this.state.emergencyContactRelationship,
+//           tel: this.state.emergencyContactTel
+//         }
+//       };
+
+//       apiUpdatePatient(requestObj).then(() => {
+//         this.openModal();
+//       }, () => {
+//         this.openModalAlert();
+//       });
+//   }
 
   handleChange(date) {
     this.setState({
@@ -145,17 +147,9 @@ class PatientFormComponent extends Component {
     this.setState({ [key]: value });
   };
 
-  openModal() {
-    this.setState({ modal: true });
-  }
-
   closeModal() {
     this.setState({ modal: false });
     hashHistory.push('/home');
-  }
-
-  openModalAlert() {
-    this.setState({ modalAlert: true });
   }
 
   closeModalAlert() {
@@ -163,9 +157,10 @@ class PatientFormComponent extends Component {
   }
 
   render() {
-      const {patients} = this.props;
+      const {patients} = this.props; 
+      console.log(">>>>>>>" +JSON.stringify(patients.emergencyContact))
     return (
-       <Form horizontal onSubmit={this.handleSubmit}>
+       <Form horizontal>
          <FormGroup>
            <Col componentClass={ControlLabel} sm={3}>
              ชื่อ
@@ -299,7 +294,7 @@ class PatientFormComponent extends Component {
            <Col sm={7}>
              <FormControl id="emergencyContactName" type="text" 
              placeholder="ผู้ติดต่อฉุกเฉิน" className={this.state.emergencyContactNameClassName} 
-             value={patients.emergencyContactName} onChange={this.handleInput} />
+             value={JSON.stringify(patients.emergencyContactName)} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -324,7 +319,7 @@ class PatientFormComponent extends Component {
          </FormGroup>
 
 
-         <Button bsStyle="success" type="submit" id="saveBtn" >แก้ไข</Button>
+         {/* <Button bsStyle="success" type="submit" id="saveBtn" >แก้ไข</Button> */}
 
 
          <Modal show={patients.modal} onHide={this.closeModal} backdrop="static" keyboard={false}>
