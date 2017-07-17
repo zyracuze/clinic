@@ -4,6 +4,7 @@ import ModalSearch from '../../components/fee/ModalSearch'
 import ListFee from '../../components/fee/ListFee'
 import DisplayPatientName from '../../components/elements/DisplayPatientName'
 import SearchForm from '../../components/elements/SearchForm'
+import ModalDisplayMessage from '../../components/elements/ModalDisplayMessage'
 import { apiValidateSearch } from '../../apis/ApiPatient';
 import { apiCreateFee } from '../../apis/ApiFee';
 export default class SaveFeeContainer extends Component{
@@ -53,10 +54,24 @@ export default class SaveFeeContainer extends Component{
         apiCreateFee(this.setDataForSaveFee(fees)).then(this.createFeeSuccess,this.createFeeFail)
     }
     createFeeSuccess=(response)=>{
-        console.log("success" + response)
+        this.setDateForModal(true, "Save successfully.")
+    }
+    onClickModal=()=>{
+        this.setState({
+             isShowmodal: false
+        })
     }
     createFeeFail=(response)=>{
-        console.log("fail" + response)
+        this.setDateForModal(false, "Failed to save data. Please try again. Or contact the system administrator.")
+    }
+    setDateForModal(isSuccess,msg){
+        this.setState({
+            isShowmodal: true,
+            isSuccess: isSuccess,
+            titleModal: "Fee",
+            messageModal: msg,
+            nameBtnModal: "OK"
+        })
     }
     setDataForSaveFee=(data)=>{
         return{
@@ -74,6 +89,12 @@ export default class SaveFeeContainer extends Component{
             <DisplayPatientName namePatient={this.state.namePatient}/>
             <ListFee disabledListFee={this.state.disabledListFee}
                      onSubmitSaveFee={this.onSubmitSaveFee}/>
+            <ModalDisplayMessage isSuccess={this.state.isSuccess}
+                                 isShowmodal={this.state.isShowmodal}
+                                 onClickModal={this.onClickModal}
+                                 titleModal={this.state.titleModal}
+                                 messageModal={this.state.messageModal}
+                                 nameBtnModal={this.state.nameBtnModal}/>
             <ModalSearch onCloseModal={this.onCloseModal} 
                         isShowingModal={this.state.isShowingModal}
                         dataObjTable={this.state.dataObjTable}
