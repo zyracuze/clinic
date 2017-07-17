@@ -21,8 +21,8 @@ export default class SharedTableElement extends Component{
                 <tbody>
                     {
                         dataObjTable.length > 0 &&
-                        dataObjTable.map((data)=>(
-                            <tr>
+                        dataObjTable.map((data,index)=>(
+                            <tr key={index}>
                                 <td>{data.idPatient}</td>
                                 <td>{data.firstname}</td>
                                 <td>{data.lastname}</td>
