@@ -171,6 +171,9 @@ class CreatePatient extends Component {
         requiredDocument: this.state.requiredDocument,
         congenitalDisease: this.state.congenitalDisease,
         beAllergic: this.state.beAllergic,
+        emergencyContactName: this.state.emergencyContactName,
+        emergencyContactRelationship: this.state.emergencyContactRelationship,
+        emergencyContactTel: this.state.emergencyContactTel,
         emergencyContact: {
           name: this.state.emergencyContactName,
           relationship: this.state.emergencyContactRelationship,
