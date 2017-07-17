@@ -3,8 +3,8 @@ package fee
 import (
 	"math/rand"
 	"net/http"
-	"strconv"
 	"time"
+	"fmt"
 
 	"github.com/labstack/echo"
 	"gopkg.in/mgo.v2/bson"
@@ -16,11 +16,19 @@ type FeeItem struct {
 	Amount      float64 `json:"amount"`
 }
 
+type Counter interface {
+	count() (int, error)
+}
+
+type MongoCounter struct {}
+
 type Fee struct {
 	Id             bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
 	IdFee          string        `json:"idFee"`
 	IdPatient      string        `json:"idPatient"`
-	FeeItem        []FeeItem     `json:"items"`
+	Firstname      string        `json:"firstname"`
+	Lastname	   string        `json:"lastname"`
+	FeeItem        []FeeItem     `json:"fees"`
 	CreateDateTime time.Time     `json:"createDateTime"`
 }
 
@@ -30,7 +38,7 @@ func CreateFee(c echo.Context) error {
 		return c.NoContent(http.StatusBadRequest)
 	}
 
-	fee.IdFee = generateIdFee()
+	fee.IdFee = generateIdFee(MongoCounter{})
 	fee.CreateDateTime = time.Now().Local()
 	err := fee.create()
 	if err != nil {
@@ -40,18 +48,16 @@ func CreateFee(c echo.Context) error {
 	return c.NoContent(http.StatusCreated)
 }
 
-func generateIdFee() string {
-	t := time.Now().Local()
-	dateTime := t.Format("20060102150405")
-	count, err := count()
+func generateIdFee(c Counter) string {
+	count, err := c.count()
 	if err != nil {
 		count = rand.Intn(10)
 	}
-	result := "F" + dateTime + strconv.Itoa(count+1)
+	result := fmt.Sprintf("F%06d", count+1)
 	return result
 }
 
-func count() (int, error) {
+func (m MongoCounter) count() (int, error) {
 	db, err := database.Connect()
 	if err != nil {
 		return 0, err

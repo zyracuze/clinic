@@ -13,7 +13,7 @@ import Logout from './components/Logout'
 
 import './App.css'
 
-import {Router, Route, hashHistory} from 'react-router'
+import {Router, Route, hashHistory, IndexRoute} from 'react-router'
 
 class App extends Component {
   render() {
@@ -27,7 +27,10 @@ class App extends Component {
           <Route path='/' component={Login} />
           <Route path='/home' component={Home} />
           <Route path='/search' component={SearchPatientContainer} />
-          <Route path='/editPatient' component={EditPatientContainer}/>
+          <Route path='/editPatient'>
+            <IndexRoute component={EditPatientContainer}/>
+            <route path=':id' component={EditPatientContainer} />
+          </Route>
           <Route path='/generateMedicalCertificate' component={GenerateMedicalCertificate}/>
           <Route path='/medicalExpenseReport' component={MedicalExpenseReport}/>
           <Route path='/saveFee' component={SaveFee}/>

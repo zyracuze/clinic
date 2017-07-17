@@ -5,10 +5,7 @@ import '../../App.css';
 export default class AdvanceSearchFormElement extends Component{
     static propTypes = {
         onAdvanceSearchPatient: PropTypes.func.isRequired,
-        titleSearch: PropTypes.string.isRequired,
-        namePatient: PropTypes.string.isRequired,
-        lastnamePatient: PropTypes.string.isRequired,
-        idPatient: PropTypes.string.isRequired
+        titleSearch: PropTypes.string.isRequired
     }
     render(){
         return (
@@ -19,19 +16,16 @@ export default class AdvanceSearchFormElement extends Component{
               type="text"
               className="form-control-signin"
               placeholder="ชื่อ"
-              value={this.props.namePatient}
               name="namePatient"/>
             <input
               type="text"
               className="form-control-signin"
               placeholder="นามสกุล"
-              value={this.props.lastnamePatient}
               name="lastnamePatient"/>
           <input
               type="text"
               className="form-control-signin"
               placeholder="รหัสผู้ป่วย"
-              value={this.props.idPatient}
               name="idPatient"/>
         </label>
         <Button

@@ -2,37 +2,29 @@ import React, { Component } from 'react'
 import { apiValidateSearch, apiUpdatePatient } from '../apis/ApiPatient'
 import PatientFormComponent from '../components/patient/PatientFormComponent'
 import { Button } from 'react-bootstrap';
-
-
 class EditPatientContainer extends Component {
+
   constructor(props) {
     super(props);
-    console.log("Edit EditPatientContainer : "+ JSON.stringify(props));
-    this.state = {
-      modal: false,
-      modalAlert: false,
-      formValid: true,
-      patients: {}};
-    let localtion = this.props.location
-      let data = {
-          "idpatient": localtion.query.id
-        }
-
-        apiValidateSearch(data).then(
-          (responseSuccess)=>{
-            console.log("API EditPatientContainer validate : " + JSON.stringify(responseSuccess[0]));
-            this.setPatient(responseSuccess[0])
-            console.log("Data EditPatientContainer this.state.patients  SetPatient: " + JSON.stringify(this.state.patients))
-          },(responseFail) => {
-
-          }
-        );
-
     this.updatePatienSubmit = this.updatePatienSubmit.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.openModalAlert = this.openModalAlert.bind(this);
+  }
+  state = {
+    patients: {}
+  }
+  componentDidMount() {
+    apiValidateSearch(this.setPatient()).then(
+      (responseSuccess)=>{
+        this.setState({patients: responseSuccess[0]});
+      },(responseFail) => {}
+    );
   }
   
+  setPatient() {
+    return {
+        "idPatient": this.props.params.id
+    }
+  }
+
   updatePatienSubmit(patients) {
       let requestObj = {
         firstname: patients.firstname,
@@ -56,33 +48,17 @@ class EditPatientContainer extends Component {
       };
 
        apiUpdatePatient(requestObj).then(() => {
-        this.openModal();
+        console.log("Edit Success :::: ");
       }, () => {
-        this.openModalAlert();
+        console.log("Edit Fail :::: ");
       });
   }
 
-  openModal() {
-    this.setState({ modal: true });
-  }
-
-  openModalAlert() {
-    this.setState({ modalAlert: true });
-  }
-
-  setPatient(patients) {
-    console.log("Data EditPatientContainer  SetPatient: " + JSON.stringify(patients))
-      this.setState({
-        "patients": patients
-      });
-  }
-    
   render() {
-    console.log("Patient Edit Container : " + JSON.stringify(this.state.patients));
     return (
       <div>
         <PatientFormComponent patients={this.state.patients}/>
-         <Button
+        <Button
            onClick={()=> this.updatePatienSubmit(this.state.patients)}
            bsStyle="primary"
            type="submit"

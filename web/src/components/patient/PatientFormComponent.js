@@ -10,8 +10,6 @@ import '../../App.css';
 class PatientFormComponent extends Component {
   constructor(props) {
     super(props);
-    console.log("Result PatientFormComponent : "+ JSON.stringify(props));
-
     this.setPatient = this.setPatient.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);

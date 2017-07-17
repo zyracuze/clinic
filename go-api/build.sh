@@ -24,6 +24,7 @@ fi
 
 echo "Testing ...."
 go test -v patient/...
+go test -v fee/...
 
 echo "Building ...."
 go install main

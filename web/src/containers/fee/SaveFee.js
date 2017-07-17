@@ -1,22 +1,79 @@
 import React, { Component } from 'react'
-import { Form, Button} from 'react-bootstrap';
+import {Form} from 'react-bootstrap';
 import ModalSearch from '../../components/fee/ModalSearch'
 import ListFee from '../../components/fee/ListFee'
 import DisplayPatientName from '../../components/elements/DisplayPatientName'
 import SearchForm from '../../components/elements/SearchForm'
+import { apiValidateSearch } from '../../apis/ApiPatient';
+import { apiCreateFee } from '../../apis/ApiFee';
 export default class SaveFeeContainer extends Component{
     state = {
-        firstnamePatient: "",
-        lastnamePatient: ""
+        namePatient: "",
+        firstname: "",
+        lastname: "",
+        idPatient: "",
+        disabledListFee: true
+    }
+    onChangeIdPatient=(event)=>{
+        this.setStatePatient("", true)
+        if(event.target.value !== ''){
+            apiValidateSearch(this.setDataPatientSearch(event)).then(this.searchPatientSuccess)
+        }
+    }
+    setDataPatientSearch(event){
+        return {
+        "idPatient": event.target.value
+        }
+    }
+    searchPatientSuccess=(response)=>{
+        this.setStatePatient("Data not found.", true)
+        if(response){
+            this.setStatePatient(response[0], false)
+        }
+    }
+    setStatePatient(data, isDisabled){
+        this.setState({
+            namePatient: data.firstname + " " + data.lastname,
+            firstname: data.firstname,
+            lastname: data.lastname,
+            idPatient: data.idPatient,
+            disabledListFee: isDisabled
+        })
+    }
+    onSubmitSaveFee=(event)=>{
+        event.preventDefault()
+        let data = event.target
+        let fees = []
+        for(var i=0;i <= data.num.value; i++){
+            fees.push({
+                expenseItem: data.elements["expenseItem"+i].value,
+                amount: parseFloat(data.elements["amount"+i].value.replace(",", ".")) 
+            })
+        }
+        apiCreateFee(this.setDataForSaveFee(fees)).then(this.createFeeSuccess,this.createFeeFail)
+    }
+    createFeeSuccess=(response)=>{
+        console.log("success" + response)
+    }
+    createFeeFail=(response)=>{
+        console.log("fail" + response)
+    }
+    setDataForSaveFee=(data)=>{
+        return{
+            idPatient: this.state.idPatient,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            fees: data
+        }
     }
     render(){
         return(
-        <Form horizontal onSubmit={this.onSubmitSaveFee}>
-            <SearchForm onSearchPatient={this.onSearchPatient}/>
-            <DisplayPatientName firstnamePatient={this.state.firstnamePatient}
-                                lastnamePatient={this.state.lastnamePatient}/>
-            <ListFee/>
-            <Button bsStyle="success" type="submit" id="saveBtn" >เพิ่ม</Button>
+        <Form horizontal>
+            <SearchForm onAdvanceSearchPatient={this.onAdvanceSearchPatient}
+                        onChangeIdPatient={this.onChangeIdPatient}/>
+            <DisplayPatientName namePatient={this.state.namePatient}/>
+            <ListFee disabledListFee={this.state.disabledListFee}
+                     onSubmitSaveFee={this.onSubmitSaveFee}/>
             <ModalSearch onCloseModal={this.onCloseModal} 
                         isShowingModal={this.state.isShowingModal}
                         dataObjTable={this.state.dataObjTable}
