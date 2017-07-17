@@ -13,11 +13,11 @@ Create new fee
     "fees": [
         {
             "expenseItem": "ค่าตรวจหมอ",
-            "amount": "200"
+            "amount": 200
         },
         {
             "expenseItem": "ค่ายาแก้ปวด",
-            "amount": "350"
+            "amount": 350
         }
     ]
 }
