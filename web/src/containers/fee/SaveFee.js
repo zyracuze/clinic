@@ -47,7 +47,7 @@ export default class SaveFeeContainer extends Component{
         for(var i=0;i <= data.num.value; i++){
             fees.push({
                 expenseItem: data.elements["expenseItem"+i].value,
-                amount: data.elements["amount"+i].value
+                amount: parseFloat(data.elements["amount"+i].value.replace(",", ".")) 
             })
         }
         apiCreateFee(this.setDataForSaveFee(fees)).then(this.createFeeSuccess,this.createFeeFail)
