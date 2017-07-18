@@ -3,8 +3,6 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
-
-import SampleLogin from './sample/SampleLogin';
 import HomeComponent from '../components/HomeComponent';
 import HeaderComponent from '../components/HeaderComponent';
 import PatientsSearchResultComponent from '../components/PatientsSearchResultComponent'
@@ -17,9 +15,6 @@ storiesOf('Header', module)
 
 storiesOf('Home', module)
   .add('Home Page', () => (<HomeComponent />));
-
-storiesOf('Login', module)
-  .add('Login Page', () => (<SampleLogin />));
 
 storiesOf('Shared component', module)
   .add('Show data in table', () => (
