@@ -8,7 +8,7 @@ import SampleLogin from './sample/SampleLogin';
 import Home from '../components/Home';
 import Header from '../components/Header';
 import PatientsSearchResultComponent from '../components/elements/PatientsSearchResultComponent'
-import DisplayPatientName from '../components/elements/DisplayPatientName'
+import DisplayPatientNameComponent from '../components/elements/DisplayPatientNameComponent'
 import ModalDisplayMessage from '../components/elements/ModalDisplayMessage'
 import '../App.css'
 
@@ -34,7 +34,7 @@ storiesOf('Shared component', module)
     }]}/>
   ))
   .add('Display patient name and lastname',()=>(
-    <DisplayPatientName namePatient={'Phatcharaphan Ananpreechakun'}/>
+    <DisplayPatientNameComponent namePatient={'Phatcharaphan Ananpreechakun'}/>
   ))
   .add('Modal display message when data display is success', ()=>(
     <ModalDisplayMessage isShowmodal={true} titleModal="Fee" 

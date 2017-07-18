@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {FormGroup, ControlLabel, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types'
-export default class DisplayPatientName extends Component{
+export default class DisplayPatientNameComponent extends Component{
     static propTypes = {
         namePatient: PropTypes.string.isRequired
     }
