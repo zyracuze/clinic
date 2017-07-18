@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Form} from 'react-bootstrap';
-import ListFee from '../../components/fee/ListFee'
+import SaveFeeComponent from '../../components/fee/SaveFeeComponent'
 import DisplayPatientNameComponent from '../../components/DisplayPatientNameComponent'
 import SearchByIdComponent from '../../components/SearchByIdComponent'
 import ModalDisplayMessageComponent from '../../components/ModalDisplayMessageComponent'
@@ -86,7 +86,7 @@ export default class SaveFeeContainer extends Component{
             <SearchByIdComponent onAdvanceSearchPatient={this.onAdvanceSearchPatient}
                         onChangeIdPatient={this.onChangeIdPatient}/>
             <DisplayPatientNameComponent namePatient={this.state.namePatient}/>
-            <ListFee disabledListFee={this.state.disabledListFee}
+            <SaveFeeComponent disabledListFee={this.state.disabledListFee}
                      onSubmitSaveFee={this.onSubmitSaveFee}/>
             <ModalDisplayMessageComponent isSuccess={this.state.isSuccess}
                                  isShowmodal={this.state.isShowmodal}

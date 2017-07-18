@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import {Form, FormGroup, FormControl, ControlLabel, Col, Button } from 'react-bootstrap';
-export default class FormGroupTwoBlock extends Component {
+export default class SaveFeeComponent extends Component {
     static propTypes = {
        disabledListFee: PropTypes.bool.isRequired,
        onSubmitSaveFee: PropTypes.func.isRequired
