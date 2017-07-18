@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { validateLogin} from '../apis/ApiLogin';
 import '../App.css';
 
-class Login extends Component {
+class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Login from './components/Login'
+import LoginComponent from './components/LoginComponent'
 import HomeComponent from './components/HomeComponent'
 import SearchPatientContainer from './containers/SearchPatientContainer'
 import HeaderComponent from './components/HeaderComponent'
@@ -24,7 +24,7 @@ class App extends Component {
         </div>
         <div className="App-intro">
         <Router history={hashHistory}>
-          <Route path='/' component={Login} />
+          <Route path='/' component={LoginComponent} />
           <Route path='/home' component={HomeComponent} />
           <Route path='/search' component={SearchPatientContainer} />
           <Route path='/editPatient'>
