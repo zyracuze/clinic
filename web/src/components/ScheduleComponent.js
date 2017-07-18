@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-export default class Schedule extends Component {
+export default class ScheduleComponent extends Component {
   render() {
     return(
        <div>Schedule</div>
