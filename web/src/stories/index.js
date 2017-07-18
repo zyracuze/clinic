@@ -7,9 +7,9 @@ import { linkTo } from '@storybook/addon-links';
 import SampleLogin from './sample/SampleLogin';
 import Home from '../components/Home';
 import Header from '../components/Header';
-import PatientsSearchResultComponent from '../components/elements/PatientsSearchResultComponent'
-import DisplayPatientNameComponent from '../components/elements/DisplayPatientNameComponent'
-import ModalDisplayMessageComponent from '../components/elements/ModalDisplayMessageComponent'
+import PatientsSearchResultComponent from '../components/PatientsSearchResultComponent'
+import DisplayPatientNameComponent from '../components/DisplayPatientNameComponent'
+import ModalDisplayMessageComponent from '../components/ModalDisplayMessageComponent'
 import '../App.css'
 
 storiesOf('Header', module)

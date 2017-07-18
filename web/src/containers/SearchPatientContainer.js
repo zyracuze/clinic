@@ -3,8 +3,8 @@ import { Button } from 'react-bootstrap';
 import '../App.css';
 import { apiValidateSearch } from '../apis/ApiPatient';
 import SearchPatientResultComponent from '../components/SearchPatientResultComponent';
-import PatientsSearchResultComponent from '../components/elements/PatientsSearchResultComponent';
-import SearchPatientsComponent from '../components/elements/SearchPatientsComponent';
+import PatientsSearchResultComponent from '../components/PatientsSearchResultComponent';
+import SearchPatientsComponent from '../components/SearchPatientsComponent';
 
 class SearchPatientContainer extends Component {
   state = {

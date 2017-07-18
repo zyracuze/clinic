@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {Form} from 'react-bootstrap';
 import ListFee from '../../components/fee/ListFee'
-import DisplayPatientNameComponent from '../../components/elements/DisplayPatientNameComponent'
-import SearchByIdComponent from '../../components/elements/SearchByIdComponent'
-import ModalDisplayMessageComponent from '../../components/elements/ModalDisplayMessageComponent'
+import DisplayPatientNameComponent from '../../components/DisplayPatientNameComponent'
+import SearchByIdComponent from '../../components/SearchByIdComponent'
+import ModalDisplayMessageComponent from '../../components/ModalDisplayMessageComponent'
 import { apiValidateSearch } from '../../apis/ApiPatient';
 import { apiCreateFee } from '../../apis/ApiFee';
 export default class SaveFeeContainer extends Component{
