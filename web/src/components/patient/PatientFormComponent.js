@@ -17,9 +17,6 @@ class PatientFormComponent extends Component {
     this.closeModalAlert = this.closeModalAlert.bind(this);
     this.setPatient = this.setPatient.bind(this);
     this.state = {patients: props};
-   
-
-    console.log("Result PatientFormComponent this.state.modal : " + JSON.stringify(this.state.modal));
   }
 
   setPatient(patients) {
@@ -155,8 +152,7 @@ class PatientFormComponent extends Component {
   }
 
   render() {
-      const {patients} = this.props; 
-      console.log(">>>>>>>" +JSON.stringify(patients.emergencyContact))
+      const {patients} = this.props;
     return (
        <Form horizontal>
          <FormGroup>
@@ -178,14 +174,14 @@ class PatientFormComponent extends Component {
              ชื่อเล่น
               </Col>
            <Col sm={3}>
-             <FormControl id="nickname" type="text" placeholder="ชื่อเล่น" className={this.state.nicknameClassName} 
+             <FormControl id="nickname" type="text" placeholder="ชื่อเล่น" className={this.state.nicknameClassName}
              value={patients.nickname} onChange={this.handleInput} />
            </Col>
            <Col componentClass={ControlLabel} sm={1}>
              เพศ
               </Col>
            <Col sm={3}>
-             <FormControl componentClass="select" id="gender" value={patients.gender} 
+             <FormControl componentClass="select" id="gender" value={patients.gender}
              onChange={this.handleChangeGender.bind(this)}>
                <option value="male">ชาย</option>
                <option value="female">หญิง</option>
@@ -214,7 +210,7 @@ class PatientFormComponent extends Component {
              บัตรประชาชน
               </Col>
            <Col sm={2}>
-             <FormControl id="idCard" type="text" placeholder="บัตรประชาชน" 
+             <FormControl id="idCard" type="text" placeholder="บัตรประชาชน"
              className={this.state.idCardClassName} value={patients.idCard} onChange={this.handleInput} />
            </Col>
          </FormGroup>
@@ -223,7 +219,7 @@ class PatientFormComponent extends Component {
              อาชีพ
               </Col>
            <Col sm={2}>
-             <FormControl id="career" type="text" placeholder="อาชีพ" 
+             <FormControl id="career" type="text" placeholder="อาชีพ"
              className={this.state.careerClassName} value={patients.career} onChange={this.handleInput} />
            </Col>
          </FormGroup>
@@ -232,7 +228,7 @@ class PatientFormComponent extends Component {
              โทร
               </Col>
            <Col sm={2}>
-             <FormControl id="tel" type="text" placeholder="โทร" className={this.state.telClassName} 
+             <FormControl id="tel" type="text" placeholder="โทร" className={this.state.telClassName}
              value={patients.tel} onChange={this.handleInput} />
            </Col>
          </FormGroup>
@@ -241,7 +237,7 @@ class PatientFormComponent extends Component {
              ที่อยู่ปัจจุบัน
               </Col>
            <Col sm={7}>
-             <FormControl id="homeAddress" type="text" placeholder="ที่อยู่ปัจจุบัน" 
+             <FormControl id="homeAddress" type="text" placeholder="ที่อยู่ปัจจุบัน"
              className={this.state.homeAddressClassName} value={patients.homeAddress} onChange={this.handleInput} />
            </Col>
          </FormGroup>
@@ -250,7 +246,7 @@ class PatientFormComponent extends Component {
              ที่อยู่ที่ทำงาน
               </Col>
            <Col sm={7}>
-             <FormControl id="workAddress" type="text" placeholder="ที่อยู่ที่ทำงาน" 
+             <FormControl id="workAddress" type="text" placeholder="ที่อยู่ที่ทำงาน"
              className={this.state.workAddressClassName} value={patients.workAddress} onChange={this.handleInput} />
            </Col>
          </FormGroup>
@@ -268,7 +264,7 @@ class PatientFormComponent extends Component {
              โรคประจำตัว
                </Col>
            <Col sm={7}>
-             <FormControl id="congenitalDisease" type="text" placeholder="โรคประจำตัว" 
+             <FormControl id="congenitalDisease" type="text" placeholder="โรคประจำตัว"
              className={patients.congenitalDiseaseClassName} value={patients.congenitalDisease} onChange={this.handleInput} />
            </Col>
          </FormGroup>
@@ -277,7 +273,7 @@ class PatientFormComponent extends Component {
              แพ้ยา
                </Col>
            <Col sm={7}>
-             <FormControl id="beAllergic" type="text" placeholder="แพ้ยา" className={this.state.beAllergicClassName} 
+             <FormControl id="beAllergic" type="text" placeholder="แพ้ยา" className={this.state.beAllergicClassName}
              value={patients.beAllergic} onChange={this.handleInput} />
            </Col>
          </FormGroup>
@@ -290,9 +286,9 @@ class PatientFormComponent extends Component {
              ผู้ติดต่อฉุกเฉิน
                </Col>
            <Col sm={7}>
-             <FormControl id="emergencyContactName" type="text" 
-             placeholder="ผู้ติดต่อฉุกเฉิน" className={this.state.emergencyContactNameClassName} 
-             value={JSON.stringify(patients.emergencyContactName)} onChange={this.handleInput} />
+             <FormControl id="emergencyContactName" type="text"
+             placeholder="ผู้ติดต่อฉุกเฉิน" className={this.state.emergencyContactNameClassName}
+             value={patients.emergencyContact.name} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -300,9 +296,9 @@ class PatientFormComponent extends Component {
              ความสัมพันธ์
                </Col>
            <Col sm={3}>
-             <FormControl id="emergencyContactRelationship" type="text" 
-             placeholder="ความสัมพันธ์" className={this.state.emergencyContactRelationshipClassName} 
-             value={patients.emergencyContactRelationship} onChange={this.handleInput} />
+             <FormControl id="emergencyContactRelationship" type="text"
+             placeholder="ความสัมพันธ์" className={this.state.emergencyContactRelationshipClassName}
+             value={patients.emergencyContact.relationship} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -310,9 +306,9 @@ class PatientFormComponent extends Component {
              โทร
                </Col>
            <Col sm={3}>
-             <FormControl id="emergencyContactTel" type="text" 
-             placeholder="โทร" className={this.state.emergencyContactTelClassName} 
-             value={patients.emergencyContactTel} onChange={this.handleInput} />
+             <FormControl id="emergencyContactTel" type="text"
+             placeholder="โทร" className={this.state.emergencyContactTelClassName}
+             value={patients.emergencyContact.tel} onChange={this.handleInput} />
            </Col>
          </FormGroup>
 
