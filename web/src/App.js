@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Login from './components/Login'
-import Home from './components/Home'
+import HomeComponent from './components/HomeComponent'
 import SearchPatientContainer from './containers/SearchPatientContainer'
 import HeaderComponent from './components/HeaderComponent'
 import EditPatientContainer from './containers/EditPatientContainer'
@@ -25,7 +25,7 @@ class App extends Component {
         <div className="App-intro">
         <Router history={hashHistory}>
           <Route path='/' component={Login} />
-          <Route path='/home' component={Home} />
+          <Route path='/home' component={HomeComponent} />
           <Route path='/search' component={SearchPatientContainer} />
           <Route path='/editPatient'>
             <IndexRoute component={EditPatientContainer}/>

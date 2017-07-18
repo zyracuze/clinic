@@ -1,7 +1,7 @@
 import React,{ Component } from 'react'
 import '../App.css';
 import {Grid, Row, Col, Button} from 'react-bootstrap';
-export default class Home extends Component{
+export default class HomeComponent extends Component{
   render(){
     return (
       <div>
