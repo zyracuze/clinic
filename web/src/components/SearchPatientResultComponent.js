@@ -6,11 +6,11 @@ class SearchPatientResultComponent extends Component {
   
   constructor(props) {
     super(props);
-    console.log("Result : "+ JSON.stringify(props.patients));
+    console.log("Result : "+ JSON.stringify(props.patient));
   }
 
   render() {
-    const {patients} = this.props;
+    const {patient} = this.props;
     function FieldGroup({ id, labelPlace, labelValue, ...props }) {
       return (
         <FormGroup controlId={id}>
@@ -24,37 +24,37 @@ class SearchPatientResultComponent extends Component {
         <FieldGroup
           id="formControlsIdentify"
           labelPlace="รหัสผู้ป่วย : "
-          labelValue={patients.idPatient}
+          labelValue={patient.idPatient}
         />
 
         <FieldGroup
           id="formControlsName"
           labelPlace="ชื่อ - นามสกุล : "
-          labelValue={patients.firstname + " " + patients.lastname}
+          labelValue={patient.firstname + " " + patient.lastname}
         />
 
         <FieldGroup
           id="formControlsName"
           labelPlace="เบอร์ติดต่อ : "
-          labelValue={patients.tel}
+          labelValue={patient.tel}
         />
 
         <FieldGroup
           id="formControlsName"
           labelPlace="วันเกิด : "
-          labelValue={patients.birthday}
+          labelValue={patient.birthday}
         />
 
         <FieldGroup
           id="formControlsName"
           labelPlace="เพศ : "
-          labelValue={patients.gender}
+          labelValue={patient.gender}
         />
 
         <FieldGroup
           id="formControlsName"
           labelPlace="ที่อยู่ : "
-          labelValue={patients.homeAddress}
+          labelValue={patient.homeAddress}
         />
         
     </div>

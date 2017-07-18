@@ -5,11 +5,14 @@ import { apiValidateSearch } from '../apis/ApiPatient';
 import SearchPatientResultComponent from '../components/SearchPatientResultComponent';
 import PatientsSearchResultComponent from '../components/PatientsSearchResultComponent';
 import SearchPatientsComponent from '../components/SearchPatientsComponent';
+import ModalPatientDetailComponent from '../components/patient/ModalPatientDetailComponent'
 
 class SearchPatientContainer extends Component {
   state = {
     dataObjTable: [],
-    titleSearch: "ค้นหาผู้ป่วย"
+    titleSearch: "ค้นหาผู้ป่วย",
+    patients: {},
+    isShowmodal: false
   }
   setPatient(patients) {
     if(patients){
@@ -17,6 +20,17 @@ class SearchPatientContainer extends Component {
         dataObjTable: patients
       });
     }
+  }
+  showPatientDetail=(patient)=>{
+    this.setState({
+      patient: patient,
+      isShowmodal: true
+    })
+  }
+  onCloseModal=()=>{
+  this.setState({
+      isShowmodal: false
+    })
   }
   onAdvanceSearchPatient=(event)=>{
     event.preventDefault()
@@ -37,7 +51,11 @@ class SearchPatientContainer extends Component {
       <div className="form-search-container">
         <SearchPatientsComponent onAdvanceSearchPatient={this.onAdvanceSearchPatient}
                            titleSearch={this.state.titleSearch}/>
-        <PatientsSearchResultComponent dataObjTable={this.state.dataObjTable} />     
+        <PatientsSearchResultComponent dataObjTable={this.state.dataObjTable} 
+                                       showPatientDetail={this.showPatientDetail}/>     
+        <ModalPatientDetailComponent patient={this.state.patient}
+                                     isShowmodal={this.state.isShowmodal}
+                                     onCloseModal={this.onCloseModal}/>                     
     </div>
     );
   }

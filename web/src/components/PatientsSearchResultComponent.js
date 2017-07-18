@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router'
+import {Button} from 'react-bootstrap';
 export default class PatientsSearchResultComponent extends Component{
     static propTypes = {
-        dataObjTable: PropTypes.array.isRequired
+        dataObjTable: PropTypes.array.isRequired,
+        showPatientDetail: PropTypes.func.isRequired
     }
     render(){
-        const {dataObjTable} = this.props
+        const {dataObjTable, showPatientDetail} = this.props
         return(
             <div className="container">
             <table className="table table-hover">
@@ -15,6 +17,7 @@ export default class PatientsSearchResultComponent extends Component{
                         <th>รหัสผู้ป่วย</th>
                         <th>ชื่อ</th>
                         <th>นามสกุล</th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -27,6 +30,7 @@ export default class PatientsSearchResultComponent extends Component{
                                 <td>{data.firstname}</td>
                                 <td>{data.lastname}</td>
                                 <td><Link to={{pathname:`/editPatient/${data.idPatient}`}} >Edit</Link></td>
+                                <td><Button onClick={()=>showPatientDetail(data)}>View</Button></td>
                             </tr>
                         ))
                     }
