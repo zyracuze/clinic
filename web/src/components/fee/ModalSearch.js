@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import PropTypes from 'prop-types';
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 import AdvanceSearchForm from '../elements/AdvanceSearchForm'
-import Table from '../elements/SharedTable'
+import PatientsSearchResultComponent from '../elements/PatientsSearchResultComponent'
 
 export default class ModalSearch extends Component{
     static propTypes = {
@@ -23,7 +23,7 @@ export default class ModalSearch extends Component{
                     <h1>Search Patient</h1>
                     <AdvanceSearchForm  titleSearch={this.props.titleSearch} 
                                         onAdvanceSearchPatient={this.props.onAdvanceSearchPatient}/>
-                    <Table dataObjTable={this.props.dataObjTable} 
+                    <PatientsSearchResultComponent dataObjTable={this.props.dataObjTable} 
                            onChooseDataTable={this.props.onChooseDataTable}/>
                 </ModalDialog>
                 </ModalContainer>

@@ -7,7 +7,7 @@ import { linkTo } from '@storybook/addon-links';
 import SampleLogin from './sample/SampleLogin';
 import Home from '../components/Home';
 import Header from '../components/Header';
-import SharedTable from '../components/elements/SharedTable'
+import PatientsSearchResultComponent from '../components/elements/PatientsSearchResultComponent'
 import DisplayPatientName from '../components/elements/DisplayPatientName'
 import ModalDisplayMessage from '../components/elements/ModalDisplayMessage'
 import '../App.css'
@@ -23,7 +23,7 @@ storiesOf('Login', module)
 
 storiesOf('Shared component', module)
   .add('Show data in table', () => (
-    <SharedTable dataObjTable={[{
+    <PatientsSearchResultComponent dataObjTable={[{
       idPatient: "P000001",
       firstname: "Phatcharaphan",
       lastname: "Ananpreechakun"

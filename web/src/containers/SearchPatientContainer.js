@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import '../App.css';
 import { apiValidateSearch } from '../apis/ApiPatient';
 import SearchPatientResultComponent from '../components/SearchPatientResultComponent';
-import SharedTable from '../components/elements/SharedTable';
+import PatientsSearchResultComponent from '../components/elements/PatientsSearchResultComponent';
 import AdvanceSearchForm from '../components/elements/AdvanceSearchForm';
 
 class SearchPatientContainer extends Component {
@@ -37,7 +37,7 @@ class SearchPatientContainer extends Component {
       <div className="form-search-container">
         <AdvanceSearchForm onAdvanceSearchPatient={this.onAdvanceSearchPatient}
                            titleSearch={this.state.titleSearch}/>
-        <SharedTable dataObjTable={this.state.dataObjTable} />     
+        <PatientsSearchResultComponent dataObjTable={this.state.dataObjTable} />     
     </div>
     );
   }
