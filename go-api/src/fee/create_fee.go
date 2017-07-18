@@ -1,14 +1,13 @@
 package fee
 
 import (
+	"fmt"
 	"math/rand"
 	"net/http"
+	database "service"
 	"time"
-	"fmt"
 
 	"github.com/labstack/echo"
-	"gopkg.in/mgo.v2/bson"
-	database "service"
 )
 
 type FeeItem struct {
@@ -20,17 +19,7 @@ type Counter interface {
 	count() (int, error)
 }
 
-type MongoCounter struct {}
-
-type Fee struct {
-	Id             bson.ObjectId `json:"id,omitempty" bson:"_id,omitempty"`
-	IdFee          string        `json:"idFee"`
-	IdPatient      string        `json:"idPatient"`
-	Firstname      string        `json:"firstname"`
-	Lastname	   string        `json:"lastname"`
-	FeeItem        []FeeItem     `json:"fees"`
-	CreateDateTime time.Time     `json:"createDateTime"`
-}
+type MongoCounter struct{}
 
 func CreateFee(c echo.Context) error {
 	fee := new(Fee)
