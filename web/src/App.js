@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Login from './components/Login'
 import Home from './components/Home'
 import SearchPatientContainer from './containers/SearchPatientContainer'
-import Header from './components/Header'
+import HeaderComponent from './components/HeaderComponent'
 import EditPatientContainer from './containers/EditPatientContainer'
 import GenerateMedicalCertificate from './components/GenerateMedicalCertificate'
 import MedicalExpenseReport from './components/MedicalExpenseReport'
@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <Header />
+          <HeaderComponent />
         </div>
         <div className="App-intro">
         <Router history={hashHistory}>
