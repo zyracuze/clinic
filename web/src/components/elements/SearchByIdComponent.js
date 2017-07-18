@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
 import { FormGroup, FormControl, ControlLabel, Col, Glyphicon, InputGroup } from 'react-bootstrap';
-export default class SearchForm extends Component{
+export default class SearchByIdComponent extends Component{
     static propTypes = {
         onAdvanceSearchPatient: PropTypes.func.isRequired,
         onChangeIdPatient: PropTypes.func.isRequired
