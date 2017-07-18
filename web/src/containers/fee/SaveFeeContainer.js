@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Form} from 'react-bootstrap';
-import ModalSearch from '../../components/fee/ModalSearch'
 import ListFee from '../../components/fee/ListFee'
 import DisplayPatientNameComponent from '../../components/elements/DisplayPatientNameComponent'
 import SearchByIdComponent from '../../components/elements/SearchByIdComponent'
@@ -95,11 +94,6 @@ export default class SaveFeeContainer extends Component{
                                  titleModal={this.state.titleModal}
                                  messageModal={this.state.messageModal}
                                  nameBtnModal={this.state.nameBtnModal}/>
-            <ModalSearch onCloseModal={this.onCloseModal} 
-                        isShowingModal={this.state.isShowingModal}
-                        dataObjTable={this.state.dataObjTable}
-                        onChooseDataTable={this.onChooseDataTable}
-                        onAdvanceSearchPatient={this.onAdvanceSearchPatient}/>
         </Form>
         )
     }
