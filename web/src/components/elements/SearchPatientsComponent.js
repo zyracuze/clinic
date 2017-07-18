@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types'
 import '../../App.css';
-export default class AdvanceSearchFormElement extends Component{
+export default class SearchPatientsComponent extends Component{
     static propTypes = {
         onAdvanceSearchPatient: PropTypes.func.isRequired,
         titleSearch: PropTypes.string.isRequired

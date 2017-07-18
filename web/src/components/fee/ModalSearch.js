@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import PropTypes from 'prop-types';
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
-import AdvanceSearchForm from '../elements/AdvanceSearchForm'
+import SearchPatientsComponent from '../elements/SearchPatientsComponent'
 import PatientsSearchResultComponent from '../elements/PatientsSearchResultComponent'
 
 export default class ModalSearch extends Component{
@@ -21,7 +21,7 @@ export default class ModalSearch extends Component{
                 <ModalContainer onClose={this.props.onCloseModal}>
                 <ModalDialog onClose={this.props.onCloseModal}>
                     <h1>Search Patient</h1>
-                    <AdvanceSearchForm  titleSearch={this.props.titleSearch} 
+                    <SearchPatientsComponent  titleSearch={this.props.titleSearch} 
                                         onAdvanceSearchPatient={this.props.onAdvanceSearchPatient}/>
                     <PatientsSearchResultComponent dataObjTable={this.props.dataObjTable} 
                            onChooseDataTable={this.props.onChooseDataTable}/>

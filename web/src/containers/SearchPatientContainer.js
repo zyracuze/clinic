@@ -4,7 +4,7 @@ import '../App.css';
 import { apiValidateSearch } from '../apis/ApiPatient';
 import SearchPatientResultComponent from '../components/SearchPatientResultComponent';
 import PatientsSearchResultComponent from '../components/elements/PatientsSearchResultComponent';
-import AdvanceSearchForm from '../components/elements/AdvanceSearchForm';
+import SearchPatientsComponent from '../components/elements/SearchPatientsComponent';
 
 class SearchPatientContainer extends Component {
   state = {
@@ -35,7 +35,7 @@ class SearchPatientContainer extends Component {
   render() {
     return (
       <div className="form-search-container">
-        <AdvanceSearchForm onAdvanceSearchPatient={this.onAdvanceSearchPatient}
+        <SearchPatientsComponent onAdvanceSearchPatient={this.onAdvanceSearchPatient}
                            titleSearch={this.state.titleSearch}/>
         <PatientsSearchResultComponent dataObjTable={this.state.dataObjTable} />     
     </div>
