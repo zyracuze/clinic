@@ -5,18 +5,18 @@ import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
 import SampleLogin from './sample/SampleLogin';
-import Home from '../components/Home';
-import Header from '../components/Header';
+import HomeComponent from '../components/HomeComponent';
+import HeaderComponent from '../components/HeaderComponent';
 import PatientsSearchResultComponent from '../components/PatientsSearchResultComponent'
 import DisplayPatientNameComponent from '../components/DisplayPatientNameComponent'
 import ModalDisplayMessageComponent from '../components/ModalDisplayMessageComponent'
 import '../App.css'
 
 storiesOf('Header', module)
-  .add('Header', () => (<Header />));
+  .add('Header', () => (<HeaderComponent />));
 
 storiesOf('Home', module)
-  .add('Home Page', () => (<Home />));
+  .add('Home Page', () => (<HomeComponent />));
 
 storiesOf('Login', module)
   .add('Login Page', () => (<SampleLogin />));
