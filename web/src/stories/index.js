@@ -9,6 +9,7 @@ import PatientsSearchResultComponent from '../components/PatientsSearchResultCom
 import DisplayPatientNameComponent from '../components/DisplayPatientNameComponent'
 import ModalDisplayMessageComponent from '../components/ModalDisplayMessageComponent'
 import '../App.css'
+import '../index.css';
 
 storiesOf('Header', module)
   .add('Header', () => (<HeaderComponent />));
