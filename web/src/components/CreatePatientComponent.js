@@ -9,7 +9,7 @@ import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button, Modal }
 import 'react-datepicker/dist/react-datepicker.css';
 import '../App.css';
 
-class CreatePatient extends Component {
+export default class CreatePatientComponent extends Component {
   constructor() {
     super();
     this.state = {
@@ -384,4 +384,4 @@ class CreatePatient extends Component {
   }
 
 }
-export default CreatePatient;
+

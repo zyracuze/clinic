@@ -6,7 +6,7 @@ import HeaderComponent from './components/HeaderComponent'
 import EditPatientContainer from './containers/EditPatientContainer'
 import GenerateMedicalCertificate from './components/GenerateMedicalCertificate'
 import MedicalExpenseReport from './components/MedicalExpenseReport'
-import CreatePatient from './components/CreatePatient'
+import CreatePatientComponent from './components/CreatePatientComponent'
 import SaveFeeContainer from './containers/fee/SaveFeeContainer'
 import ScheduleComponent from './components/ScheduleComponent'
 import LogoutComponent from './components/LogoutComponent'
@@ -34,7 +34,7 @@ class App extends Component {
           <Route path='/generateMedicalCertificate' component={GenerateMedicalCertificate}/>
           <Route path='/medicalExpenseReport' component={MedicalExpenseReport}/>
           <Route path='/saveFee' component={SaveFeeContainer}/>
-          <Route path='/createPatient' component={CreatePatient}/>
+          <Route path='/createPatient' component={CreatePatientComponent}/>
           <Route path='/schedule' component={ScheduleComponent}/>
           <Route path='/logout' component={LogoutComponent}/>
           
