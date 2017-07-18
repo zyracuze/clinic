@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Button, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types'
-export default class ModalDisplayMessage extends Component{
+export default class ModalDisplayMessageComponent extends Component{
     static propTypes = {
         isShowmodal: PropTypes.bool.isRequired,
         onClickModal: PropTypes.func.isRequired,

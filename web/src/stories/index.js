@@ -9,7 +9,7 @@ import Home from '../components/Home';
 import Header from '../components/Header';
 import PatientsSearchResultComponent from '../components/elements/PatientsSearchResultComponent'
 import DisplayPatientNameComponent from '../components/elements/DisplayPatientNameComponent'
-import ModalDisplayMessage from '../components/elements/ModalDisplayMessage'
+import ModalDisplayMessageComponent from '../components/elements/ModalDisplayMessageComponent'
 import '../App.css'
 
 storiesOf('Header', module)
@@ -37,7 +37,7 @@ storiesOf('Shared component', module)
     <DisplayPatientNameComponent namePatient={'Phatcharaphan Ananpreechakun'}/>
   ))
   .add('Modal display message when data display is success', ()=>(
-    <ModalDisplayMessage isShowmodal={true} titleModal="Fee" 
+    <ModalDisplayMessageComponent isShowmodal={true} titleModal="Fee" 
                          messageModal="Save Successfully"
                          nameBtnModal="OK"
                          isSuccess={true}/>

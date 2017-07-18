@@ -4,7 +4,7 @@ import ModalSearch from '../../components/fee/ModalSearch'
 import ListFee from '../../components/fee/ListFee'
 import DisplayPatientNameComponent from '../../components/elements/DisplayPatientNameComponent'
 import SearchByIdComponent from '../../components/elements/SearchByIdComponent'
-import ModalDisplayMessage from '../../components/elements/ModalDisplayMessage'
+import ModalDisplayMessageComponent from '../../components/elements/ModalDisplayMessageComponent'
 import { apiValidateSearch } from '../../apis/ApiPatient';
 import { apiCreateFee } from '../../apis/ApiFee';
 export default class SaveFeeContainer extends Component{
@@ -89,7 +89,7 @@ export default class SaveFeeContainer extends Component{
             <DisplayPatientNameComponent namePatient={this.state.namePatient}/>
             <ListFee disabledListFee={this.state.disabledListFee}
                      onSubmitSaveFee={this.onSubmitSaveFee}/>
-            <ModalDisplayMessage isSuccess={this.state.isSuccess}
+            <ModalDisplayMessageComponent isSuccess={this.state.isSuccess}
                                  isShowmodal={this.state.isShowmodal}
                                  onClickModal={this.onClickModal}
                                  titleModal={this.state.titleModal}
