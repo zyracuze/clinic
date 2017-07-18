@@ -18,7 +18,7 @@ class EditPatientContainer extends Component {
       },(responseFail) => {}
     );
   }
-  
+
   setPatient() {
     return {
         "idPatient": this.props.params.id
@@ -55,9 +55,15 @@ class EditPatientContainer extends Component {
   }
 
   render() {
+    let patientFormComponent;
+    if(this.state.patients.firstname != null){
+      patientFormComponent = <PatientFormComponent patients={this.state.patients}/>
+    } else {
+      patientFormComponent = null;
+    }
     return (
       <div>
-        <PatientFormComponent patients={this.state.patients}/>
+        {patientFormComponent}
         <Button
            onClick={()=> this.updatePatienSubmit(this.state.patients)}
            bsStyle="primary"
