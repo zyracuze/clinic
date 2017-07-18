@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { validateLogin} from '../apis/ApiLogin';
 import '../App.css';
 
-class LoginComponent extends Component {
+export default class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,4 +58,3 @@ class LoginComponent extends Component {
     );
   }
 }
-export default Login;
