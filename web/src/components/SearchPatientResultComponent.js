@@ -3,7 +3,7 @@ import { FormGroup, ControlLabel } from 'react-bootstrap';
 import '../App.css';
 
 class SearchPatientResultComponent extends Component {
-  
+
   constructor(props) {
     super(props);
     console.log("Result : "+ JSON.stringify(props.patient));
@@ -18,7 +18,7 @@ class SearchPatientResultComponent extends Component {
         </FormGroup>
       );
     }
-    
+
     return (
       <div>
         <FieldGroup
@@ -56,7 +56,25 @@ class SearchPatientResultComponent extends Component {
           labelPlace="ที่อยู่ : "
           labelValue={patient.homeAddress}
         />
-        
+
+        <FieldGroup
+          id="formControlsName"
+          labelPlace="ผู้ติดต่อฉุกเฉิน : "
+          labelValue={patient.emergencyContact.name}
+        />
+        <FieldGroup
+          id="formControlsName"
+          labelPlace="ความสัมพันธ์ : "
+          labelValue={patient.emergencyContact.relationship}
+        />
+        <FieldGroup
+          id="formControlsName"
+          labelPlace="โทร : "
+          labelValue={patient.emergencyContact.tel}
+        />
+
+
+
     </div>
     );
   }
