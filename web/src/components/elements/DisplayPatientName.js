@@ -10,10 +10,10 @@ export default class DisplayPatientName extends Component{
           return(
             <FormGroup>
               <Col componentClass={ControlLabel} sm={3}>
-                ชื่อผู้ป่วย
+                ชื่อผู้ป่วย : 
               </Col>
               <Col componentClass={ControlLabel} sm={3}>
-                {namePatient}
+                <label> {namePatient}</label>
               </Col>
             </FormGroup>
           )
