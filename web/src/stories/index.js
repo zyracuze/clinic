@@ -8,6 +8,7 @@ import SampleLogin from './sample/SampleLogin';
 import Home from '../components/Home';
 import Header from '../components/Header';
 import SharedTable from '../components/elements/SharedTable'
+import DisplayPatientName from '../components/elements/DisplayPatientName'
 
 import '../App.css'
 
@@ -32,3 +33,8 @@ storiesOf('Shared Table Component', module)
       lastname: "Ananpreechakun2"
     }]}/>
   ));
+
+  storiesOf('Display patient name and lastname', module)
+    .add('',()=>(
+      <DisplayPatientName namePatient={'Phatcharaphan Ananpreechakun'}/>
+    ))
