@@ -9,7 +9,6 @@ import Home from '../components/Home';
 import Header from '../components/Header';
 import SharedTable from '../components/elements/SharedTable'
 import DisplayPatientName from '../components/elements/DisplayPatientName'
-
 import '../App.css'
 
 storiesOf('Header', module)
@@ -21,7 +20,7 @@ storiesOf('Home', module)
 storiesOf('Login', module)
   .add('Login Page', () => (<SampleLogin />));
 
-storiesOf('Shared Table Component', module)
+storiesOf('Shared component', module)
   .add('Show data in table', () => (
     <SharedTable dataObjTable={[{
       idPatient: "P000001",
@@ -32,9 +31,8 @@ storiesOf('Shared Table Component', module)
       firstname: "Phatcharaphan2",
       lastname: "Ananpreechakun2"
     }]}/>
+  ))
+  .add('Display patient name and lastname',()=>(
+    <DisplayPatientName namePatient={'Phatcharaphan Ananpreechakun'}/>
   ));
 
-  storiesOf('Display patient name and lastname', module)
-    .add('',()=>(
-      <DisplayPatientName namePatient={'Phatcharaphan Ananpreechakun'}/>
-    ))
