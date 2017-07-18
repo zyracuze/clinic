@@ -7,6 +7,7 @@ import { linkTo } from '@storybook/addon-links';
 import SampleLogin from './sample/SampleLogin';
 import Home from '../components/Home';
 import Header from '../components/Header';
+import SharedTable from '../components/elements/SharedTable'
 
 import '../App.css'
 
@@ -18,3 +19,16 @@ storiesOf('Home', module)
 
 storiesOf('Login', module)
   .add('Login Page', () => (<SampleLogin />));
+
+storiesOf('Shared Table Component', module)
+  .add('Show data in table', () => (
+    <SharedTable dataObjTable={[{
+      idPatient: "P000001",
+      firstname: "Phatcharaphan",
+      lastname: "Ananpreechakun"
+    },{
+      idPatient: "P000002",
+      firstname: "Phatcharaphan2",
+      lastname: "Ananpreechakun2"
+    }]}/>
+  ));
