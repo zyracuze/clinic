@@ -14,7 +14,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"*"},
-		AllowMethods: []string{echo.POST, echo.PUT},
+		AllowMethods: []string{echo.POST, echo.PUT, echo.GET},
 	}))
 
 	e.POST("/login", login.ValidateUserLogin)
@@ -22,6 +22,7 @@ func main() {
 	e.POST("/patient/create", patient.CreatePatient)
 	e.PUT("/patient/update/:id", patient.UpdatePatient)
 	e.POST("/patient/search", patient.SearchPatient)
+	e.GET("/patient/search/:id", patient.SearchPatientById)
 	e.POST("/fee/create", fee.CreateFee)
 	e.Logger.Fatal(e.Start(":8888"))
 }
