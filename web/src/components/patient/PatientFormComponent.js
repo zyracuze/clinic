@@ -73,10 +73,14 @@ class PatientFormComponent extends Component {
   }
 
   handleInput(e) {
-    const key = e.target.id;
+    const key = e.target.name;
     const value = e.target.value;
     this.setState({ [key]: value });
   };
+  
+  componentDidMount() {
+    this.setPatient(this.props.patients);
+  }
 
   render() {
       const {patients} = this.props;
@@ -87,7 +91,7 @@ class PatientFormComponent extends Component {
              ชื่อ
               </Col>
            <Col sm={3}>
-             <FormControl id="firstname" name="firstname" type="text" placeholder="ชื่อ" className={this.state.firstnameClassName} value={patients.firstname} />
+             <FormControl id="firstname" name="firstname" type="text" placeholder="ชื่อ" className={this.state.firstnameClassName} value={this.state.firstname} onChange={this.handleInput} />
            </Col>
            <Col componentClass={ControlLabel} sm={1}>
              นามสกุล
