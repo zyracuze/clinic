@@ -14,7 +14,7 @@ class PatientFormComponent extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.setPatient = this.setPatient.bind(this);
-    this.state = {patients: props};
+    this.state = props.patients;
   }
 
   setPatient(patients) {
@@ -83,7 +83,6 @@ class PatientFormComponent extends Component {
   }
 
   render() {
-      const {patients} = this.props;
     return (
        <Form horizontal onSubmit={this.props.updatePatienSubmit}>
          <FormGroup>
@@ -97,10 +96,10 @@ class PatientFormComponent extends Component {
              นามสกุล
               </Col>
            <Col sm={3}>
-             <FormControl id="lastname" name="lastname" type="text" placeholder="นามสกุล" className={this.state.lastnameClassName} value={patients.lastname} onChange={this.handleInput} />
+             <FormControl id="lastname" name="lastname" type="text" placeholder="นามสกุล" className={this.state.lastnameClassName} value={this.state.lastname} onChange={this.handleInput} />
            </Col>
          </FormGroup>
-         <FormGroup>
+         {/* <FormGroup>
            <Col componentClass={ControlLabel} sm={3}>
              ชื่อเล่น
               </Col>
@@ -242,7 +241,7 @@ class PatientFormComponent extends Component {
              placeholder="โทร" className={this.state.emergencyContactTelClassName}
              value={patients.emergencyContact.tel} onChange={this.handleInput} />
            </Col>
-         </FormGroup>
+         </FormGroup> */}
 
 
          <Button bsStyle="success" type="submit" >แก้ไข</Button>
