@@ -6,7 +6,7 @@ import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Checkbox } fro
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../App.css';
 
-class PatientFormComponent extends Component {
+export default class PatientFormComponent extends Component {
   constructor(props) {
     super(props);
     this.state = props.patients;
@@ -25,7 +25,7 @@ class PatientFormComponent extends Component {
       nickname: patients.nickname,
       nicknameClassName: '',
       gender: patients.gender,
-      birthday: moment(patients.birthday, "MM/DD/YYYY"),
+      birthday: moment(patients.birthday, "DD/MM/YYYY"),
       birthdayClassName: '',
       idCard: patients.idCard,
       idCardClassName: '',
@@ -57,6 +57,12 @@ class PatientFormComponent extends Component {
     });
   }
 
+  handleChangeDatePicker=(event)=>{
+    this.setState({
+      birthday: event
+    });
+  }
+  
   handleInput=(event)=> {
     const key = event.target.name;
     const value = event.target.value;
@@ -111,8 +117,8 @@ class PatientFormComponent extends Component {
              <DatePicker
                id="birthday"
                name="birthday"
-               selected={moment(this.state.birthday, "MM-DD-YYYY")}
-               onChange={this.handleChange}
+               selected={moment(this.state.birthday, "DD/MM/YYYY")}
+               onSelect={this.handleChangeDatePicker}
                showMonthDropdown
                showYearDropdown
                dateFormat="DD/MM/YYYY"
@@ -231,6 +237,4 @@ class PatientFormComponent extends Component {
        </Form >
     )
   }
-
 }
-export default PatientFormComponent;

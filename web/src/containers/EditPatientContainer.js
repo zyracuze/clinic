@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { apiValidateSearch, apiUpdatePatient } from '../apis/ApiPatient'
 import PatientFormComponent from '../components/patient/PatientFormComponent'
-class EditPatientContainer extends Component {
+export default class EditPatientContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -72,4 +72,3 @@ class EditPatientContainer extends Component {
   }
 
 }
-export default EditPatientContainer;
