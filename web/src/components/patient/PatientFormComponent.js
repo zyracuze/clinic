@@ -1,27 +1,18 @@
 import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
-import { hashHistory } from 'react-router'
-import { apiUpdatePatient } from '../../apis/ApiPatient'
-import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Modal, Checkbox } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Checkbox } from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../App.css';
 
 class PatientFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.setPatient = this.setPatient.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-    this.setPatient = this.setPatient.bind(this);
     this.state = props.patients;
   }
 
-  setPatient(patients) {
+  setPatient=(patients)=> {
       this.setState({
-      modal: false,
-      modalAlert: false,
-      formValid: true,
       firstname: patients.firstname,
       firstnameClassName:'',
       lastname: patients.lastname,
@@ -29,7 +20,7 @@ class PatientFormComponent extends Component {
       nickname: patients.nickname,
       nicknameClassName: '',
       gender: patients.gender,
-      birthday: moment(patients.birthday, "MM-DD-YYYY"),
+      birthday: moment(patients.birthday, "MM/DD/YYYY"),
       birthdayClassName: '',
       idCard: patients.idCard,
       idCardClassName: '',
@@ -53,28 +44,22 @@ class PatientFormComponent extends Component {
       emergencyContactTel: patients.emergencyContact.tel,
       emergencyContactTelClassName: '',
       emergencyContact: {
-          name: '',
-          relationship: '',
-          tel: ''
+          name: patients.emergencyContact.name,
+          relationship: patients.emergencyContact.relationship,
+          tel: patients.emergencyContact.tel
         }
     });
   }
 
-  handleChange(date) {
-    this.setState({
-      birthday: date
-    });
-  }
-
-  handleChangeGender(event){
+  handleChangeGender=(event)=>{
     this.setState({
       gender: event.target.value
     });
   }
 
-  handleInput(e) {
-    const key = e.target.name;
-    const value = e.target.value;
+  handleInput=(event)=> {
+    const key = event.target.name;
+    const value = event.target.value;
     this.setState({ [key]: value });
   };
   
@@ -84,35 +69,35 @@ class PatientFormComponent extends Component {
 
   render() {
     return (
-       <Form horizontal onSubmit={this.props.updatePatienSubmit}>
+       <Form horizontal onSubmit={this.state.updatePatienSubmit}>
          <FormGroup>
            <Col componentClass={ControlLabel} sm={3}>
              ชื่อ
               </Col>
            <Col sm={3}>
-             <FormControl id="firstname" name="firstname" type="text" placeholder="ชื่อ" className={this.state.firstnameClassName} value={this.state.firstname} onChange={this.handleInput} />
+             <FormControl id="firstname" name="firstname" type="text" placeholder="ชื่อ" value={this.state.firstname} onChange={this.handleInput} />
            </Col>
            <Col componentClass={ControlLabel} sm={1}>
              นามสกุล
               </Col>
            <Col sm={3}>
-             <FormControl id="lastname" name="lastname" type="text" placeholder="นามสกุล" className={this.state.lastnameClassName} value={this.state.lastname} onChange={this.handleInput} />
+             <FormControl id="lastname" name="lastname" type="text" placeholder="นามสกุล" value={this.state.lastname} onChange={this.handleInput} />
            </Col>
          </FormGroup>
-         {/* <FormGroup>
+         <FormGroup>
            <Col componentClass={ControlLabel} sm={3}>
              ชื่อเล่น
               </Col>
            <Col sm={3}>
-             <FormControl id="nickname" name="nickname" type="text" placeholder="ชื่อเล่น" className={this.state.nicknameClassName}
-             value={patients.nickname} onChange={this.handleInput} />
+             <FormControl id="nickname" name="nickname" type="text" placeholder="ชื่อเล่น"
+             value={this.state.nickname} onChange={this.handleInput} />
            </Col>
            <Col componentClass={ControlLabel} sm={1}>
              เพศ
               </Col>
            <Col sm={3}>
-             <FormControl componentClass="select" id="gender" name="gender"  value={patients.gender}
-             onChange={this.handleChangeGender.bind(this)}>
+             <FormControl componentClass="select" id="gender" name="gender"  value={this.state.gender}
+             onChange={this.handleChangeGender}>
                <option value="male">ชาย</option>
                <option value="female">หญิง</option>
              </FormControl>
@@ -126,7 +111,7 @@ class PatientFormComponent extends Component {
              <DatePicker
                id="birthday"
                name="birthday"
-               selected={moment(patients.birthday, "MM-DD-YYYY")}
+               selected={moment(this.state.birthday, "MM/DD/YYYY")}
                onChange={this.handleChange}
                showMonthDropdown
                showYearDropdown
@@ -142,7 +127,7 @@ class PatientFormComponent extends Component {
               </Col>
            <Col sm={2}>
              <FormControl id="idCard" name="idCard" type="text" placeholder="บัตรประชาชน"
-             className={this.state.idCardClassName} value={patients.idCard} onChange={this.handleInput} />
+              value={this.state.idCard} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -151,7 +136,7 @@ class PatientFormComponent extends Component {
               </Col>
            <Col sm={2}>
              <FormControl id="career" name="career" type="text" placeholder="อาชีพ"
-             className={this.state.careerClassName} value={patients.career} onChange={this.handleInput} />
+                value={this.state.career} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -159,8 +144,8 @@ class PatientFormComponent extends Component {
              โทร
               </Col>
            <Col sm={2}>
-             <FormControl id="tel" name="tel" type="text" placeholder="โทร" className={this.state.telClassName}
-             value={patients.tel} onChange={this.handleInput} />
+             <FormControl id="tel" name="tel" type="text" placeholder="โทร"
+             value={this.state.tel} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -169,7 +154,7 @@ class PatientFormComponent extends Component {
               </Col>
            <Col sm={7}>
              <FormControl id="homeAddress" name="homeAddress" type="text" placeholder="ที่อยู่ปัจจุบัน"
-             className={this.state.homeAddressClassName} value={patients.homeAddress} onChange={this.handleInput} />
+              value={this.state.homeAddress} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -178,7 +163,7 @@ class PatientFormComponent extends Component {
               </Col>
            <Col sm={7}>
              <FormControl id="workAddress" type="text" placeholder="ที่อยู่ที่ทำงาน"
-             className={this.state.workAddressClassName} value={patients.workAddress} onChange={this.handleInput} />
+              value={this.state.workAddress} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -186,8 +171,8 @@ class PatientFormComponent extends Component {
              เอกสารที่ต้องการ
                </Col>
            <Col sm={3}>
-             <Checkbox id="requiredDocument" name="certMedicine" value={patients.requiredDocument} inline>ใบรับรองแพทย์</Checkbox>{' '}
-             <Checkbox id="requiredDocument" name="socialCert" value={patients.requiredDocument} inline>ใบประกันสังคม</Checkbox>
+             <Checkbox id="requiredDocument" name="certMedicine" value={this.state.requiredDocument} inline>ใบรับรองแพทย์</Checkbox>{' '}
+             <Checkbox id="requiredDocument" name="socialCert" value={this.state.requiredDocument} inline>ใบประกันสังคม</Checkbox>
            </Col>
          </FormGroup>
          <FormGroup>
@@ -196,7 +181,7 @@ class PatientFormComponent extends Component {
                </Col>
            <Col sm={7}>
              <FormControl id="congenitalDisease" name="congenitalDisease" type="text" placeholder="โรคประจำตัว"
-             className={patients.congenitalDiseaseClassName} value={patients.congenitalDisease} onChange={this.handleInput} />
+              value={this.state.congenitalDisease} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -205,7 +190,7 @@ class PatientFormComponent extends Component {
                </Col>
            <Col sm={7}>
              <FormControl id="beAllergic" name="beAllergic" type="text" placeholder="แพ้ยา" className={this.state.beAllergicClassName}
-             value={patients.beAllergic} onChange={this.handleInput} />
+             value={this.state.beAllergic} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <Col className="clearline" />
@@ -218,8 +203,8 @@ class PatientFormComponent extends Component {
                </Col>
            <Col sm={7}>
              <FormControl id="emergencyContactName" name="emergencyContactName" type="text"
-             placeholder="ผู้ติดต่อฉุกเฉิน" className={this.state.emergencyContactNameClassName}
-             value={patients.emergencyContact.name} onChange={this.handleInput} />
+             placeholder="ผู้ติดต่อฉุกเฉิน"
+             value={this.state.emergencyContactName} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -228,8 +213,8 @@ class PatientFormComponent extends Component {
                </Col>
            <Col sm={3}>
              <FormControl id="emergencyContactRelationship" name="emergencyContactRelationship" type="text"
-             placeholder="ความสัมพันธ์" className={this.state.emergencyContactRelationshipClassName}
-             value={patients.emergencyContact.relationship} onChange={this.handleInput} />
+             placeholder="ความสัมพันธ์"
+             value={this.state.emergencyContactRelationship} onChange={this.handleInput} />
            </Col>
          </FormGroup>
          <FormGroup>
@@ -238,12 +223,10 @@ class PatientFormComponent extends Component {
                </Col>
            <Col sm={3}>
              <FormControl id="emergencyContactTel" name="emergencyContactTel" type="text"
-             placeholder="โทร" className={this.state.emergencyContactTelClassName}
-             value={patients.emergencyContact.tel} onChange={this.handleInput} />
+             placeholder="โทร"
+             value={this.state.emergencyContactTel} onChange={this.handleInput} />
            </Col>
-         </FormGroup> */}
-
-
+         </FormGroup>
          <Button bsStyle="success" type="submit" >แก้ไข</Button>
        </Form >
     )
