@@ -12,8 +12,6 @@ import (
 
 func UpdatePatient(c echo.Context) error {
 	patient := new(Patient)
-	id := c.Param("id")
-	patient.Id = bson.ObjectIdHex(id)
 	if err := c.Bind(patient); err != nil {
 		return c.NoContent(http.StatusBadRequest)
 	}
@@ -33,7 +31,7 @@ func (p *Patient) updatePatient(patient *Patient) error {
 
 	change := bson.M{"$set": &p}
 	find := bson.M{
-		"_id": p.Id,
+		"idpatient": p.IdPatient,
 	}
 
 	err = db.Update("patient", find, change)
