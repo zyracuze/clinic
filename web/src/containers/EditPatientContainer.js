@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { apiValidateSearch, apiUpdatePatient } from '../apis/ApiPatient'
 import PatientFormComponent from '../components/patient/PatientFormComponent'
-import { Button } from 'react-bootstrap';
 class EditPatientContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.updatePatienSubmit = this.updatePatienSubmit.bind(this);
   }
   state = {
     patients: {}
@@ -49,7 +47,7 @@ class EditPatientContainer extends Component {
           tel: patients.emergencyContactTel.value
         }
       };
-
+      
       apiUpdatePatient(requestObj).then(() => {
         console.log("Edit Success :::: ");
       }, () => {
@@ -61,8 +59,8 @@ class EditPatientContainer extends Component {
     let patientFormComponent;
     if(this.state.patients.firstname != null){
       patientFormComponent = <PatientFormComponent 
-                                            patients={this.state.patients}  
-                                            updatePatienSubmit={this.updatePatienSubmit}/>
+                                  patients={this.state.patients}  
+                                  updatePatienSubmit={this.updatePatienSubmit}/>
     } else {
       patientFormComponent = null;
     }

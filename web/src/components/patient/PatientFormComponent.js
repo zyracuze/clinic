@@ -1,27 +1,23 @@
 import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
-import { hashHistory } from 'react-router'
-import { apiUpdatePatient } from '../../apis/ApiPatient'
-import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Modal, Checkbox } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Checkbox } from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../App.css';
 
 class PatientFormComponent extends Component {
   constructor(props) {
     super(props);
-    this.setPatient = this.setPatient.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-    this.setPatient = this.setPatient.bind(this);
     this.state = props.patients;
   }
 
-  setPatient(patients) {
+  static propTypes = {
+    updatePatienSubmit: PropTypes.func.isRequired
+  }
+
+  setPatient=(patients)=> {
       this.setState({
-      modal: false,
-      modalAlert: false,
-      formValid: true,
       firstname: patients.firstname,
       firstnameClassName:'',
       lastname: patients.lastname,
@@ -29,7 +25,7 @@ class PatientFormComponent extends Component {
       nickname: patients.nickname,
       nicknameClassName: '',
       gender: patients.gender,
-      birthday: moment(patients.birthday, "MM-DD-YYYY"),
+      birthday: moment(patients.birthday, "MM/DD/YYYY"),
       birthdayClassName: '',
       idCard: patients.idCard,
       idCardClassName: '',
@@ -55,24 +51,16 @@ class PatientFormComponent extends Component {
     });
   }
 
-  handleChange(date) {
-    this.setState({
-      birthday: date
-    });
-  }
-
-  handleChangeGender(event){
+  handleChangeGender=(event)=>{
     this.setState({
       gender: event.target.value
     });
   }
 
-  handleInput(e) {
-    const key = e.target.name;
-    const value = e.target.value;
-    this.setState({
-        [key]:value
-    })
+  handleInput=(event)=> {
+    const key = event.target.name;
+    const value = event.target.value;
+    this.setState({ [key]: value });
   };
   
   componentDidMount() {
@@ -87,21 +75,21 @@ class PatientFormComponent extends Component {
              ชื่อ
               </Col>
            <Col sm={3}>
-             <FormControl id="firstname" name="firstname" type="text" placeholder="ชื่อ" className={this.state.firstnameClassName} value={this.state.firstname} onChange={this.handleInput} />
+             <FormControl id="firstname" name="firstname" type="text" placeholder="ชื่อ" value={this.state.firstname} onChange={this.handleInput} />
            </Col>
            <Col componentClass={ControlLabel} sm={1}>
              นามสกุล
               </Col>
            <Col sm={3}>
-             <FormControl id="lastname" name="lastname" type="text" placeholder="นามสกุล" className={this.state.lastnameClassName} value={this.state.lastname} onChange={this.handleInput} />
+             <FormControl id="lastname" name="lastname" type="text" placeholder="นามสกุล" value={this.state.lastname} onChange={this.handleInput} />
            </Col>
          </FormGroup>
-          <FormGroup>
+         <FormGroup>
            <Col componentClass={ControlLabel} sm={3}>
              ชื่อเล่น
               </Col>
            <Col sm={3}>
-             <FormControl id="nickname" name="nickname" type="text" placeholder="ชื่อเล่น" className={this.state.nicknameClassName}
+             <FormControl id="nickname" name="nickname" type="text" placeholder="ชื่อเล่น"
              value={this.state.nickname} onChange={this.handleInput} />
            </Col>
            <Col componentClass={ControlLabel} sm={1}>
@@ -109,7 +97,7 @@ class PatientFormComponent extends Component {
               </Col>
            <Col sm={3}>
              <FormControl componentClass="select" id="gender" name="gender"  value={this.state.gender}
-             onChange={this.handleChangeGender.bind(this)}>
+             onChange={this.handleChangeGender}>
                <option value="male">ชาย</option>
                <option value="female">หญิง</option>
              </FormControl>
@@ -174,7 +162,7 @@ class PatientFormComponent extends Component {
              ที่อยู่ที่ทำงาน
               </Col>
            <Col sm={7}>
-             <FormControl id="workAddress" type="text" placeholder="ที่อยู่ที่ทำงาน"
+             <FormControl id="workAddress" name="workAddress" type="text" placeholder="ที่อยู่ที่ทำงาน"
              className={this.state.workAddressClassName} value={this.state.workAddress} onChange={this.handleInput} />
            </Col>
          </FormGroup>
@@ -239,8 +227,6 @@ class PatientFormComponent extends Component {
              value={this.state.emergencyContactTel} onChange={this.handleInput} />
            </Col>
          </FormGroup> 
-
-
          <Button bsStyle="success" type="submit" >แก้ไข</Button>
        </Form >
     )
