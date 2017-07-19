@@ -58,7 +58,7 @@ export default class SaveFeeComponent extends Component {
                     disabled={this.props.disabledListFee} bsStyle="btn btn-primary width45" 
                     type="button" id="saveBtn" >+</Button><br/>
             <Button bsStyle="success" type="submit" id="saveBtn" 
-                    disabled={this.props.disabledListFee}>เพิ่ม</Button>
+                    disabled={this.props.disabledListFee}>บันทึกข้อมูล</Button>
           </Form>
         );
     }
