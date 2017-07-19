@@ -40,7 +40,7 @@ class PatientFormComponent extends Component {
       requiredDocument: patients.requiredDocument,
       congenitalDisease: patients.con,
       congenitalDiseaseClassName: '',
-      beAllergic: '',
+      beAllergic: patients.beAllergic.name,
       beAllergicClassName: '',
       emergencyContactName: patients.emergencyContact.name,
       emergencyContactNameClassName: '',
