@@ -25,25 +25,28 @@ class EditPatientContainer extends Component {
     }
   }
 
-  updatePatienSubmit(patients) {
+  updatePatienSubmit=(event)=> {
+   event.preventDefault()
+    let patients = event.target
       let requestObj = {
-        firstname: patients.firstname,
-        lastname: patients.lastname,
-        nickname: patients.nickname,
-        gender: patients.gender,
-        birthday: patients.birthday,
-        idCard: patients.idCard,
-        career: patients.career,
-        tel: patients.tel,
-        workAddress: patients.workAddress,
-        homeAddress: patients.homeAddress,
-        requiredDocument: patients.requiredDocument,
-        congenitalDisease: patients.congenitalDisease,
-        beAllergic: patients.beAllergic,
+        idPatient: this.props.params.id,
+        firstname: patients.firstname.value,
+        lastname: patients.lastname.value,
+        nickname: patients.nickname.value,
+        gender: patients.gender.value,
+        birthday: patients.birthday.value,
+        idCard: patients.idCard.value,
+        career: patients.career.value,
+        tel: patients.tel.value,
+        workAddress: patients.workAddress.value,
+        homeAddress: patients.homeAddress.value,
+        requiredDocument: patients.requiredDocument.value,
+        congenitalDisease: patients.congenitalDisease.value,
+        beAllergic: patients.beAllergic.value,
         emergencyContact: {
-          name: patients.emergencyContactName,
-          relationship: patients.emergencyContactRelationship,
-          tel: patients.emergencyContactTel
+          name: patients.emergencyContactName.value,
+          relationship: patients.emergencyContactRelationship.value,
+          tel: patients.emergencyContactTel.value
         }
       };
 
@@ -57,18 +60,15 @@ class EditPatientContainer extends Component {
   render() {
     let patientFormComponent;
     if(this.state.patients.firstname != null){
-      patientFormComponent = <PatientFormComponent patients={this.state.patients}/>
+      patientFormComponent = <PatientFormComponent 
+                                            patients={this.state.patients}  
+                                            updatePatienSubmit={this.updatePatienSubmit}/>
     } else {
       patientFormComponent = null;
     }
     return (
       <div>
         {patientFormComponent}
-        <Button
-           onClick={()=> this.updatePatienSubmit(this.state.patients)}
-           bsStyle="primary"
-           type="submit"
-           className="btn btn-lg btn-primary">แก้ไข</Button>
       </div>
     )
   }
