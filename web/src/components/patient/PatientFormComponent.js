@@ -19,7 +19,7 @@ export default class PatientFormComponent extends Component {
 
   setPatient=(patients)=> {
       this.setState({
-      requiredDocument: ['certMedicine'],// patients.requiredDocument,
+      requiredDocument: patients.requiredDocument,
       firstname: patients.firstname,
       firstnameClassName:'',
       lastname: patients.lastname,
