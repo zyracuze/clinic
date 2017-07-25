@@ -1,27 +1,31 @@
 import React, { Component } from 'react'
 import { apiValidateSearch, apiUpdatePatient } from '../apis/ApiPatient'
+import { Form } from 'react-bootstrap'
 import PatientFormComponent from '../components/patient/PatientFormComponent'
+import ModalDisplayMessageComponent from '../components/ModalDisplayMessageComponent'
 export default class EditPatientContainer extends Component {
-
-  constructor(props) {
-    super(props);
-  }
   state = {
     patients: {}
   }
   componentDidMount() {
-    apiValidateSearch(this.setPatient()).then(
-      (responseSuccess)=>{
-        this.setState({patients: responseSuccess[0]});
-      },(responseFail) => {}
-    );
+    apiValidateSearch(this.setIdPatientForSearch()).then(this.searchPatientSuccess)
   }
 
-  setPatient() {
-    return {
-        "idPatient": this.props.params.id
-    }
+  setIdPatientForSearch=()=>{
+      return {
+      "idPatient": this.props.params.id
+      }
   }
+  searchPatientSuccess=(response)=>{
+      this.setStatePatient({})
+      if(response){
+          this.setStatePatient(response[0])
+      }
+  }
+  setStatePatient(data){
+      this.setState({patients: data})
+  }
+  
   setRequiredDocument(requiredDocumentList){
     var resultRequireds = []
     for(var index = 0 ; index < requiredDocumentList.length ; index++ ){
@@ -34,8 +38,6 @@ export default class EditPatientContainer extends Component {
   
   updatePatienSubmit=(event)=> {
    event.preventDefault()
-   console.log("REQ [0] > > :: " + event.target.requiredDocument[0].value + "+" + event.target.requiredDocument[0].checked)
-   console.log("REQ [1] > > :: " + event.target.requiredDocument[1].value + "+" + event.target.requiredDocument[1].checked)
     let patients = event.target
       let requestObj = {
         idPatient: this.props.params.id,
@@ -58,17 +60,36 @@ export default class EditPatientContainer extends Component {
           tel: patients.emergencyContactTel.value
         }
       };
-      
-      console.log("requestObj > > :: " + JSON.stringify(requestObj))
-      apiUpdatePatient(requestObj).then(() => {
-        console.log("Edit Success :::: ");
-      }, () => {
-        console.log("Edit Fail :::: ");
-      });
+      apiUpdatePatient(requestObj).then(this.createPatientSuccess, this.createPatientFail);
   }
+
+  setDateForModal(isSuccess, msg) {
+        this.setState({
+            isShowmodal: true,
+            isSuccess: isSuccess,
+            titleModal: "Create Patient",
+            messageModal: msg,
+            nameBtnModal: "OK"
+        })
+    }
+
+    onClickModal =()=> {
+        this.setState({
+            isShowmodal: false
+        })
+    }
+
+    createPatientFail= (response) => {
+        this.setDateForModal(false, "Failed to save data. Please try again. Or contact the system administrator.")
+    }
+
+    createPatientSuccess= (response) => {
+        this.setDateForModal(true, "Save successfully.")
+    }
 
   render() {
     let patientFormComponent;
+    let modalDisplayMessageComponent;
     if(this.state.patients.firstname != null){
       patientFormComponent = <PatientFormComponent 
                                   patients={this.state.patients}  
@@ -76,9 +97,21 @@ export default class EditPatientContainer extends Component {
     } else {
       patientFormComponent = null;
     }
+
+    if(this.state.isShowmodal !== undefined){
+       modalDisplayMessageComponent =  <ModalDisplayMessageComponent isSuccess={this.state.isSuccess}
+                                      isShowmodal={this.state.isShowmodal}
+                                      onClickModal={this.onClickModal}
+                                      titleModal={this.state.titleModal}
+                                      messageModal={this.state.messageModal}
+                                      nameBtnModal={this.state.nameBtnModal} />
+    }else{
+        modalDisplayMessageComponent = null;
+    }
     return (
-      <div>
+     <div>
         {patientFormComponent}
+        {modalDisplayMessageComponent}
       </div>
     )
   }

@@ -106,7 +106,8 @@ export default class PatientFormComponent extends Component {
                       value={requiredDocObj.id}
                       display={requiredDocObj.value}
                       checked={this.setChecked(requiredDocObj.id)}
-                      onClick={this.onClick} />
+                      onClick={this.onClick}
+                      onChange={()=>{}} />
       );
     });
 
