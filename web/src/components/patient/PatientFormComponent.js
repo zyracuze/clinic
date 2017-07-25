@@ -105,7 +105,7 @@ export default class PatientFormComponent extends Component {
         <CheckboxItem key={index}
                       value={requiredDocObj.id}
                       display={requiredDocObj.value}
-                      defaultChecked={this.setChecked(requiredDocObj.id)}
+                      checked={this.setChecked(requiredDocObj.id)}
                       onClick={this.onClick} />
       );
     });
