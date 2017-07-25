@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { apiValidateSearch, apiUpdatePatient } from '../apis/ApiPatient'
-import { Form } from 'react-bootstrap'
 import PatientFormComponent from '../components/patient/PatientFormComponent'
 import ModalDisplayMessageComponent from '../components/ModalDisplayMessageComponent'
 export default class EditPatientContainer extends Component {
@@ -36,7 +35,7 @@ export default class EditPatientContainer extends Component {
     return resultRequireds
   }
   
-  updatePatienSubmit=(event)=> {
+  onSubmitPatient=(event)=> {
    event.preventDefault()
     let patients = event.target
       let requestObj = {
@@ -93,7 +92,7 @@ export default class EditPatientContainer extends Component {
     if(this.state.patients.firstname != null){
       patientFormComponent = <PatientFormComponent 
                                   patients={this.state.patients}  
-                                  updatePatienSubmit={this.updatePatienSubmit}/>
+                                  onSubmitPatient={this.onSubmitPatient}/>
     } else {
       patientFormComponent = null;
     }

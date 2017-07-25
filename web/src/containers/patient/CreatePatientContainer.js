@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
-import { Form } from 'react-bootstrap'
-import PatientFormComponent from '../../components/patient/PatientFormComponentBO'
+import moment from 'moment'
+import PatientFormComponent from '../../components/patient/PatientFormComponent'
 import ModalDisplayMessageComponent from '../../components/ModalDisplayMessageComponent'
 import { apiCreatePatient } from '../../apis/ApiPatient'
 
 class CreatePatientContainer extends Component {
-    state = {}
-
+    state = {
+    patients: {
+        requiredDocument: [''],
+        beAllergic: {name: ''},
+        emergencyContact: {
+            name: '',
+            relationship: '',
+            tel: ''
+        },
+        birthday: moment()
+    }
+  }
     setDateForModal(isSuccess, msg) {
         this.setState({
             isShowmodal: true,
@@ -31,11 +41,21 @@ class CreatePatientContainer extends Component {
         this.setDateForModal(true, "Save successfully.")
     }
 
-    onSubmitCreatePatient = (event) => {
+    onSubmitPatient = (event) => {
         event.preventDefault();
         let data = event.target;
         apiCreatePatient(this.setDataForCreatePatient(data)).then(this.createPatientSuccess, this.createPatientFail)
     }
+
+    setRequiredDocument(requiredDocumentList){
+    var resultRequireds = []
+    for(var index = 0 ; index < requiredDocumentList.length ; index++ ){
+      if(requiredDocumentList[index].checked){
+          resultRequireds.push(requiredDocumentList[index].value)
+      }
+    }
+    return resultRequireds
+  }
 
     setDataForCreatePatient = (data) => {
         return {
@@ -43,13 +63,13 @@ class CreatePatientContainer extends Component {
             lastname: data.lastname.value,
             nickname: data.nickname.value,
             gender: data.gender.value,
-            birthday: '01/01/0001',
+            birthday: data.birthday.value,
             idCard: data.idCard.value,
             career: data.career.value,
             tel: data.tel.value,
             workAddress: data.workAddress.value,
             homeAddress: data.homeAddress.value,
-            requiredDocument: data.requiredDocument.value,
+            requiredDocument: this.setRequiredDocument(data.requiredDocument),
             congenitalDisease: data.congenitalDisease.value,
             beAllergic: data.beAllergic.value,
             emergencyContactName: data.emergencyContactName.value,
@@ -64,16 +84,30 @@ class CreatePatientContainer extends Component {
     }
 
     render() {
+        let patientFormComponent;
+        let modalDisplayMessageComponent;
+        if(this.state.patients != null){
+        patientFormComponent = <PatientFormComponent 
+                                    patients={this.state.patients}  
+                                    onSubmitPatient={this.onSubmitPatient}/>
+        } else {
+        patientFormComponent = null;
+        }
+        if(this.state.isShowmodal !== undefined){
+        modalDisplayMessageComponent =  <ModalDisplayMessageComponent isSuccess={this.state.isSuccess}
+                                        isShowmodal={this.state.isShowmodal}
+                                        onClickModal={this.onClickModal}
+                                        titleModal={this.state.titleModal}
+                                        messageModal={this.state.messageModal}
+                                        nameBtnModal={this.state.nameBtnModal} />
+        }else{
+            modalDisplayMessageComponent = null;
+        }
         return (
-            <Form horizontal>
-                <PatientFormComponent onSubmitCreatePatient={this.onSubmitCreatePatient}></PatientFormComponent>
-                <ModalDisplayMessageComponent isSuccess={this.state.isSuccess}
-                    isShowmodal={this.state.isShowmodal}
-                    onClickModal={this.onClickModal}
-                    titleModal={this.state.titleModal}
-                    messageModal={this.state.messageModal}
-                    nameBtnModal={this.state.nameBtnModal} />
-            </Form>
+            <div>
+                {patientFormComponent}
+                {modalDisplayMessageComponent}
+            </div>
         )
     }
 

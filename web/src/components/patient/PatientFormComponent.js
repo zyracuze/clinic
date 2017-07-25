@@ -14,7 +14,7 @@ export default class PatientFormComponent extends Component {
   }
 
   static propTypes = {
-    updatePatienSubmit: PropTypes.func.isRequired
+    onSubmitPatient: PropTypes.func.isRequired,
   }
 
   setPatient=(patients)=> {
@@ -63,10 +63,6 @@ export default class PatientFormComponent extends Component {
       birthday: event
     });
   }
-
-  handleChangeCheckBox = (field, value) => {
-    this.setState({[field]: value});
-  };
   
   handleInput=(event)=> {
     const key = event.target.name;
@@ -82,7 +78,8 @@ export default class PatientFormComponent extends Component {
     return this.state.requiredDocument.indexOf(name) > -1;
   }
   
-  onClick=(event)=> {
+  onClickChecked=(event)=> {
+    PropTypes.checkPropTypes(this.propTypes, this.props, 'prop', 'PatientFormComponent');
     const { value } = event.target;
     const requiredDocument = [ ...this.state.requiredDocument ];
     const indexOf = requiredDocument.indexOf(value);
@@ -100,16 +97,21 @@ export default class PatientFormComponent extends Component {
     let CheckboxItemRequiredDoc
 
     const requiredDoc = [{id:'certMedicine', value: 'ใบรับรองแพทย์'},{id:'socialCert', value:'ใบประกันสังคม'}]
-    CheckboxItemRequiredDoc = requiredDoc.map((requiredDocObj,index) => {
-      return (
-        <CheckboxItem key={index}
-                      value={requiredDocObj.id}
-                      display={requiredDocObj.value}
-                      checked={this.setChecked(requiredDocObj.id)}
-                      onClick={this.onClick}
-                      onChange={()=>{}} />
-      );
-    });
+    if(this.state.requiredDocument !== undefined){
+      CheckboxItemRequiredDoc = requiredDoc.map((requiredDocObj,index) => {
+        return (
+          <CheckboxItem key={index}
+                        value={requiredDocObj.id}
+                        display={requiredDocObj.value}
+                        checked={this.setChecked(requiredDocObj.id)}
+                        onClick={this.onClickChecked}
+                        onChange={()=>{}} />
+        );
+      });
+    }else{
+      CheckboxItemRequiredDoc = null
+    }
+    
 
     function CheckboxItem({ value, display, checked, onClick }) {
       return (
@@ -125,7 +127,7 @@ export default class PatientFormComponent extends Component {
     }
 
     return (
-       <Form horizontal onSubmit={this.props.updatePatienSubmit}>
+       <Form horizontal onSubmit={this.props.onSubmitPatient}>
          <FormGroup>
            <Col componentClass={ControlLabel} sm={3}>
              ชื่อ
@@ -282,7 +284,7 @@ export default class PatientFormComponent extends Component {
              value={this.state.emergencyContactTel} onChange={this.handleInput} />
            </Col>
          </FormGroup> 
-         <Button bsStyle="success" type="submit" >แก้ไข</Button>
+         <Button bsStyle="success" type="submit" >บันทึก</Button>
        </Form >
     )
   }
