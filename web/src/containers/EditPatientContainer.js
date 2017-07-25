@@ -66,7 +66,7 @@ export default class EditPatientContainer extends Component {
         this.setState({
             isShowmodal: true,
             isSuccess: isSuccess,
-            titleModal: "Create Patient",
+            titleModal: "Edit Patient",
             messageModal: msg,
             nameBtnModal: "OK"
         })
