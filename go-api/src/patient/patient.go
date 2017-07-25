@@ -19,7 +19,7 @@ type Patient struct {
 	Tel               string        `json:"tel"`
 	WorkAddress       string        `json:"workAddress"`
 	HomeAddress       string        `json:"homeAddress"`
-	RequiredDocument  string        `json:"requiredDocument"`
+	RequiredDocument  []string  	`json:"requiredDocument"`
 	CongenitalDisease string        `json:"congenitalDisease"`
 	BeAllergic        string        `json:"beAllergic"`
 	EmergencyContact  Emergency     `json:"emergencyContact"`

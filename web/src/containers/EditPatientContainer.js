@@ -22,9 +22,20 @@ export default class EditPatientContainer extends Component {
         "idPatient": this.props.params.id
     }
   }
-
+  setRequiredDocument(requiredDocumentList){
+    var resultRequireds = []
+    for(var index = 0 ; index < requiredDocumentList.length ; index++ ){
+      if(requiredDocumentList[index].checked){
+          resultRequireds.push(requiredDocumentList[index].value)
+      }
+    }
+    return resultRequireds
+  }
+  
   updatePatienSubmit=(event)=> {
    event.preventDefault()
+   console.log("REQ [0] > > :: " + event.target.requiredDocument[0].value + "+" + event.target.requiredDocument[0].checked)
+   console.log("REQ [1] > > :: " + event.target.requiredDocument[1].value + "+" + event.target.requiredDocument[1].checked)
     let patients = event.target
       let requestObj = {
         idPatient: this.props.params.id,
@@ -38,7 +49,7 @@ export default class EditPatientContainer extends Component {
         tel: patients.tel.value,
         workAddress: patients.workAddress.value,
         homeAddress: patients.homeAddress.value,
-        requiredDocument: patients.requiredDocument.value,
+        requiredDocument: this.setRequiredDocument(event.target.requiredDocument),
         congenitalDisease: patients.congenitalDisease.value,
         beAllergic: patients.beAllergic.value,
         emergencyContact: {
@@ -48,6 +59,7 @@ export default class EditPatientContainer extends Component {
         }
       };
       
+      console.log("requestObj > > :: " + JSON.stringify(requestObj))
       apiUpdatePatient(requestObj).then(() => {
         console.log("Edit Success :::: ");
       }, () => {

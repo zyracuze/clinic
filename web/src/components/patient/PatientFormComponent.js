@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import PropTypes from 'prop-types';
-import { Form, FormGroup, FormControl, ControlLabel, Col, Button, Checkbox } from 'react-bootstrap';
+import { Form, FormGroup, FormControl, ControlLabel, Col, Button } from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css';
 import '../../App.css';
+import '../../PatientForm.css';
 
 export default class PatientFormComponent extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ export default class PatientFormComponent extends Component {
 
   setPatient=(patients)=> {
       this.setState({
+      requiredDocument: ['certMedicine'],// patients.requiredDocument,
       firstname: patients.firstname,
       firstnameClassName:'',
       lastname: patients.lastname,
@@ -37,7 +39,6 @@ export default class PatientFormComponent extends Component {
       workAddressClassName: '',
       homeAddress: patients.homeAddress,
       homeAddressClassName: '',
-      requiredDocument: patients.requiredDocument,
       congenitalDisease: patients.con,
       congenitalDiseaseClassName: '',
       beAllergic: patients.beAllergic.name,
@@ -62,6 +63,10 @@ export default class PatientFormComponent extends Component {
       birthday: event
     });
   }
+
+  handleChangeCheckBox = (field, value) => {
+    this.setState({[field]: value});
+  };
   
   handleInput=(event)=> {
     const key = event.target.name;
@@ -73,7 +78,51 @@ export default class PatientFormComponent extends Component {
     this.setPatient(this.props.patients);
   }
 
+  setChecked=(name)=> {
+    return this.state.requiredDocument.indexOf(name) > -1;
+  }
+  
+  onClick=(event)=> {
+    const { value } = event.target;
+    const requiredDocument = [ ...this.state.requiredDocument ];
+    const indexOf = requiredDocument.indexOf(value);
+
+    if (indexOf === -1) {
+      requiredDocument.push(value);
+    }else {
+      requiredDocument.splice(indexOf, 1);
+    }
+    
+    this.setState({ requiredDocument });
+  }
+
   render() {
+    let CheckboxItemRequiredDoc
+
+    const requiredDoc = [{id:'certMedicine', value: 'ใบรับรองแพทย์'},{id:'socialCert', value:'ใบประกันสังคม'}]
+    CheckboxItemRequiredDoc = requiredDoc.map((requiredDocObj,index) => {
+      return (
+        <CheckboxItem key={index}
+                      value={requiredDocObj.id}
+                      display={requiredDocObj.value}
+                      defaultChecked={this.setChecked(requiredDocObj.id)}
+                      onClick={this.onClick} />
+      );
+    });
+
+    function CheckboxItem({ value, display, checked, onClick }) {
+      return (
+        <label className="CheckboxItem">
+          <input 
+                name="requiredDocument"
+                type="checkbox"
+                value={value}
+                checked={checked}
+                onClick={onClick} /> {display}
+        </label>
+      );
+    }
+
     return (
        <Form horizontal onSubmit={this.props.updatePatienSubmit}>
          <FormGroup>
@@ -177,8 +226,7 @@ export default class PatientFormComponent extends Component {
              เอกสารที่ต้องการ
                </Col>
            <Col sm={3}>
-             <Checkbox id="requiredDocument" name="certMedicine" value={this.state.requiredDocument} inline>ใบรับรองแพทย์</Checkbox>{' '}
-             <Checkbox id="requiredDocument" name="socialCert" value={this.state.requiredDocument} inline>ใบประกันสังคม</Checkbox>
+              {CheckboxItemRequiredDoc}
            </Col>
          </FormGroup>
          <FormGroup>

@@ -1,0 +1,6 @@
+.CheckboxItem {
+  display: inline;
+  margin-bottom: 10px;
+  user-select: none;
+  margin-right: 20px;
+}
