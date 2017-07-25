@@ -9,7 +9,6 @@ import MedicalExpenseReportComponent from './components/MedicalExpenseReportComp
 import CreatePatientContainer from './containers/patient/CreatePatientContainer'
 import SaveFeeContainer from './containers/fee/SaveFeeContainer'
 import ScheduleComponent from './components/ScheduleComponent'
-import LogoutComponent from './components/LogoutComponent'
 
 import './App.css'
 
@@ -36,8 +35,6 @@ class App extends Component {
           <Route path='/saveFee' component={SaveFeeContainer}/>
           <Route path='/createPatient' component={CreatePatientContainer}/>
           <Route path='/schedule' component={ScheduleComponent}/>
-          <Route path='/logout' component={LogoutComponent}/>
-          
         </Router>
         </div>
       </div>

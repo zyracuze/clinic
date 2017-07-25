@@ -41,9 +41,7 @@ export default class HomeComponent extends Component{
               <Col xs={3} md={2}>
                 <Button href="#/schedule" bsStyle="warning">ตารางนัด</Button>
               </Col>
-              <Col xs={3} md={2}>
-                <Button href="#/logout" bsStyle="warning">ออกจากระบบ</Button>
-              </Col>
+              <Col xs={3} md={2}/>
               <Col xs={2} md={3}/>
           </Row>
         </Grid>
