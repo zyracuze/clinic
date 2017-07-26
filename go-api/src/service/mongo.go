@@ -12,6 +12,9 @@ type Connection struct {
 }
 
 func Connect() (*Connection, error) {
+	if(os.Getenv("mongodb_host") == ""  || os.Getenv("mongodb_dbname") == ""){
+		panic("Please check the mongodb_host or mongodb_dbname. Can not enter a blank value.")
+	}
 	session, err := mgo.Dial(os.Getenv("mongodb_host"))
 	if err != nil {
 		return nil, err
