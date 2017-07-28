@@ -4,5 +4,6 @@ export default{
     CREATE_PATIENT_URL : URL + "patient/create",
     SEARCH_PATIENT_URL : URL + "patient/search",
     UPDATE_PATIENT_URL : URL + "patient/update",
-    CREATE_FEE_URL : URL + "fee/create"
+    CREATE_FEE_URL : URL + "fee/create",
+    SEARCH_FEE: URL + "fee/search"
 }

@@ -2,13 +2,12 @@ import React,{Component} from 'react'
 import PropTypes from 'prop-types'
 export default class SearchReportComponent extends Component{
     static propType = {
-        onSubmitSearchButton: PropTypes.func.isRequired
+        onSubmitSearch: PropTypes.func.isRequired
     }
     render(){
         return(
              <div> 
-                <form onSubmit = { this.onSubmitSearchButton }>
-              
+                <form onSubmit = { this.props.onSubmitSearch }>
                 <h2 className="form-signin-heading">รายงานค่ารักษา</h2>
                     <input
                     type="text"

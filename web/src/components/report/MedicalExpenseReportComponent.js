@@ -24,11 +24,12 @@ export default class MedicalExpenseReportComponent extends Component {
                         dataTable.length > 0 &&
                         dataTable.map((data,index)=>(
                             <tr key={index}>
-                                <td>{index}</td>
+                                <td>{index+1}</td>
                                 <td>{data.idPatient}</td>
                                 <td>{data.firstname} {data.lastname}</td>
-                                <td>{data.lastname}</td>
-                                <td>{data.sum}</td>
+                                <td>{data.createDateTime}</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         ))
                     }
