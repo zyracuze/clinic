@@ -9,11 +9,16 @@ export default class MedicalExpenseReportContainer extends Component{
     
     onSubmitSearch=(event)=>{
         event.preventDefault()
-        console.log("dxx" + event.target.period.value)
         let data = event.target
+        this.initialDataTable()
         apiSearchReport(this.prepareDataForSearch(data))
             .then(this.searchReportSuccess)
 
+    }
+    initialDataTable=()=>{
+        this.setState({
+             dataTable: []
+        })
     }
     searchReportSuccess=(response)=>{
         if(response){

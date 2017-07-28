@@ -28,7 +28,14 @@ export default class MedicalExpenseReportComponent extends Component {
                                 <td>{data.idPatient}</td>
                                 <td>{data.firstname} {data.lastname}</td>
                                 <td>{data.createDateTime}</td>
-                                <td></td>
+                                <td>
+                                    {
+                                       data.fees.length > 0 &&
+                                       data.fees.map((fee,feeIndex)=>(
+                                           <div>{fee.expenseItem} {fee.amount}</div>
+                                       ))
+                                    }
+                                </td>
                                 <td></td>
                             </tr>
                         ))
