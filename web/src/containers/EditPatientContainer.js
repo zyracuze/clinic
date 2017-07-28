@@ -35,9 +35,7 @@ export default class EditPatientContainer extends Component {
     return resultRequireds
   }
   
-  onSubmitPatient=(event)=> {
-   event.preventDefault()
-    let patients = event.target
+  onSubmitPatient=(patients)=> {
       let requestObj = {
         idPatient: this.props.params.id,
         firstname: patients.firstname.value,
@@ -50,7 +48,7 @@ export default class EditPatientContainer extends Component {
         tel: patients.tel.value,
         workAddress: patients.workAddress.value,
         homeAddress: patients.homeAddress.value,
-        requiredDocument: this.setRequiredDocument(event.target.requiredDocument),
+        requiredDocument: this.setRequiredDocument(patients.requiredDocument),
         congenitalDisease: patients.congenitalDisease.value,
         beAllergic: patients.beAllergic.value,
         emergencyContact: {

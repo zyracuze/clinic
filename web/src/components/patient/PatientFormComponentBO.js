@@ -1,17 +1,59 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
 import { Form, FormGroup, FormControl, ControlLabel, Col, Radio, Button } from 'react-bootstrap';
 
 export default class PatientFormComponentBO extends Component {
   
   static propTypes = {
-    onSubmitCreatePatient: PropTypes.func.isRequired
+    onSubmitPatient: PropTypes.func.isRequired
   }
+  
+  onClickChecked=(event)=> {
+    const { value } = event.target;
+    const requiredDocument = [ ...this.state.requiredDocument ];
+    const indexOf = requiredDocument.indexOf(value);
 
+    if (indexOf === -1) {
+      requiredDocument.push(value);
+    }else {
+      requiredDocument.splice(indexOf, 1);
+    }
+    
+    this.setState({ requiredDocument });
+  }
+  
   render() {
+    let CheckboxItemRequiredDoc
+
+    const requiredDoc = [{id:'certMedicine', value: 'ใบรับรองแพทย์'},{id:'socialCert', value:'ใบประกันสังคม'}]
+    CheckboxItemRequiredDoc = requiredDoc.map((requiredDocObj,index) => {
+      return (
+        <CheckboxItem key={index}
+                      value={requiredDocObj.id}
+                      display={requiredDocObj.value}
+                      checked={}
+                      onClick={this.onClick}
+                      onChange={()=>{}} />
+      );
+    });
+
+    function CheckboxItem({ value, display, checked, onClick }) {
+      return (
+        <label className="CheckboxItem">
+          <input 
+                name="requiredDocument"
+                type="checkbox"
+                value={value}
+                checked={checked}
+                onClick={onClick} /> {display}
+        </label>
+      );
+    }
 
     return (
-      <Form horizontal onSubmit={this.props.onSubmitCreatePatient}>
+      <Form horizontal onSubmit={this.props.onSubmitPatient}>
         <FormGroup>
           <Col componentClass={ControlLabel} sm={3}>
             ชื่อ
@@ -44,13 +86,23 @@ export default class PatientFormComponentBO extends Component {
           </Col>
         </FormGroup>
         <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
-            วันเกิด
-             </Col>
-          <Col sm={3}>
-            ??
-          </Col>
-        </FormGroup>
+           <Col componentClass={ControlLabel} sm={3}>
+             วันเกิด
+              </Col>
+           <Col sm={3}>
+             <DatePicker
+               id="birthday"
+               name="birthday"
+               selected={moment()}
+               onSelect={this.handleChangeDatePicker}
+               showMonthDropdown
+               showYearDropdown
+               dateFormat="DD/MM/YYYY"
+               dropdownMode="select"
+               className="form-control"
+             />
+           </Col>
+         </FormGroup>
         <FormGroup>
           <Col componentClass={ControlLabel} sm={3}>
             บัตรประชาชน
@@ -96,8 +148,7 @@ export default class PatientFormComponentBO extends Component {
             เอกสารที่ต้องการ
               </Col>
           <Col sm={3}>
-            <Radio id="requiredDocument" name="certMedicine" inline defaultChecked={true} > ใบรับรองแพทย์</Radio>{' '}
-            <Radio id="requiredDocument" name="socialCert" inline >ใบประกันสังคม</Radio>
+             {CheckboxItemRequiredDoc}
           </Col>
         </FormGroup>
         <FormGroup>

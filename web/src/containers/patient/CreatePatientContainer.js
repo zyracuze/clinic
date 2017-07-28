@@ -41,9 +41,7 @@ class CreatePatientContainer extends Component {
         this.setDateForModal(true, "Save successfully.")
     }
 
-    onSubmitPatient = (event) => {
-        event.preventDefault();
-        let data = event.target;
+    onSubmitPatient = (data) => {
         apiCreatePatient(this.setDataForCreatePatient(data)).then(this.createPatientSuccess, this.createPatientFail)
     }
 

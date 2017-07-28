@@ -93,6 +93,18 @@ export default class PatientFormComponent extends Component {
     this.setState({ requiredDocument });
   }
 
+  submit=(event)=> {
+    event.preventDefault();
+    let data = event.target;
+    var isPass = true
+
+    //validate data
+    
+    if(isPass) {
+      this.props.onSubmitPatient(data)
+    }
+  }
+
   render() {
     let CheckboxItemRequiredDoc
 
@@ -126,8 +138,10 @@ export default class PatientFormComponent extends Component {
       );
     }
 
+
+
     return (
-       <Form horizontal onSubmit={this.props.onSubmitPatient}>
+       <Form horizontal onSubmit={this.submit}>
          <FormGroup>
            <Col componentClass={ControlLabel} sm={3}>
              ชื่อ
