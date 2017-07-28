@@ -32,7 +32,7 @@ export default class MedicalExpenseReportComponent extends Component {
                                     {
                                        data.fees.length > 0 &&
                                        data.fees.map((fee,feeIndex)=>(
-                                           <div>{fee.expenseItem} {fee.amount}</div>
+                                           <div key={feeIndex}>{fee.expenseItem} {fee.amount}</div>
                                        ))
                                     }
                                 </td>
