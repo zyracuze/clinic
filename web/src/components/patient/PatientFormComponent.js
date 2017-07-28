@@ -93,15 +93,46 @@ export default class PatientFormComponent extends Component {
     this.setState({ requiredDocument });
   }
 
+  validation(data, isPass){
+    isPass = this.isValidation(data.firstname.value, isPass)
+    isPass = this.isValidation(data.lastname.value, isPass)
+    isPass = this.isValidation(data.nickname.value, isPass)
+    isPass = this.isValidation(data.gender.value, isPass)
+    isPass = this.isValidation(data.birthday.value, isPass)
+    isPass = this.isValidation(data.idCard.value, isPass)
+    isPass = this.isValidation(data.career.value, isPass)
+    isPass = this.isValidation(data.tel.value, isPass)
+    isPass = this.isValidation(data.workAddress.value, isPass)
+    isPass = this.isValidation(data.homeAddress.value, isPass)
+    isPass = this.isValidation(data.requiredDocument, isPass)
+    isPass = this.isValidation(data.congenitalDisease.value, isPass)
+    isPass = this.isValidation(data.beAllergic.value, isPass)
+    isPass = this.isValidation(data.emergencyContactName.value, isPass)
+    isPass = this.isValidation(data.emergencyContactRelationship.value, isPass)
+    isPass = this.isValidation(data.emergencyContactTel.value, isPass)
+    isPass = this.isValidation(data.emergencyContactName.value, isPass)
+    isPass = this.isValidation(data.emergencyContactRelationship.value, isPass)
+    isPass = this.isValidation(data.emergencyContactTel.value, isPass)
+    return isPass
+  }
+  
+  isValidation(field, isPass){
+    if(field === ''){
+      isPass = false
+    }
+    return isPass
+  }
+  
   submit=(event)=> {
     event.preventDefault();
     let data = event.target;
     var isPass = true
+    isPass = this.validation(data, isPass)
 
-    //validate data
-    
     if(isPass) {
       this.props.onSubmitPatient(data)
+    }else{
+      this.props.onValidatePatientFail()
     }
   }
 

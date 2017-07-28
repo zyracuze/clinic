@@ -76,6 +76,10 @@ export default class EditPatientContainer extends Component {
         })
     }
 
+    onValidatePatientFail=()=>{
+        this.setDateForModal(false, "Valid field.")
+    }
+
     createPatientFail= (response) => {
         this.setDateForModal(false, "Failed to save data. Please try again. Or contact the system administrator.")
     }
@@ -90,7 +94,8 @@ export default class EditPatientContainer extends Component {
     if(this.state.patients.firstname != null){
       patientFormComponent = <PatientFormComponent 
                                   patients={this.state.patients}  
-                                  onSubmitPatient={this.onSubmitPatient}/>
+                                  onSubmitPatient={this.onSubmitPatient}
+                                  onValidatePatientFail={this.onValidatePatientFail}/>
     } else {
       patientFormComponent = null;
     }
