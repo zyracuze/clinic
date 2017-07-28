@@ -63,6 +63,13 @@ body {
   padding: 10px;
 }
 
+.form-control-option{
+  position: relative;
+  font-size: 16px;
+  height: 45px;
+  padding: 10px;
+}
+
 .form-signin-heading{
   margin-bottom: 30px;
 }
