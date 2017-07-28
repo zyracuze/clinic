@@ -2,10 +2,11 @@ package main
 
 import (
 	fee "fee"
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
 	login "login"
 	patient "patient"
+
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 func main() {
@@ -22,7 +23,8 @@ func main() {
 	e.POST("/patient/create", patient.CreatePatient)
 	e.POST("/patient/update", patient.UpdatePatient)
 	e.POST("/patient/search", patient.SearchPatient)
-	e.GET("/patient/search/:id", patient.SearchPatientById)
 	e.POST("/fee/create", fee.CreateFee)
+	e.POST("/fee/search", fee.SearchFee)
+	e.GET("/patient/search/:id", patient.SearchPatientById)
 	e.Logger.Fatal(e.Start(":8888"))
 }
