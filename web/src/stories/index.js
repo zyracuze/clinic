@@ -8,6 +8,8 @@ import HeaderComponent from '../components/HeaderComponent';
 import PatientsSearchResultComponent from '../components/PatientsSearchResultComponent'
 import DisplayPatientNameComponent from '../components/DisplayPatientNameComponent'
 import ModalDisplayMessageComponent from '../components/ModalDisplayMessageComponent'
+import SearchReportComponent from '../components/report/SearchReportComponent'
+import MedicalExpenseReportComponent from '../components/report/MedicalExpenseReportComponent'
 import '../App.css'
 import '../index.css';
 
@@ -38,3 +40,59 @@ storiesOf('Shared component', module)
                          nameBtnModal="OK"
                          isSuccess={true}/>
   ));
+
+storiesOf('Fee Page', module)
+  .add('Search report', () => (<SearchReportComponent />))
+  .add('display data when search report', ()=>(<MedicalExpenseReportComponent dataTable={[
+     {
+      "idPatient": "P000014",
+      "firstname": "Phatcharaphan",
+      "lastname": "Ananpreechakun",
+      "fees": [
+          {
+              "expenseItem": "ค่าตรวจหมอ",
+              "amount": 200
+          },
+          {
+              "expenseItem": "ค่ายาแก้ปวด",
+              "amount": 350
+          }
+      ],
+      "sumFeeItem": 550,
+      "createDateTime": "2017-07-27 16:09:02"
+    },
+    {
+      "idPatient": "P000014",
+      "firstname": "Phatcharaphan",
+      "lastname": "Ananpreechakun",
+      "fees": [
+          {
+              "expenseItem": "ค่าตรวจหมอ",
+              "amount": 200
+          },
+          {
+              "expenseItem": "ค่ายาแก้ปวด",
+              "amount": 350
+          }
+      ],
+      "sumFeeItem": 550,
+      "createDateTime": "2017-07-27 16:09:03"
+    },
+    {
+      "idPatient": "P000014",
+      "firstname": "Phatcharaphan",
+      "lastname": "Ananpreechakun",
+      "fees": [
+          {
+              "expenseItem": "ค่าตรวจหมอ",
+              "amount": 200
+          },
+          {
+              "expenseItem": "ค่ายาแก้ปวด",
+              "amount": 350
+          }
+      ],
+      "sumFeeItem": 550,
+      "createDateTime": "2017-07-22 15:42:07"
+    }
+  ]} sumFee={1650}/>));
