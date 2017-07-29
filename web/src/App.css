@@ -127,3 +127,6 @@ body {
 .container-print {
   text-align: left;
 }
+@media screen{
+    .container-print {display: none;}
+}

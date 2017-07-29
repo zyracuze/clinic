@@ -9,8 +9,7 @@ export default class GenerateMedicalCertificateContainer extends Component{
         namePatient: "",
         requestDate: moment(),
         doctorOfPatient: "",
-        symptom: "",
-        isPrint: false
+        symptom: ""
     }
     onChangeIdPatient=(event)=>{
         this.setState({
@@ -37,12 +36,7 @@ export default class GenerateMedicalCertificateContainer extends Component{
     }
     printMedicalCertificate=(event)=>{
         event.preventDefault()
-        this.setState({
-            isPrint: true
-        })
-        if(this.state.isPrint){
-            window.print()
-        }
+        window.print()
     }
     render(){
         return(
@@ -58,10 +52,7 @@ export default class GenerateMedicalCertificateContainer extends Component{
                                                         handleChangeRequestDate={this.handleChangeRequestDate}
                                                         printMedicalCertificate={this.printMedicalCertificate}/>
                 </div>
-                {
-                    this.state.isPrint && <p className="container-print">Hello Print</p>
-                }
-                
+                <p className="container-print">Hello Print</p>
             </div>
         )
     }
