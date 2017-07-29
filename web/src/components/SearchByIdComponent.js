@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl, ControlLabel, Col, Glyphicon, InputGroup } from 'react-bootstrap';
+import {Form, FormGroup, FormControl, ControlLabel, Col, Glyphicon, InputGroup } from 'react-bootstrap';
 export default class SearchByIdComponent extends Component{
     static propTypes = {
         onAdvanceSearchPatient: PropTypes.func.isRequired,
@@ -8,11 +8,13 @@ export default class SearchByIdComponent extends Component{
     }
     render(){
         return(
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={3}>
+        <div>
+        <Form horizontal>
+        <FormGroup >
+          <Col componentClass={ControlLabel} sm={4}>
             รหัสผู้ป่วย
           </Col>
-          <Col sm={3}>
+          <Col sm={4}>
             <InputGroup>
               <FormControl id="idPatient" 
                            type="text" 
@@ -24,6 +26,8 @@ export default class SearchByIdComponent extends Component{
             </InputGroup>
           </Col>
         </FormGroup>
+        </Form>
+        </div>
         )
     }
 }
