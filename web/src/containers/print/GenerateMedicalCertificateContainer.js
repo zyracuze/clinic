@@ -38,6 +38,7 @@ export default class GenerateMedicalCertificateContainer extends Component{
         return(
             <div className="form-search-container">
                 <h2>พิมพ์ใบรับรองแพทย์</h2>
+                <button onClick={() => window.print()}>PRINT</button>
                 <SearchByIdComponent onAdvanceSearchPatient={this.onAdvanceSearchPatient}
                                     onChangeIdPatient={this.onChangeIdPatient}/>
                 <DisplayPatientNameComponent namePatient={this.state.namePatient}/>
