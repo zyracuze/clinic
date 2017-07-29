@@ -2,12 +2,14 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 export default class MedicalExpenseReportComponent extends Component {
   static propTypes = {
-        dataTable: PropTypes.array.isRequired
+        dataTable: PropTypes.array.isRequired,
+        sumFee: PropTypes.number.isRequired
     }
   render() {
-    const {dataTable} = this.props
+    const {dataTable, sumFee} = this.props
     return(
         <div className="container">
+            <b>รวมยอดสุทธิทั้งหมด : {sumFee.toLocaleString('en-US', { style: 'currency', currency: 'THB' })} </b><hr/>
             <table className="table table-hover">
                 <thead>
                     <tr>

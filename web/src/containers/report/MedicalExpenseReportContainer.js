@@ -4,7 +4,8 @@ import MedicalExpenseReportComponent from '../../components/report/MedicalExpens
 import { apiSearchReport } from '../../apis/ApiFee';
 export default class MedicalExpenseReportContainer extends Component{
     state = {
-        dataTable: []
+        dataTable: [],
+        sumFee: 0
     }
     
     onSubmitSearch=(event)=>{
@@ -17,13 +18,15 @@ export default class MedicalExpenseReportContainer extends Component{
     }
     initialDataTable=()=>{
         this.setState({
-             dataTable: []
+             dataTable: [],
+             sumFee: 0
         })
     }
     searchReportSuccess=(response)=>{
         if(response){
             this.setState({
-                dataTable: response.fees
+                dataTable: response.fees,
+                sumFee: response.sum
             })
         }
     }
@@ -38,9 +41,11 @@ export default class MedicalExpenseReportContainer extends Component{
     render(){
         return (
             <div className="form-search-container">
-                <SearchReportComponent onSubmitSearch={this.onSubmitSearch}>
+                <SearchReportComponent onSubmitSearch={this.onSubmitSearch} >
                 </SearchReportComponent>
-                <MedicalExpenseReportComponent dataTable={this.state.dataTable}> </MedicalExpenseReportComponent>
+                <MedicalExpenseReportComponent dataTable={this.state.dataTable}
+                                               sumFee={this.state.sumFee}> 
+                </MedicalExpenseReportComponent>
             </div>
         )
     }
