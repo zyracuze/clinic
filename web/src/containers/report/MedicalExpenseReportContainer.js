@@ -23,7 +23,7 @@ export default class MedicalExpenseReportContainer extends Component{
     searchReportSuccess=(response)=>{
         if(response){
             this.setState({
-                dataTable: response
+                dataTable: response.fees
             })
         }
     }

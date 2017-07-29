@@ -36,7 +36,7 @@ export default class MedicalExpenseReportComponent extends Component {
                                        ))
                                     }
                                 </td>
-                                <td></td>
+                                <td>{data.sumFeeItem}</td>
                             </tr>
                         ))
                     }
