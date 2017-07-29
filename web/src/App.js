@@ -4,7 +4,7 @@ import HomeComponent from './components/HomeComponent'
 import SearchPatientContainer from './containers/SearchPatientContainer'
 import HeaderComponent from './components/HeaderComponent'
 import EditPatientContainer from './containers/EditPatientContainer'
-import GenerateMedicalCertificateComponent from './components/GenerateMedicalCertificateComponent'
+import GenerateMedicalCertificateContainer from './containers/print/GenerateMedicalCertificateContainer'
 import MedicalExpenseReportContainer from './containers/report/MedicalExpenseReportContainer'
 import CreatePatientContainer from './containers/patient/CreatePatientContainer'
 import SaveFeeContainer from './containers/fee/SaveFeeContainer'
@@ -30,7 +30,7 @@ class App extends Component {
             <IndexRoute component={EditPatientContainer}/>
             <route path=':id' component={EditPatientContainer} />
           </Route>
-          <Route path='/generateMedicalCertificate' component={GenerateMedicalCertificateComponent}/>
+          <Route path='/generateMedicalCertificate' component={GenerateMedicalCertificateContainer}/>
           <Route path='/medicalExpenseReport' component={MedicalExpenseReportContainer}/>
           <Route path='/saveFee' component={SaveFeeContainer}/>
           <Route path='/createPatient' component={CreatePatientContainer}/>
