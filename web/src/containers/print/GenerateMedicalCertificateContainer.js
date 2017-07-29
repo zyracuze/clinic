@@ -9,7 +9,8 @@ export default class GenerateMedicalCertificateContainer extends Component{
         namePatient: "",
         requestDate: moment(),
         doctorOfPatient: "",
-        symptom: ""
+        symptom: "",
+        isPrint: false
     }
     onChangeIdPatient=(event)=>{
         this.setState({
@@ -34,18 +35,33 @@ export default class GenerateMedicalCertificateContainer extends Component{
             requestDate: date
         });
     }
+    printMedicalCertificate=(event)=>{
+        event.preventDefault()
+        this.setState({
+            isPrint: true
+        })
+        if(this.state.isPrint){
+            window.print()
+        }
+    }
     render(){
         return(
-            <div className="form-search-container">
-                <h2>พิมพ์ใบรับรองแพทย์</h2>
-                <button onClick={() => window.print()}>PRINT</button>
-                <SearchByIdComponent onAdvanceSearchPatient={this.onAdvanceSearchPatient}
-                                    onChangeIdPatient={this.onChangeIdPatient}/>
-                <DisplayPatientNameComponent namePatient={this.state.namePatient}/>
-                <GenerateMedicalCertificateComponent requestDate={this.state.requestDate}
-                                                     doctorOfPatient={this.state.doctorOfPatient}
-                                                     symptom={this.state.symptom}
-                                                     handleChangeRequestDate={this.handleChangeRequestDate}/>
+            <div>
+                <div className="form-search-container">
+                    <h2>พิมพ์ใบรับรองแพทย์</h2>
+                    <SearchByIdComponent onAdvanceSearchPatient={this.onAdvanceSearchPatient}
+                                        onChangeIdPatient={this.onChangeIdPatient}/>
+                    <DisplayPatientNameComponent namePatient={this.state.namePatient}/>
+                    <GenerateMedicalCertificateComponent requestDate={this.state.requestDate}
+                                                        doctorOfPatient={this.state.doctorOfPatient}
+                                                        symptom={this.state.symptom}
+                                                        handleChangeRequestDate={this.handleChangeRequestDate}
+                                                        printMedicalCertificate={this.printMedicalCertificate}/>
+                </div>
+                {
+                    this.state.isPrint && <p className="container-print">Hello Print</p>
+                }
+                
             </div>
         )
     }

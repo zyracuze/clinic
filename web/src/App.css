@@ -117,9 +117,13 @@ body {
 
 @page{
   size: auto A4 landscape;
-  margin: 3mm;
+  margin: 5mm;
 }
 @media print {
     .form-search-container {display: none;}
-    .App-logo{display: none;}
+    .App-logo {display: none;}
+    .App-header {display: none;}
+}
+.container-print {
+  text-align: left;
 }

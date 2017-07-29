@@ -9,13 +9,14 @@ export default class GenerateMedicalCertificateComponent extends Component {
     requestDate: PropTypes.string.isRequired,
     doctorOfPatient: PropTypes.string.isRequired,
     symptom: PropTypes.string.isRequired,
-    handleChangeRequestDate: PropTypes.func.isRequired
+    handleChangeRequestDate: PropTypes.func.isRequired,
+    printMedicalCertificate: PropTypes.func.isRequired
   }
   render() {
-    const {requestDate, doctorOfPatient, symptom, handleChangeRequestDate} = this.props
+    const {requestDate, doctorOfPatient, symptom, handleChangeRequestDate, printMedicalCertificate} = this.props
     return(
         <div className="container">
-          <Form horizontal>
+          <Form horizontal onSubmit={printMedicalCertificate}>
             <FormGroup>
               <Col componentClass={ControlLabel} sm={4}> แพทย์เจ้าของไข้ : </Col>
               <Col sm={4}>
@@ -51,8 +52,7 @@ export default class GenerateMedicalCertificateComponent extends Component {
             </FormGroup>
             <FormGroup>
               <Col componentClass={ControlLabel} sm={7}>
-                <button
-                    type="submit"
+                <button type="submit"
                     className="btn btn-lg btn-primary">PRINT</button>
               </Col>
             </FormGroup>
