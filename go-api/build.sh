@@ -14,6 +14,7 @@ then
   echo "Downloading dependencies ...."
   go get -u github.com/labstack/echo/...
   go get -u github.com/spf13/viper
+  go get -u github.com/go-test/deep
 
   # go get gopkg.in/mgo.v2
   # go get gopkg.in/yaml.v2

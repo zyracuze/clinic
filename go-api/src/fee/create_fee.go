@@ -10,11 +10,6 @@ import (
 	"github.com/labstack/echo"
 )
 
-type FeeItem struct {
-	ExpenseItem string  `json:"expenseItem"`
-	Amount      float64 `json:"amount"`
-}
-
 type Counter interface {
 	count() (int, error)
 }

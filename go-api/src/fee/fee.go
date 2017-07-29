@@ -15,3 +15,8 @@ type Fee struct {
 	FeeItem        []FeeItem     `json:"fees"`
 	CreateDateTime time.Time     `json:"createDateTime"`
 }
+
+type FeeItem struct {
+	ExpenseItem string  `json:"expenseItem"`
+	Amount      float64 `json:"amount"`
+}
