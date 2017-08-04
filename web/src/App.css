@@ -7,7 +7,25 @@ body {
 }
 
 .App-logo {
-  max-width: 18%;
+  max-width: 75%;
+}
+
+.App-home {
+  text-align: left;
+  color: black;
+}
+
+.App-logout {
+  text-align: right;
+  color: black;
+}
+
+.home-size{
+  max-width: 15%;
+}
+
+.logout-size{
+  max-width: 7%;
 }
 
 .App-header {
