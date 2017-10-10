@@ -14,10 +14,28 @@ $cd go-api
 $sh build.sh refresh
 ```
 
-## 2. start mongodb
-```
-$mongod --dbpath <path of data>
-```
+## 2. mongodb
+- Installation MongoDB
+  - Update Homebrew’s package database.¶
+    ```
+    $brew update
+    ```
+
+  - Install MongoDB.
+    ```
+    $brew install mongodb
+    ```
+
+  - Create the data directory.
+    ```
+    $mkdir -p data/db
+    ```
+    
+- Run MongoDB
+  - Run MongoDB specify the path of the mongod
+    ```
+    $mongod --dbpath <path of data>
+    ```
 ## 3. step login
   - ถ้าไม่มี user
     - สร้าง user โดยยิงผ่าน Postman ใส่ URL http://localhost:8888/user/create
